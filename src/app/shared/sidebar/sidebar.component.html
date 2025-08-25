@@ -1,0 +1,127 @@
+<mat-nav-list>
+  <!------------------- NEW sidebar ------------------------------>
+  <div class="side-bar-cont" id="accordion">
+    <ul>
+      <!-- <li><a mat-list-item routerLinkActive="list-item-active" role="button" routerLink="/dashboard"><h2 matSubheader >Dashboard</h2></a></li> -->
+      <li>
+        <a routerLinkActive="list-item-active" routerLink="/dashboard" role="button" class="menu_list_main">
+          <h2 matSubheader>Dashboard</h2>
+        </a>
+      </li>
+      <li>
+        <a data-bs-toggle="collapse" href="#menu_list-4" role="button" aria-expanded="false"
+          aria-controls="collapseExample" class="menu_list_main">
+          <h2 matSubheader *ngIf="IsNotOperator">Master Data</h2> <mat-icon
+            class="right_arrow">keyboard_arrow_right</mat-icon>
+        </a>
+        <div class="collapse sub_menu" id="menu_list-4" data-bs-parent="#accordion">
+      <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/users"
+          *ngIf="IsStateLevel || IsSuperAdmin || IsStateNodal || IsDepartmentAdmin">Users Management</a></li>
+      <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/department" *ngIf="IsStateLevel">Department
+          Management</a></li>
+      <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/scheme"
+          *ngIf="IsStateLevel || IsSuperAdmin || IsStateNodal || IsDepartmentAdmin">Scheme Approval till now</a></li>
+      <!-- <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/scheme-budget"
+          *ngIf="!IsStateLevel && !IsSuperAdmin && IsNotOperator">Scheme Budget</a></li> -->
+
+          <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/approve-scheme"
+            *ngIf="IsStateLevel">New Scheme Sent for Approval</a></li>
+  </div>
+  </li>
+
+  <li>
+    <a data-bs-toggle="collapse" href="#menu_list" role="button" aria-expanded="true" aria-controls="collapseExample"
+      class="menu_list_main" (open)="true">
+      <span></span>
+      <h2 matSubheader>DBT Data Management</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
+    </a>
+    <div class="collapse sub_menu" id="menu_list" data-bs-parent="#accordion">
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata"
+      *ngIf="IsStateLevel || IsStateNodal">Data Entered by department</a></li>
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata"
+      *ngIf="!IsStateLevel && !IsStateNodal">Data Entry</a></li>
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/processdata"
+      *ngIf="IsNotOperator && !IsSuperAdmin">Data Send By department for Approval</a></li>
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/push-dbt"
+      *ngIf="IsStateLevel || IsStateNodal">Push to Bharat DBT</a></li>
+  </div>
+  </li>
+
+  <li *ngIf="IsNotOperator">
+    <a data-bs-toggle="collapse" href="#menu_list-1" role="button" aria-expanded="false" aria-controls="collapseExample"
+      class="menu_list_main">
+      <span></span>
+      <h2 matSubheader>Data Reported by Admin <br> Department</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
+    </a>
+    <div class="collapse sub_menu" id="menu_list-1" data-bs-parent="#accordion">
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/monthlystatus" *ngIf="IsNotOperator">Present Upload Status as on Date</a></li>
+  </div>
+  </li>
+
+  <li>
+    <a *ngIf="IsNotOperator" data-bs-toggle="collapse" href="#menu_list-3" role="button" aria-expanded="false" aria-controls="collapseExample"
+      class="menu_list_main">
+      <span></span>
+      <h2 matSubheader>MIS Reports</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
+    </a>
+    <div class="collapse sub_menu" id="menu_list-3" data-bs-parent="#accordion">
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-month-dbt"
+      *ngIf="IsNotOperator && !IsStateLevel">Mis month wise Entry Report</a></li>
+  <!-- <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-wise-beneficiary" *ngIf="IsNotOperator && !IsStateLevel">Mis Scheme wise benificiary Report</a></li> -->
+  <!-- <li> <a mat-list-item routerLinkActive="list-item-active" routerLink="/benifit-matrix" *ngIf="IsStateLevel">Beneficiary Matrix</a></li> -->
+  <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/department-wise-mis-report"
+      *ngIf="IsStateLevel">Department wise mis report</a></li>
+
+      <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/report-of-push-data"
+        *ngIf="IsStateLevel">Data already send/pushed to Bharat DBT </a></li>
+  </div>
+  </li>
+
+
+
+  </ul>
+  </div>
+  <!-------------------- //new sidebar ---------------------->
+
+  <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">Dashboard</a>
+    <h2 matSubheader *ngIf="IsNotOperator">Master Data</h2>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/users" *ngIf="IsNotOperator">Users Management</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/department" *ngIf="IsStateLevel">Department Management</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/scheme" *ngIf="IsNotOperator">Scheme Management</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/scheme-budget" *ngIf="!IsStateLevel && !IsSuperAdmin && IsNotOperator">Scheme Budget</a> -->
+  <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata/add">Upload DBT Data</a> -->
+  <!-- <h2 matSubheader>DBT</h2>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata">Data Entry List</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/processdata" *ngIf="IsNotOperator && !IsSuperAdmin">Pending for Process</a>
+    <h2 matSubheader>Data Entry Reports</h2>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/monthlystatus">Monthwise Upload Status</a>
+    <h2 matSubheader>MIS Reports</h2>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-month-dbt" *ngIf="IsNotOperator && !IsStateLevel">Mis month wise Entry Report</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-wise-beneficiary" *ngIf="IsNotOperator && !IsStateLevel">Mis Scheme wise benificiary Report</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/benifit-matrix" *ngIf="IsNotOperator">Beneficiary Matrix</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/department-wise-mis-report">department-wise-mis-report</a> -->
+</mat-nav-list>
+
+<!-- <mat-nav-list>
+    <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
+        <mat-icon mat-list-icon>home</mat-icon>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+        <a mat-list-item href="...">Submenu Item 1</a>
+        <a mat-list-item href="...">Submenu Item 2</a>
+        <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+            <span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+        </mat-list-item>
+        <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+            <mat-list-item>SubSubmenu Item 1</mat-list-item>
+            <mat-list-item>SubSubmenu Item 2</mat-list-item>
+        </div>
+    </div>
+</mat-nav-list> -->

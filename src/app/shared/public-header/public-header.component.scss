@@ -1,0 +1,65 @@
+header{
+  width: 100%;
+  background-color: #82b3eb4a;
+  padding: 1.5rem;
+  border-bottom: 2px solid gray;
+}
+.logo{
+    /* height: 80px; */
+    width: 80px;
+}
+.left-logo{
+    float: left;
+}
+.govt-logo{
+    width: 100%;
+    height: 100%;
+    margin: 5px 5px 5px 45px;
+}
+.header-content{
+    width: 500px;
+    float: left;
+    padding-left: 60px;
+    line-height: 0.3;
+    margin-top: 25px;
+    color: rgb(2, 42, 75);
+}
+.header-content_new h1 {
+  font-size: 28px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.header-content_new p {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.right-logo{
+    float: right;
+    margin-right: 45px;
+    width: 216px;
+}
+.nic-logo{
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+
+}
+.app-header {
+    justify-content: space-between;
+    position: relative;
+    //top: 120px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+.mat-toolbar.mat-primary {
+  background: none;
+    color: #1461b9;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+

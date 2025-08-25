@@ -1,0 +1,46 @@
+export class DBTData {
+    id:any;
+    entryLevel:any;
+    deptCode:any;
+    deptName:any;
+    districtCode:any;
+    schemeCode:any;
+    schemeName:any;
+    finYrCode:any;
+    financialYear:any;
+    totalBen:any;
+    totalBenWithBank:any;
+    totalBenDigitized:any;
+    benAadharSeeded:any;
+    mobileCaptured:any;
+    benefitType:any;
+    reportingMonth:any;
+    reportingMonthName:any;
+    fundTrnsferCash:any;
+    expenditureKind:any;
+    noTrnsCashElectronic:any;
+    amntTrnsCashElectronic:any;
+    noTrnsCashOther:any;
+    amntTrnsCashOther:any;
+    trnsAadharSeeded:any;
+    unitKind:any;
+    qtyTransferedKind:any;
+    aadharTransKind:any;
+    noDeDuplicated:any;
+    noGhost:any;
+    otherSavings:any;
+    savingAmnt:any;
+    remarks:any;
+    isActive:any;
+    status:any;
+    createdOn:any;
+    modifiedOn:any;
+    deptProcessOn:any;
+    stateProcessOn:any;
+    createdBy:any;
+    deptProcessBy:any;
+    stateProcessBy:any;
+    modifiedBy:any;
+
+    submition_flag:any;
+}

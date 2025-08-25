@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// .form-dialog .mat-dialog-container{
+//     // overflow-y: hidden !important;
+// }
+.mat-raised-button.mat-primary{
+  background-color: #2e6c8b;
+}
+.mat-elevation-z8 {
+  border: 1px solid #2e6c8ba6;
+}
+table.mat-table.cdk-table.mat-sort thead tr {
+  // background: aliceblue;
+  background: #d9edfd;
+}
+table.mat-table.cdk-table.mat-sort thead tr th {
+  color: #2e6c8b;
+  font-size: 14px;
+}
+.mat-dialog-container .mat-form-field-label{
+  color: #427a96;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-focused{
+  color: #2e6c8b !important;
+}
+.mat-dialog-title {
+  color: #2e6c8b;
+}
+.mat-icon.mat-primary {
+  color: #2e6c8b;
+}
+
+.mat-dialog-container{
+  // background-color: #f0f9ff;
+    border: 1px solid #2e6c8b;
+    // height: 82vh !important;
+    height: auto !important;
+}
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 30px;
+}
+.mat-paginator-outer-container {
+  display: flex;
+  background: aliceblue;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9c9c9c;
+  border-radius: 0.25em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+.body {
+  background: #f0f9ff;
+  height: 100%;
+  padding: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+}
+
+
+
+.form-dialog .mat-dialog-container {
+  border-radius: 14px !important;
+  box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
+}

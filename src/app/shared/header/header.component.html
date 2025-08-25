@@ -1,0 +1,141 @@
+<!-- <header class="app-header">
+  <div class="d-header">
+    <div class="logo-2">
+      <img src="assets/Emblem_of_West_Bengal.png" alt="wb_logo">
+    </div>
+    <div class="header-content">
+      <h1>Direct Benefit Transfer</h1>
+      <p>Government of West Bengal</p>
+    </div>
+  </div>
+</header>
+
+<mat-toolbar color="primary" class="main-toolbar">
+  <mat-toolbar-row class="toolbar-row">
+    <button mat-icon-button (click)="onClickSideBarToggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="dash-head">
+      <p>WB State DBT Dashboard</p>
+    </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end center" class="toolbar-actions">
+      <ul fxLayout="row" fxLayoutGap="10px" class="toolbar-menu">
+        <li>
+          <button mat-button [matMenuTriggerFor]="notification" class="notification-btn">
+            <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+            <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #notification="matMenu">
+            <div class="notification-main">
+              <a mat-menu-item href="#"><mat-icon>message</mat-icon> New feature coming</a>
+              <a mat-menu-item href="#"><mat-icon>message</mat-icon> Another feature</a>
+            </div>
+          </mat-menu>
+        </li>
+
+        <li class="user-profile">
+          <button mat-button [matMenuTriggerFor]="menu" class="user-btn">
+            <mat-icon>account_circle</mat-icon>
+            {{username}} <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="mat_menu_main">
+            <div mat-menu-item class="user_verify">
+              <mat-icon>verified_user</mat-icon>
+              <span>Role: {{rolename}}</span>
+            </div>
+            <a mat-menu-item class="acc_user">
+              <mat-icon>account_circle</mat-icon>
+              {{username}}
+            </a>
+            <a mat-menu-item routerLink="/change-passwd" routerLinkActive="list-item-active" class="user_paswd">
+              <mat-icon>password</mat-icon>
+              Change Password
+            </a>
+            <button mat-menu-item (click)="onClickLogOut()" class="user_log_out">
+              <mat-icon>power_settings_new</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar> -->
+
+
+<header class="app-header">
+  <!-- <div class="d-header shadow-toolbar">
+    <div class="logo-2">
+      <img src="assets/Emblem_of_West_Bengal.png" alt="wb_logo">
+    </div>
+    <div class="header-content">
+      <h1>Direct Benefit Transfer</h1>
+      <p>Government of West Bengal</p>
+    </div>
+  </div> -->
+</header>
+
+<mat-toolbar color="primary" class="main-toolbar">
+  <mat-toolbar-row class="toolbar-row">
+    <button class="menu-button" mat-icon-button (click)="onClickSideBarToggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="app-header">
+      <!-- <p>WB State DBT Dashboard</p> -->
+      <div class="d-header shadow-toolbar">
+        <div class="logo-2">
+          <img src="assets/Emblem_of_West_Bengal.png" alt="wb_logo">
+        </div>
+        <div class="header-content">
+          <h1>Direct Benefit Transfer</h1>
+          <p>Government of West Bengal</p>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end center" class="toolbar-actions">
+      <ul fxLayout="row" fxLayoutGap="10px" class="toolbar-menu">
+        <!-- <li>
+          <button mat-button [matMenuTriggerFor]="notification" class="notification-btn">
+            <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+            <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #notification="matMenu">
+            <div class="notification-main">
+              <a mat-menu-item href="#"><mat-icon>message</mat-icon> New feature coming</a>
+              <a mat-menu-item href="#"><mat-icon>message</mat-icon> Another feature</a>
+            </div>
+          </mat-menu>
+        </li> -->
+
+        <li class="user-profile">
+          <button mat-button [matMenuTriggerFor]="menu" class="user-btn">
+            <mat-icon>account_circle</mat-icon>
+            {{username}} <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="mat_menu_main">
+            <div mat-menu-item class="user_verify">
+              <mat-icon>verified_user</mat-icon>
+              <span>Role: {{rolename}}</span>
+            </div>
+            <a mat-menu-item class="acc_user">
+              <mat-icon>account_circle</mat-icon>
+              {{username}}
+            </a>
+            <a mat-menu-item routerLink="/change-passwd" routerLinkActive="list-item-active" class="user_paswd">
+              <mat-icon>password</mat-icon>
+              Change Password
+            </a>
+            <button mat-menu-item (click)="onClickLogOut()" class="user_log_out">
+              <mat-icon>power_settings_new</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

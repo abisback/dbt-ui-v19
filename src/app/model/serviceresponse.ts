@@ -1,0 +1,63 @@
+import { User } from "./user.model";
+
+export interface ServiceResponse<T> {
+    apiResponseStatus: number;
+    errorMessage: string;
+    result: T;
+}
+export interface DBTEditDataModel {
+    id: number;
+    TotalBen: number;
+    TotalBenWithBank: number;
+    TotalBenDigitized: number;
+    BenAadharSeeded: number;
+    MobileCaptured: number;
+    ReportingMonth?: number;
+    ReportingMonthName: string;
+    FundTrnsferCash?: number;
+    ExpenditureKind?: number;
+    NoTrnsCashElectronic?: number;
+    AmntTrnsCashElectronic?: number;
+    NoTrnsCashOther?: number;
+    AmntTrnsCashOther?: number;
+    TrnsAadharSeeded?: number;
+    UnitKind?: number;
+    QtyTransferedKind?: number;
+    AadharTransKind?: number;
+    NoDeDuplicated: number;
+    NoGhost: number;
+    OtherSavings: number;
+    SavingAmnt: number;
+    Remarks?: string;
+    TotalBenX?: number;
+    BenStateAdditional?: number;
+    NumberOfGroupSHG?: number;
+    FundCashCentre?: number;
+    FundCashState?: number;
+    FundCashStateAdditional?: number;
+    FundCashStateY?: number;
+    FundCashElectronicCentre?: number;
+    FundCashElectronicState?: number;
+    FundCashElectronicAdditional?: number;
+    FundCashElectronicStateY: number;
+    FundCashElectronicApb?: number;
+    FundCashElectronicNonApb?: number;
+    ExpenditureKindCentre?: number;
+    ExpenditureKindState?: number;
+    ExpenditureKindAdditional?: number;
+    ExpenditureKindStateY?: number;
+    ExpenditureKindAuthenticatedCentre?: number;
+    ExpenditureKindAuthenticatedState?: number;
+    ExpenditureKindAuthenticatedAdditional?: number;
+    ExpenditureKindAuthenticatedStateY?: number;
+    NoTrnsCashElectronicApb?: number;
+    NoTrnsCashElectronicNonApb?: number;
+    CloseingCount?: number;
+    AdditionalBen?: number;
+    ActualEntry?: number;
+    totalBenIncremental?: number;
+    benWithBankIncremental?: number;
+    benDigitizedIncremental?: number;
+    benAadharSeededIncremental?: number;
+    mobileCapturedIncremental?: number;
+}

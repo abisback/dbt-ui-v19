@@ -1,0 +1,546 @@
+<div class="dashboarm_main_page">
+  <div class="container-fluid">
+    <!-- <div class="row my-3">
+      <div class="col-md-12">
+        <div class="d-box-main">
+          <div class="top-four-box">
+            <div class="box-1 approved">
+              <div class="box-content">
+                <h2> Total Department</h2>
+                <small> Total Department</small>
+              </div>
+              <div class="box-no">
+                {{departmentCount}}
+              </div>
+              <mat-icon>verified</mat-icon>
+            </div>
+            <div class="box-1 pending">
+              <div class="box-content">
+                <h2>Total Scheme</h2>
+                <small>Total Scheme </small>
+              </div>
+              <div class="box-no">
+                {{totalScheme}}
+              </div>
+              <mat-icon>pending_actions</mat-icon>
+              <mat-icon>verified</mat-icon>
+            </div>
+            <div class="box-1 total">
+              <div class="box-content">
+                <h2>Total Beneficiary</h2>
+                <small>Total Beneficiary</small>
+              </div>
+              <div class="box-no">
+                {{totalBen}}
+              </div>
+              <mat-icon>snippet_folder</mat-icon>
+              <mat-icon>verified</mat-icon>
+            </div>
+            <div class="box-1 rejected">
+              <div class="box-content">
+                <h2>Total Amount</h2>
+                <small>Total Amount </small>
+              </div>
+              <div class="box-no">
+                {{totalFundTranferCash}}
+              </div>
+              <mat-icon>fmd_bad</mat-icon>
+              <mat-icon>verified</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row my-2">
+      <div class="col-12">
+        <!-- <div class="dashboard-header"> -->
+        <div class="title box-dept mb-2 mt-1">
+          <!-- <div class="box-content"> -->
+          <!-- <h2>Total Department</h2> -->
+           <h1 style="font-weight: 500; font-family: 'Poppins', cursive;">WB State DBT Dashboard</h1>
+          <!-- <small>Total Department</small> -->
+          <!-- </div> -->
+          <!-- <div class="box-no">{{ departmentCount }}</div>
+                    <mat-icon style="color:#1976d2">business</mat-icon> -->
+        </div>
+        <div class="top-stats-container">
+          <div class="stat-box box-dept">
+            <div class="box-content">
+              <h2>Total Department</h2>
+              <!-- <small>Total Department</small> -->
+            </div>
+            <div class="box-no">{{ departmentCount }}</div>
+            <mat-icon style="color:#1976d2">business</mat-icon>
+          </div>
+
+          <div class="stat-box box-scheme">
+            <div class="box-content">
+              <h2>Total Scheme</h2>
+              <!-- <small>Total Scheme</small> -->
+            </div>
+            <div class="box-no">{{ totalScheme }}</div>
+            <mat-icon style="color:#ff9800 ">assignment</mat-icon>
+          </div>
+
+          <div class="stat-box box-beneficiary">
+            <div class="box-content">
+              <h2>Total Beneficiary</h2>
+              <!-- <small>Total Beneficiary</small> -->
+            </div>
+            <div class="box-no">{{ totalBen }}</div>
+            <mat-icon style="color:#4caf50">people</mat-icon>
+          </div>
+
+          <div class="stat-box box-amount">
+            <div class="box-content">
+              <h2>Total Amount</h2>
+              <!-- <small>Total Amount</small> -->
+            </div>
+            <div class="box-no">{{ totalFundTranferCash }}</div>
+            <mat-icon style="color:#f44336">account_balance_wallet</mat-icon>
+          </div>
+
+          <div class="stat-box box-pending">
+            <div class="box-content">
+              <h2>Average Expense Per Scheme</h2>
+              <!-- <small>Pending Items</small> -->
+            </div>
+            <div class="box-no">{{formattedAverageExpenditure}}</div>
+            <mat-icon style="color:#9c27b0">equalizer</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXT SECTION ? -->
+
+    <!-- <div class="row my-3 mt-5">
+        <div class="col-xl-4 col-lg-6 col-md-12">
+          <div class="left-para">
+            <div class="left-head">
+            <h2>Yearly  Bar</h2>
+            <button mat-button><mat-icon>download</mat-icon></button>
+           </div>
+            <div class="para_image">
+              <img src="assets/graph-2.png" alt="Yearly_graph" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12">
+          <div class="left-para">
+            <div class="left-head">
+            <h2>Half Yearly  Bar</h2>
+            <button mat-button><mat-icon>download</mat-icon></button>
+           </div>
+            <div class="para_image">
+              <img src="assets/graph-2.png" alt="Yearly_graph" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>  -->
+
+    <div *ngIf="userRole !== 'DOPT' && userRole !== 'DNOD'" class="chart-container">
+      <div class="left-para">
+        <!-- <div class="left-head">
+            <h2>Details Bar Graph of Cash And Kind Distribution</h2>
+            <button (click)="downloadChart()" mat-button>
+              <mat-icon>download</mat-icon>
+            </button>
+          </div> -->
+
+        <!-- <form class="example-form py-4" [formGroup]="dbtDataForm">
+            <div class="d-flex flex-row">
+              <div *ngIf="userRole !== 'DADM'" class="col-xl-2 col-lg-2 col-md-2">
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label>Select Department</mat-label>
+                  <mat-select #deptName formControlName="deptCode" disableRipple>
+                    <mat-option *ngFor="let item of departmentList"
+                    (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-2 col-lg-2 col-md-2" (click)="handleClick()">
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label>Select Scheme</mat-label>
+                  <mat-select #schemeCode formControlName="schemeId" disableRipple>
+                    <mat-option *ngFor="let item of schemeList" (onSelectionChange)="onSchemeSelect($event,item.id)"
+                      [value]="item.id">
+                      {{item.schemeName}}
+                    </mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-2 col-lg-2 col-md-2">
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label>Select Financial year</mat-label>
+                  <mat-select #finYrCode formControlName="finYrCode" disableRipple>
+                    <mat-option *ngFor="let item of finYrList"
+                      (onSelectionChange)="onFinancialYearSelect($event,item.codeValueId)" [value]="item.codeValueId.trim()">
+                      {{item.codeValueDesc.trim()}}
+                    </mat-option>
+                  </mat-select>
+
+
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <br />
+          </form> -->
+
+        <div>
+          <!-- <canvas id="canvas" width="600" height="250"></canvas> -->
+
+          <div class="row mt-2">
+            <div class="col-lg-7 mb-lg-0 mb-2">
+              <div class="card z-index-2 ">
+                <form [formGroup]="dbtDataForm">
+                  <div class="card-header row pb-0   d-flex  ">
+                    <span class="text-capitalize col-lg-5">
+                      <p class="cash-kind-graph">Details Bar Graph of Cash And Kind Distribution</p>
+                    </span>
+                    <div class="col-lg-7 d-flex gap-2">
+
+                      <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()"
+                        matTooltip="Reset">
+                        <mat-icon>refresh</mat-icon>
+                      </button>
+
+                      <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+                        <mat-label>Financial Year</mat-label>
+                        <input matInput type="text" formControlName="finYrCode" [matAutocomplete]="finYrAuto" />
+                        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+                        <mat-autocomplete #finYrAuto="matAutocomplete" [displayWith]="displayFinancialYearFn.bind(this)"
+                          [panelWidth]="'18cm'">
+                          <mat-option class="ctm-auto-ddl" *ngFor="let year of finYrList" [title]="year.codeValueDesc"
+                            (onSelectionChange)="onFinancialYearSelect($event, year.codeValueId)"
+                            [value]="year.codeValueId.trim()">
+                            {{year.codeValueDesc.trim()}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width slim-field mt-2 " appearance="outline">
+                        <mat-label>Search by Scheme Name</mat-label>
+                        <input matInput type="text" formControlName="schemeId" [matAutocomplete]="mjrHd"
+                          (keyup)="searchScheme($event);" />
+                        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+                        <mat-autocomplete #mjrHd="matAutocomplete" [displayWith]="displaySchemeFn.bind(this)"
+                          [panelWidth]="'18cm'">
+                          <mat-option class="ctm-auto-ddl" *ngFor="let scheme of schemeListName" [title]="scheme.name"
+                            (onSelectionChange)="onSchemeSelect($event, scheme.id)" [value]="scheme.id"> {{
+                            scheme.id }}:{{ scheme.schemeName }} </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+
+
+
+                  </div>
+                </form>
+                <div class="card-body p-3">
+                  <div class="chart">
+                    <!-- Insert chart here -->
+
+                    <div id="chart" *ngIf="chartOptions">
+                      <!-- <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                                [plotOptions]="chartOptions.plotOptions"
+                                                [responsive]="chartOptions.responsive" [xaxis]="chartOptions['xaxis']"
+                                                [legend]="chartOptions.legend" [fill]="chartOptions.fill">
+                                            </apx-chart> -->
+
+
+
+                      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                        [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis" [dataLabels]="chartOptions.dataLabels"
+                        [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [fill]="chartOptions.fill"
+                        [plotOptions]="chartOptions.plotOptions">
+                      </apx-chart>
+
+
+
+
+                    </div>
+
+
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card card-carousel overflow-hidden p-0">
+                <!-- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"> -->
+                <!-- <div class="carousel-inner border-radius-lg h-100"> -->
+                <!-- Add carousel items here -->
+                <div class="card-header pb-0 pt-3 ">
+                  <span class="text-capitalize">
+                    <p class="cash-kind-graph">Fund Allocation By Centre and State</p>
+                  </span>
+                </div>
+                <div class="p-1 d-flex ">
+                  <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+                    <mat-label>Search by Scheme Name</mat-label>
+                    <input matInput type="text" [formControl]="schemeControl" [matAutocomplete]="schemeFund" (keyup)="searchScheme($event);" />
+                    <mat-icon matSuffix>arrow_drop_down</mat-icon>
+
+
+                    <mat-autocomplete #schemeFund="matAutocomplete" [panelWidth]="'auto'"
+                      [displayWith]="displaySchemeFn.bind(this)">
+                      <mat-option class="ctm-auto-ddl" *ngFor="let scheme of schemeListName" [title]="scheme.name"
+                        (onSelectionChange)="onSchemeSelectForShare($event, scheme.id)" [value]="scheme.id"> {{
+                        scheme.id }}:{{ scheme.schemeName }} </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <button mat-icon-button color="warn" class="small-icon-btn justify-content-end" (click)="resetScheme()" matTooltip="Reset">
+                    <mat-icon>refresh</mat-icon>
+                  </button>
+
+
+                </div>
+                <div class="card-body p-1 d-flex justify-content-between align-items-center" *ngIf="isChartVisible">
+
+                  <div id="chart2" class="col-lg-6">
+                    <apx-chart [series]="secondChartOptions.series" [chart]="secondChartOptions.chart"
+                      [plotOptions]="secondChartOptions.plotOptions" [labels]="secondChartOptions.labels"
+                      [legend]="{ show: false }" [dataLabels]="{ enabled: true }">
+                    </apx-chart>
+
+                  </div>
+
+                  <div id="chart3" class="col-lg-6 mb-3">
+                    <apx-chart [series]="thirdChartOptions.series" [chart]="thirdChartOptions.chart"
+                      [plotOptions]="thirdChartOptions.plotOptions" [labels]="thirdChartOptions.labels"></apx-chart>
+                  </div>
+
+                </div>
+
+
+
+                <!-- </div> -->
+                <!-- <button class="carousel-control-prev w-5 me-3" type="button"
+                                        data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next w-5 me-3" type="button"
+                                        data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button> -->
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-lg-7 abc">
+              <div class="card ">
+                <div class="card-header d-flex row pb-0 p-2">
+                  <div class="d-flex justify-content-between">
+                    <!-- <span class="mb-1 text-capitalize col-lg-6">Scheme Not Reported </span> -->
+
+                    <span class="mb-1 text-capitalize col-lg-6 ">
+                      <p class="scheme-not-reported">Scheme Status Report</p>
+                    </span>
+
+                    <mat-form-field class="full-width slim-field mt-2 me-2" appearance="outline">
+                      <mat-label>Select Type</mat-label>
+                      <input matInput type="text" [matAutocomplete]="flType" />
+                      <mat-icon matSuffix>arrow_drop_down</mat-icon>
+                      <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
+                      <mat-autocomplete #flType="matAutocomplete" [panelWidth]="'auto'"
+                        [displayWith]="displayFilterFn.bind(this)">
+                        <mat-option *ngFor="let item of filterTypeOption"
+                          (onSelectionChange)="onOptionValueSelect($event,item.value)" [value]="item.value">
+                          {{item.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <!-- </mat-select> -->
+                      <!-- <mat-hint>Please Select Role</mat-hint> -->
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="full-width slim-field mt-2">
+                      <mat-label>Search Here</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter"
+                        style="color: black; ">
+                      <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
+                    </mat-form-field>
+
+
+                  </div>
+
+                </div>
+
+                <div class=" card overflow-auto p-1">
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col" style="width: 5%;">#</th>
+                          <th scope="col" style="width: 60%;">Scheme Name</th>
+                          <th scope="col" style="width: 20%;">Last Reporting Month</th>
+                          <th scope="col" style="width: 15%;">Push To Bharat DBT</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of notReportedSchemeList; let i = index">
+                          <td> <span class="mb-0 text-sm">{{i + 1}}</span></td>
+                          <td> <span class="mb-0 text-sm">{{data.schemeCode}}:{{data.schemeName}}</span></td>
+
+                          <td class="">
+                            <div class="">
+                              <div class="d-flex align-items-center">
+                                <span class=" px-3 py-1 rounded-pill"
+                                  style="background: linear-gradient(90deg, #f7b42c 0%, #fc575e 100%); color: #000000; font-weight: 500; font-size: 11px; letter-spacing: 1px; box-shadow: 0 2px 8px rgba(252,87,94,0.15);">
+                                  {{data.reportingMonthName }} {{data.financialYear}}
+                                </span>
+                                <div class="" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=false">
+                                </div>
+
+                              </div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <span class="pill-scheme-code">{{data.pushToBharatDBTMonthName}}</span>
+                          </td>
+
+
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 abc">
+              <div class="card overflow-hidden">
+                <div class="card-header pb-0 p-3" style="background-color: rgb(235, 235, 235);">
+                  <p class=" top-expences">Top 5 Report of Schemes</p>
+                </div>
+                <div class="card-body p-3 overflow-scroll scrollbar" id="style-7">
+                  <ul class="list-group">
+
+                    <div class=" align-items-center">
+                      <!-- <div class="icon bg-gradient-dark shadow text-center me-3">
+                                                    <svg width="12px" height="12px" viewBox="0 0 40 44">
+                                                        <g fill="#fff">
+                                                            <g transform="translate(0,4)">
+                                                                <path
+                                                                    d="M36,0 L4,0 C1.79,0 0.02,1.78 0.02,4 L0,36 C0,38.22 1.78,40 4,40 L36,40 C38.22,40 40,38.22 40,36 L40,4 C40,1.78 38.22,0 36,0 Z M14,8 C14,9.1 13.1,10 12,10 C10.9,10 10,9.1 10,8 C10,6.9 10.9,6 12,6 C13.1,6 14,6.9 14,8 Z M22,8 C22,9.1 21.1,10 20,10 C18.9,10 18,9.1 18,8 C18,6.9 18.9,6 20,6 C21.1,6 22,6.9 22,8 Z M30,8 C30,9.1 29.1,10 28,10 C26.9,10 26,9.1 26,8 C26,6.9 26.9,6 28,6 C29.1,6 30,6.9 30,8 Z M32,32 L8,32 L8,28 L32,28 L32,32 Z M32,24 L8,24 L8,20 L32,20 L32,24 Z M32,16 L8,16 L8,12 L32,12 L32,16 Z">
+                                                                </path>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> -->
+
+
+                      <section>
+                        <!-- <h2>Today</h2> -->
+                        <details *ngFor="let items of topExpenseSchemes">
+                          <summary>
+                            <div>
+                              <span style="background-color: #f2dcbb;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor"
+                                  viewBox="0 0 16 16">
+                                  <circle cx="4" cy="8" r="2" />
+                                  <circle cx="12" cy="4" r="2" />
+                                  <circle cx="12" cy="12" r="2" />
+                                  <line x1="5.5" y1="8" x2="10" y2="4.8" stroke="currentColor" stroke-width="1.2" />
+                                  <line x1="5.5" y1="8" x2="10" y2="11.2" stroke="currentColor" stroke-width="1.2" />
+                                </svg>
+
+
+                              </span>
+                              <h3 class="scheme-name-title">
+                                <strong class="scheme-name">{{items.scheme}}</strong>
+                                <!-- <small>42542</small> -->
+                              </h3>
+
+                              <span class="me-2 pill-total-amount amount">
+                                ₹ {{ (items.maximumExpenditureAmount / 10000000).toFixed(2) }} Cr
+                              </span>
+
+
+
+
+                            </div>
+                          </summary>
+                          <div>
+                            <dl class="row">
+                              <div class="col-4">
+                                <dt>Already Push To Bharat DBT</dt>
+                                <dd>{{items.createdAt|date:'d MMM, yyyy h:mm a'}}</dd>
+                              </div>
+
+                              <div class="col-3">
+                                <!-- <dt>Status</dt> -->
+                                <dt class="pill-total-amount">{{(items.maxExpdtAmtPushDBT/ 10000000).toFixed(2) }} Cr
+                                </dt>
+                                <dd *ngIf="items.status == 0"><span class="badge badge-pill badge-danger">Not
+                                    Approved</span></dd>
+                                <dd *ngIf="items.status == 1"><span
+                                    class="badge badge-pill badge-warning">Reverted</span>
+                                </dd>
+                                <dd *ngIf="items.status == 2"><span
+                                    class="badge badge-pill badge-pending">Approved</span>
+                                </dd>
+                                <dd *ngIf="items.status == 3"><span class="badge badge-pill badge-draft">Draft
+                                    Sanctioned</span>
+                                </dd>
+                                <dd *ngIf="items.status == 4"><span
+                                    class="badge badge-pill badge-success">Sanctioned</span>
+                                </dd>
+                              </div>
+
+                              <!-- <div class="col-3">
+                                <dt> ID</dt>
+                                <dd>{{items.transactionId}}</dd>
+                              </div> -->
+                              <!-- <div class="col-3">
+                                <dt> ID</dt>
+                                <dd>{{items.allotmentId}}</dd>
+                              </div> -->
+                            </dl>
+                          </div>
+                        </details>
+                      </section>
+                    </div>
+
+                    <!-- Repeat for other categories -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- NEXT GRAPH CHART -->
+
+  <!--<button mat-raised-button color="primary" mat-button (click)="openAddDialog()">
+      Add DBT Data(New Format)
+    </button>
+    <br /> -->
+
+</div>
