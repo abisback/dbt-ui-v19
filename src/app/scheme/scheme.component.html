@@ -1,1 +1,123 @@
-<p>scheme works!</p>
+<div class="body">
+  <!-- <mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter" #input>
+</mat-form-field> -->
+<div class="container-fluid justify-content-end d-flex">
+  <button class="btn" mat-raised-button color="primary" mat-button (click)="openAddDialog()">
+    <mat-icon>playlist_add</mat-icon>
+    Add New Scheme
+  </button>
+  </div>
+  <div class=" custom-field d-flex ">
+    <div *ngIf="dept">
+      <div class=" col-xl-2 col-lg-4 col-md-6 dept-select">
+        <mat-form-field class="full-width slim-field " appearance="outline">
+          <mat-label class="block">Select Department</mat-label>
+          <input matInput type="text" [matAutocomplete]="dept" (keyup)="searchDept($event);"  />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
+          <mat-autocomplete #dept="matAutocomplete" [panelWidth]="'auto'" [displayWith]="displayFnDepartment.bind(this)">
+            <mat-option *ngFor="let item of departmentList"
+              (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
+              {{item.name}}
+            </mat-option>
+          <!-- </mat-select> -->
+          </mat-autocomplete>
+
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-3">
+        <button mat-raised-button type="submit" color="primary" >Search</button>
+    </div> -->
+    </div>
+
+
+
+
+    <div class=" col-xl-2 col-lg-4 col-md-6 search-field ">
+      <form action="" [formGroup]="searchForm">
+        <mat-form-field appearance="outline" class="full-width slim-field">
+          <mat-label>Search Here</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter"
+            formControlName="searchString" style="color: black;">
+        </mat-form-field>
+      </form>
+    </div>
+
+
+  </div>
+  <mat-dialog-content class="mat-typography">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+        <!-- deptCode Column -->
+        <ng-container matColumnDef="serialNo">
+          <th mat-header-cell *matHeaderCellDef> Serial No. </th>
+          <td mat-cell *matCellDef="let row; let rowIndex = index"> {{ (paginator.pageIndex * paginator.pageSize) +
+            (rowIndex + 1) }} </td>
+        </ng-container>
+        <ng-container matColumnDef="deptName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.deptName}} </td>
+        </ng-container>
+        <!-- schemeType Column -->
+        <ng-container matColumnDef="schemeType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Type </th>
+          <td mat-cell *matCellDef="let element"> {{helper.getSchemeType(element.schemeType)}} </td>
+        </ng-container>
+
+        <!-- schemeName Column -->
+        <ng-container matColumnDef="schemeName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.schemeName}} </td>
+        </ng-container>
+        <!-- SchemeCode Column -->
+        <ng-container matColumnDef="schemeCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.schemeCode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+          <td mat-cell *matCellDef="let element"> {{helper.getProgress(element.progress)}} </td>
+        </ng-container>
+
+        <!-- isActive Column -->
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Status </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-button-toggle-group class="toggle-status" [value]="element.isActive?'true':'false'" (change)="onToggleChange($event,element)">
+              <mat-button-toggle class="toggle-btn" *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+                {{item.codeValueDesc}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef style="align-content: center;"> Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link d-flex">
+            <button mat-flat-button matTooltip="Click to Edit" class="edit-btn" (click)="editScheme(element)">
+              <mat-icon color="accent">edit</mat-icon>
+            </button>
+            <button mat-flat-button matTooltip="Click to View" class="view-btn" (click)="viewScheme(element)">
+              <mat-icon color="primary">visibility</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+
+    </div>
+  </mat-dialog-content>
+
+</div>

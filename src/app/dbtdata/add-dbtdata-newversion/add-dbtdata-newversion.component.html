@@ -1,1 +1,628 @@
-<p>add-dbtdata-newversion works!</p>
+<div class="d-flex justify-content-between">
+  <div class="">
+    <h2 mat-dialog-title>Upload DBT data</h2>
+  </div>
+    <div class="">
+    <button mat-button class="close-icon" [mat-dialog-close]="true">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <form class="example-form" [formGroup]="dbtDataForm">
+    <div class="row d-flex mt-3">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width compact-field" appearance="outline" >
+          <mat-label>Select Department</mat-label>
+          <mat-select #deptCode formControlName="deptCode" disableRipple (selectionChange)="onDepartmentChange($event)">
+            <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-hint>Please select Department</mat-hint> -->
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-md-7"></div> -->
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width compact-field" appearance="outline">
+          <mat-label>Level of Data Upload</mat-label>
+          <mat-select #entryLevel formControlName="entryLevel" disableRipple
+            (selectionChange)="onDataUploadLevelChange($event)" matTooltip="(Select District Name if entry is at District level)">
+            <mat-option  [value]="dataUploadLevelList1?.codeValueId">
+              {{dataUploadLevelList1?.codeValueDesc}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-md-1"></div> -->
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width" appearance="outline" *ngIf="showDistrictDropDown">
+          <mat-label>Select District</mat-label>
+          <mat-select #districtCode formControlName="districtCode" disableRipple>
+            <mat-option *ngFor="let item of districtList" [value]="item.districtCode">
+              {{item.districtName}}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-hint>Please select District</mat-hint> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex">
+      <div [ngClass]="isSchemeFound ? 'col-md-4' : 'col-12'">
+        <mat-form-field class=" slim-field" appearance="outline">
+          <mat-label>Select Scheme</mat-label>
+          <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+          <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple disableRipple
+            (selectionChange)="onSchemeChange($event)"> -->
+            <input matInput type="text" formControlName="schemeCode" [matAutocomplete]="scheme" (keyup)="searchScheme($event);" />
+            <mat-autocomplete #scheme="matAutocomplete" [displayWith]="displaySchemeFn.bind(this)">
+            <mat-option *ngFor="let item of filteredSchemes" [value]="item.id" (onSelectionChange)="onSchemeChange($event)">
+              {{item.schemeName.trim()}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
+          <!-- <mat-hint>Please select Scheme to upload data</mat-hint> -->
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-md-7"></div> -->
+      <div class=" col-md-4" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width compact-field" appearance="outline">
+          <mat-label>Select Financial year</mat-label>
+          <mat-select #finYrCode formControlName="finYrCode" disableRipple>
+            <mat-option [value]="financialYear.codeValueId.trim()">
+              {{financialYear.codeValueDesc.trim()}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-md-1" *ngIf="isSchemeFound"></div> -->
+      <div class=" col-md-4" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width compact-field" appearance="outline">
+          <mat-label>Reporting Month</mat-label>
+          <mat-select #reportingMonth formControlName="reportingMonth" disableRipple
+            (selectionChange)="onMonthChange($event)">
+            <mat-option *ngFor="let item of reportingMonthList" [value]="item.monthId">
+              {{item.monthName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!dbtDataForm.controls['reportingMonth']?.valid">Please Enter Scheme
+            Name</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <!-- <div class="row" *ngIf="isSchemeFound && tabledata  && !firstTimeEntry">
+
+            <div class="col-md-12">
+                <br />
+                <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Financial Year) <mat-icon
+                            matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now.">info</mat-icon></b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th> Name</th>
+                                <th>Total Beneficiary(Previous Month)</th>
+                                <th></th>
+                                <th>Incremantal Beneficiary</th>
+                                <th>Total Beneficiary till date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <span *ngFor="let index of wbJson ; let rowIndex=index; last as isLast">
+
+                                <tr *ngIf="!isLast" style="text-align: center;">
+                                    <td>{{index.name}}</td>
+                                    <td>{{index.val}}</td>
+
+                                    <td>+</td>
+                                    <td><input  formControlName="increaseData" [defaultValue]="0"
+                                            (keyup)="onKeyUp($event,rowIndex)"></td>
+                                    <td style="max-width: 4vw">{{a[rowIndex]}}</td>
+                                </tr>
+                            </span>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+<!-- //--------------------------------------------- -->
+
+    <!-- <div class="row" *ngIf="!tableflag && tabledata && !firstTimeEntry">
+      <div class="col-md-12">
+        <br />
+        <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Financial Year) <mat-icon
+              matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now.">info</mat-icon></b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <br />
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+              <tr style="text-align: center;">
+                <th> Name</th>
+                <th>Total Beneficiary(Previous Month)</th>
+                <th></th>
+                <th>Incremantal Beneficiary</th>
+                <th>Total Beneficiary till date</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let recverForm of incrementalData.controls; let i = index">
+              <tr [formGroup]="incrementalData.fromGroupAt(i)">
+                <td>
+                  {{this.defval[i].name}}
+                </td>
+
+                <td>
+                  {{this.a[i]}}
+                </td>
+                <td>+</td>
+
+                <td>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Amount </mat-label>
+                    <input matInput  formControlName="totalBen" autocomplete="off"
+                      (keyup)="onKeyUpdefault($event,i)" />
+                  </mat-form-field>
+                </td>
+                <td style="max-width: 4vw">{{this.incrementaldata[i]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+<div class="row mt-2" *ngIf="!tableflag && tabledata && !firstTimeEntry">
+  <div class="col-md-12">
+    <mat-card-subtitle class="mb-2">
+      <b>
+        Beneficiary Details (Cumulative as on date for the Financial Year)
+        <mat-icon
+          matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now."
+          class="info-tooltip"
+        >
+          info
+        </mat-icon>
+      </b>
+    </mat-card-subtitle>
+    <mat-divider class="mb-3"></mat-divider>
+  </div>
+
+  <div class="row">
+    <div class="table-responsive ">
+      <table class="table attractive-table table-bordered table-hover dataTable js-exportable">
+        <thead>
+          <tr class="text-center table-head">
+            <th>Name</th>
+            <th>Total Beneficiary<br>(Previous Month)</th>
+            <th></th>
+            <th>Incremental Beneficiary</th>
+            <th>Total Beneficiary<br>till date</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let recverForm of incrementalData.controls; let i = index">
+          <tr [formGroup]="incrementalData.fromGroupAt(i)" class="text-center">
+            <td>
+              {{ this.defval[i].name }}
+            </td>
+            <td>
+              {{ this.a[i] }}
+            </td>
+            <td>+</td>
+            <td>
+              <mat-form-field appearance="outline" class="full-width slim-field">
+                <input matInput formControlName="totalBen" autocomplete="off" (keyup)="onKeyUpdefault($event, i)" />
+              </mat-form-field>
+            </td>
+            <td style="max-width: 80px;">
+              <span style="font-weight: 600; color: #388e3c;">{{ this.incrementaldata[i] }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- //--------------------------------------------- -->
+
+    <div class="row" *ngIf="firstTimeEntry">
+      <div class="col-md-12">
+        <br />
+        <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Financial Year) <mat-icon
+              matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now.">info</mat-icon></b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <br />
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+              <tr style="text-align: center;">
+                <th> Name</th>
+                <th>Total Beneficiary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let index of defval ; let rowIndex=index" style="text-align: center;">
+                <td>{{index.name}}</td>
+                <td><input type="text" formControlName="increaseData" (keyup)="onKeyUpFirstdefault($event,rowIndex)">
+                </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row" *ngIf="tableflag && !tabledata && !firstTimeEntry">
+            <div class="col-md-12">
+                <br />
+                <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Financial Year) <mat-icon
+                            matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now.">info</mat-icon></b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th> Name</th>
+                                <th>Total Beneficiary(Previous Month)</th>
+                                <th></th>
+                                <th>Incremantal Beneficiary</th>
+                                <th>Total Beneficiary till date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let index of wbJson ; let rowIndex=index; last as isLast"
+                                style="text-align: center;">
+
+                                <td *ngIf="!isLast">{{index.name}}</td>
+                                <td *ngIf="!isLast">{{index.val}}</td>
+                                <td *ngIf="!isLast">+</td>
+                                <td *ngIf="!isLast"><input type="text" formControlName="increaseData"
+                                        (keyup)="onKeyUpdefault($event,rowIndex)"></td>
+                                <td *ngIf="!isLast" style="max-width: 4vw">{{a[rowIndex]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+
+
+    <div class="row" *ngIf="tableflag && !tabledata && !firstTimeEntry">
+      <div class="col-md-12">
+        <br />
+        <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Financial Year) <mat-icon
+              matTooltip="As per Bharat DBT policy a beneficiary once approved for a financial year will be treated as beneficiary throughout that financial year. So, only unique beneficiary count increased will be accepted in the portal. In any case if any beneficiary deactivated due to certain condition, there is no provision to show the decreased count as of now.">info</mat-icon></b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <br />
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+              <tr style="text-align: center;">
+                <th> Name</th>
+                <th>Total Beneficiary(Previous Month)</th>
+                <th></th>
+                <th>Incremantal Beneficiary</th>
+                <th>Total Beneficiary till date</th>
+              </tr>
+            </thead>
+
+            <tbody *ngFor="let recverForm of incrementalData.controls; let i = index">
+              <tr [formGroup]="incrementalData.fromGroupAt(i)">
+                <td>
+                  {{this.defval[i].name}}
+                </td>
+
+                <td>
+                  {{this.a[i]}}
+                </td>
+                <td>+</td>
+
+                <td>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Amount </mat-label>
+                    <input matInput formControlName="totalBen" autocomplete="off"
+                      (keyup)="onKeyUpdefault($event,i)" />
+                  </mat-form-field>
+                </td>
+                <td style="max-width: 4vw">{{this.incrementaldata[i]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row d-flex">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width compact-field" appearance="outline">
+          <mat-label>Benefit Type</mat-label>
+          <mat-select #benefitType formControlName="benefitType" required disableRipple
+            (selectionChange)="onBenefitTypeChange($event)">
+            <mat-option [value]="benefitTypeList1?.codeValueId">
+              {{benefitTypeList1?.codeValueDesc }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!dbtDataForm.controls['benefitType']?.valid">Please Enter Benefit Type</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width slim-field" appearance="outline">
+          <mat-label>Number of groups/SHG</mat-label>
+          <input matInput #shgNumber formControlName="shgNumber" (keypress)="validateNumberInput($event)" placeholder="">
+        </mat-form-field>
+      </div>
+    </div>
+    <!----------------------------------------------------------------------------------->
+    <!-- <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Number of groups/SHG</mat-label>
+          <input  matInput #shgNumber formControlName="shgNumber" placeholder="">
+        </mat-form-field>
+      </div>
+    </div> -->
+    <!----------------------------------------------------------------------------------->
+
+    <div class="row mt-3">
+      <div class="col-md-12"    *ngIf="showCashTypeField">
+        <mat-card-subtitle><b>Funds Transferred (Cash Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Total Funds Transferred</mat-label>
+          <input  matInput #fundTrnsferCash formControlName="fundTrnsferCash" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['fundTrnsferCash']?.valid">Please Enter Funds
+            Transferred</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6" *ngIf="showCashTypeField"></div>
+      <div class="col-md-12" *ngIf="showKindTypeField">
+        <br />
+        <mat-card-subtitle><b>Expenditure Incurred (In-kind Scheme) to beneficiaries (in
+            ₹)</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="col-md-5" *ngIf="showKindTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Total Expenditure Incurred</mat-label>
+          <input  matInput #expenditureKind formControlName="expenditureKind" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <!-- <mat-hint>Please enter a new scheme name</mat-hint> -->
+          <mat-error *ngIf="!dbtDataForm.controls['expenditureKind']?.valid">Please Enter Expenditure
+            Incurred</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6" *ngIf="showKindTypeField"></div>
+
+      <div class="col-md-12" *ngIf="showCashTypeField">
+        <br />
+        <mat-card-subtitle><b>Transaction Details of Funds Transferred (Cash Scheme) in a
+            month</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="col-md-12" *ngIf="showCashTypeField">
+        <mat-card-subtitle><u>
+            <ul class="mt-1">
+              <li>Through Electronic Modes (ABP, NEFT, RTGS, AEPS)</li>
+            </ul>
+          </u></mat-card-subtitle>
+      </div>
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-2" appearance="outline">
+          <mat-label>Total No. of Transactions</mat-label>
+          <input  matInput #noTrnsCashElectronic formControlName="noTrnsCashElectronic" (keypress)="validateNumberInput($event)" placeholder=""
+            required>
+          <mat-error *ngIf="!dbtDataForm.controls['noTrnsCashElectronic']?.valid">Please Enter No. of
+            Transactions</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1" *ngIf="showCashTypeField"></div>
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Amount transferred (in ₹)</mat-label>
+
+          <input  matInput #amntTrnsCashElectronic formControlName="amntTrnsCashElectronic" (keypress)="validateNumberInput($event)" placeholder=""
+            required>
+          <mat-error *ngIf="!dbtDataForm.controls['amntTrnsCashElectronic']?.valid">Please Enter Amount
+            transferred (in ₹)</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Amount transactions through Electronic Mode and APB mode(in ₹)</mat-label>
+
+          <input  matInput #amntTrnsElectronicApb formControlName="amntTrnsElectronicApb" (keypress)="validateNumberInput($event)" placeholder=""
+            required>
+          <mat-error *ngIf="!dbtDataForm.controls['amntTrnsElectronicApb']?.valid">Please Enter Amount
+            transactions through Electronic Mode and APB mode(in ₹)</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-1" *ngIf="showCashTypeField"></div>
+
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Number of transactions through Electronic and APB mode(in ₹)</mat-label>
+          <input  matInput #noOfTrnsElectronicApb formControlName="noOfTrnsElectronicApb" (keypress)="validateNumberInput($event)" placeholder=""
+            required>
+          <mat-error *ngIf="!dbtDataForm.controls['noOfTrnsElectronicApb']?.valid">Please Enter Number of
+            transactions through Electronic and APB mode(in ₹)</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12" *ngIf="showCashTypeField">
+        <br />
+        <mat-card-subtitle>
+          <ul>
+            <li><u>Through Other Modes (Cash, Cheque, DD, MO)</u></li>
+          </ul>
+        </mat-card-subtitle>
+      </div>
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Total No. of Transactions</mat-label>
+          <input  matInput #noTrnsCashOther formControlName="noTrnsCashOther" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['noTrnsCashOther']?.valid">Please Enter No. of
+            Transactions</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1" *ngIf="showCashTypeField"></div>
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Amount transferred (in ₹)</mat-label>
+
+          <input  matInput #amntTrnsCashOther formControlName="amntTrnsCashOther" (keypress)="validateNumberInput($event)" (keyup)="validateSum()"
+            placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['amntTrnsCashOther']?.valid">Please Enter Amount transferred
+            (in ₹)</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-5" *ngIf="showCashTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Total No. of Transactions with Aadhaar seeded</mat-label>
+          <input  matInput #trnsAadharSeeded formControlName="trnsAadharSeeded" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['trnsAadharSeeded']?.valid">Please Enter Transactions with
+            Aadhaar seeded</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12" *ngIf="showKindTypeField">
+        <br />
+        <mat-card-subtitle><b>Transaction Details of Benefit Transferred (In-kind Scheme) in a
+            month</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="col-md-5" *ngIf="showKindTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Unit of Measurement</mat-label>
+          <input  matInput #unitKind formControlName="unitKind" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['unitKind']?.valid">Please Enter Unit of
+            Measurement</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1" *ngIf="showKindTypeField"></div>
+      <div class="col-md-5" *ngIf="showKindTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Quantity Transferred</mat-label>
+          <input  matInput #qtyTransferedKind formControlName="qtyTransferedKind" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['qtyTransferedKind']?.valid">Please Enter Quantity
+            Transferred</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-5" *ngIf="showKindTypeField">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>No. of Aadhaar Authenticated / Validated Transactions (Bio/Demo/OTP/e-Sign)</mat-label>
+          <input  matInput #aadharTransKind formControlName="aadharTransKind" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['aadharTransKind']?.valid">Please Enter Aadhaar
+            Authenticated / Validated Transactions</mat-error>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="col-md-12" *ngIf="isSchemeFound">
+        <br />
+        <mat-card-subtitle><b>Savings data for the month</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="col-md-5" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>No. of Records De-duplicated</mat-label>
+          <input  matInput #noDeDuplicated formControlName="noDeDuplicated" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['noDeDuplicated']?.valid">Please Enter Records
+            De-duplicated</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1" *ngIf="isSchemeFound"></div>
+      <div class="col-md-5" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>No. of Ghost / Fake Beneficiaries removed</mat-label>
+          <input  matInput #noGhost formControlName="noGhost" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['noGhost']?.valid">Please Enter Ghost / Fake Beneficiaries
+            removed</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-5" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Other savings due to process improvement/ efficiency</mat-label>
+          <input  matInput #otherSavings formControlName="otherSavings" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['otherSavings']?.valid">Please Enter Other savings due to
+            process improvement/ efficiency</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1" *ngIf="isSchemeFound"></div>
+      <div class="col-md-5" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Savings Amount (in ₹)</mat-label>
+          <input  matInput #savingAmnt formControlName="savingAmnt" (keypress)="validateNumberInput($event)" placeholder="" required>
+          <mat-error *ngIf="!dbtDataForm.controls['savingAmnt']?.valid">Please Enter Savings Amount (in
+            ₹)</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-md-12" *ngIf="isSchemeFound">
+        <br />
+        <mat-card-subtitle><b>Remarks</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="col-md-12" *ngIf="isSchemeFound">
+        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+          <mat-label>Remarks</mat-label>
+          <textarea matInput #remarks formControlName="remarks" placeholder="" required></textarea>
+          <mat-error *ngIf="!dbtDataForm.controls['remarks']?.valid">Please Enter Remarks</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <br />
+    <button mat-raised-button type="submit" color="primary" *ngIf="isSchemeFound" (click)="onSubmit()">Save and
+      Froward</button> &nbsp;&nbsp;&nbsp;
+
+    <!-- <button mat-raised-button type="draft" (click)="draftSave()" color="primary" [disabled]="!dbtDataForm.valid"
+            *ngIf="isSchemeFound">Draft</button> -->
+
+    &nbsp;&nbsp;&nbsp;
+    <span [hidden]="dbtDataForm.valid" id="form-button-msg" *ngIf="isSchemeFound">(<b>N.B.</b> Button will be
+      enabled once validation pass)</span>
+    <span style="color: darkorange;" *ngIf="!isSchemeFound">
+      <h3>(<b>N.B.</b> Please select A valid Scheme to proceed)</h3>
+    </span>
+    <br />
+    <br />
+  </form>
+  <br />
+</mat-dialog-content>

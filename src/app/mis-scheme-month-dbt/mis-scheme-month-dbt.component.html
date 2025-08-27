@@ -1,1 +1,157 @@
-<p>mis-scheme-month-dbt works!</p>
+<div class="body">
+  <mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()">
+      <div class="row custom-field d-flex">
+        <h2 mat-dialog-title>Entry Details Form</h2>
+        <div class="col-md-2">
+          <mat-form-field class="full-width slim-field" appearance="outline">
+            <mat-label>Select Scheme</mat-label>
+            <mat-icon matSuffix>arrow_drop_down</mat-icon>
+            <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple >
+                    <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                        {{item.schemeName}}
+                    </mat-option>
+                </mat-select> -->
+            <!-- ========================================= My Change Start ===================================================== -->
+            <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple> -->
+            <input matInput type="text" formControlName="schemeCode" [matAutocomplete]="schemeAuto"
+              (keyup)="searchScheme($event);" />
+            <mat-autocomplete #schemeAuto="matAutocomplete" [panelWidth]="'auto'"
+              [displayWith]="displaySchemeFn.bind(this)">
+              <ng-container *ngFor="let item of filteredScheme">
+                <mat-option [value]="item.id">
+                  {{item.schemeName}}
+                </mat-option>
+              </ng-container>
+            </mat-autocomplete>
+            <!-- </mat-select> -->
+            <!-- ================================================= END =============================================================== -->
+            <!-- <mat-hint>Please select Scheme</mat-hint> -->
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <button mat-raised-button type="submit" color="primary">Search</button>
+        </div>
+      </div>
+      &nbsp;&nbsp;&nbsp;
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-content class="mat-typography">
+
+    <div class="mat-elevation-z8" *ngIf="tableflag" #TABLE style=" overflow: auto;">
+      <!-- <mat-divider></mat-divider> -->
+      <div class="toolbar">
+        <button mat-raised-button color="accent" (click)="exportToExcel()">Export to Excel</button>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="mat-table-container">
+        <table mat-table [dataSource]="dataSource" matSort  class="table table-bordered lessons-table">
+
+          <ng-container matColumnDef="SerialNo">
+            <th mat-header-cell *matHeaderCellDef>Sl. No.</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ currentPage * pageSize + i + 1 }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="MonthName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Month </th>
+            <td mat-cell *matCellDef="let element"> {{element.monthname}} </td>
+          </ng-container>
+          <ng-container matColumnDef="no_of_state_central">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of beneficiaries through Normative Central and
+              state Share (X)</th>
+            <td mat-cell *matCellDef="let element"> {{element.no_of_state_central}} </td>
+          </ng-container>
+          <!-- name Column -->
+          <ng-container matColumnDef="no_of_state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of additional beneficiaries supported by
+              state, if
+              any (Y)</th>
+            <td mat-cell *matCellDef="let element"> {{element.no_of_state}} </td>
+          </ng-container>
+          <!-- email Column -->
+          <ng-container matColumnDef="TotalBen">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total number of beneficiaries (X+Y)</th>
+            <td mat-cell *matCellDef="let element"> {{element.totalben}} </td>
+          </ng-container>
+          <!-- mobile Column -->
+          <ng-container matColumnDef="TotalBenDigitized">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of beneficiaries Records digitized (Out of
+              X+Y)
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalbendigitized}}</td>
+          </ng-container>
+          <ng-container matColumnDef="BenAadharSeeded">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of Aadhar authenticated beneficiaries (Out of
+              X+Y)
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.benaadharseeded}}</td>
+          </ng-container>
+          <!-- isactive Column -->
+          <ng-container matColumnDef="MobileCaptured">
+
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of beneficiaries having mobile number (Out of
+              X+Y)
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobilecaptured}}</td>
+          </ng-container>
+          <ng-container matColumnDef="central_share">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Central share of funds transfererd to "X"
+              beneficiaries
+              (in Rs)</th>
+            <td mat-cell *matCellDef="let element"> {{element.central_share}}</td>
+          </ng-container>
+          <ng-container matColumnDef="state_share">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Normative-State share of funds transfererd to "X"
+              beneficiaries (in Rs) </th>
+            <td mat-cell *matCellDef="let element"> {{element.state_share}}</td>
+          </ng-container>
+          <ng-container matColumnDef="add_state_contribution">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Additional State contribution to X (if any) (in Rs)
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.add_state_contribution}}</td>
+          </ng-container>
+          <ng-container matColumnDef="FundTrnsferCash">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total fund Transferred (Column 11+12++13)</th>
+            <td mat-cell *matCellDef="let element"> {{element.fundTrnsferCash}}</td>
+          </ng-container>
+          <ng-container matColumnDef="state_contribution_for_additional">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> State contributation of funds transferred to "Y"
+              beneficiaries (in Rs) </th>
+            <td mat-cell *matCellDef="let element"> {{element.state_contribution_for_additional}}</td>
+          </ng-container>
+          <ng-container matColumnDef="grand_total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grand total of fund transfer for "X" and "Y"
+              beneficiaries (in Rs) </th>
+            <td mat-cell *matCellDef="let element"> {{element.grand_total}}</td>
+          </ng-container>
+          <ng-container matColumnDef="NoTrnsCashElectronic">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of Transactions through Electronic modes </th>
+            <td mat-cell *matCellDef="let element"> {{element.notrnscashelectronic}}</td>
+          </ng-container>
+          <ng-container matColumnDef="AmntTrnsCashElectronic">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount transferred through Electronic modes </th>
+            <td mat-cell *matCellDef="let element"> {{element.amnttrnscashelectronic}}</td>
+          </ng-container>
+          <ng-container matColumnDef="NoTrnsCashOther">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of Transactions through non-electronic modes
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.notrnscashOther}}</td>
+          </ng-container>
+          <ng-container matColumnDef="AmntTrnsCashOther">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount transferred through non-electronic modes </th>
+            <td mat-cell *matCellDef="let element"> {{element.amnttrnscashother}}</td>
+          </ng-container>
+
+          <tr mat-header-row sticky *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+
+    </div>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,159 @@
+table {
+    width: 100%;
+}
+
+
+.mat-table-container {
+    max-height: 700px;
+    /* or any height you want */
+    overflow-y: auto;
+    position: relative;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.toolbar {
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns the button to the right */
+    // margin-bottom: 10px; /* Adds space between the button and the table */
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+// .mat-elevation-z8 {
+//   padding: 16px;
+// }
+
+.custom-field {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: 104px;
+    margin-bottom: 8px;
+}
+
+::ng-deep .mat-form-field.slim-field {
+    font-size: 13px;
+    height: 36px;
+    --mat-form-field-container-height: 36px;
+    /* Material v16+ support */
+}
+
+::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
+    padding: 5px 0;
+    /* minimal vertical padding */
+    border-top: 0;
+
+}
+
+::ng-deep .mat-form-field.slim-field input.mat-input-element {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 6px;
+    font-size: 13px;
+    color: #000000;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 2px .75em 0 .75em !important;
+}
+
+
+
+/* Fix mat-header-row */
+.mat-table thead,
+.cdk-table thead,
+.mat-header-row {
+    position: sticky;
+    top: 0;
+    /* Adjust based on your header height */
+    z-index: 10;
+    background-color: #f1f1f1;
+    /* For visibility */
+}
+
+/* Optional: style for inner header rows if you have multiple */
+.mat-header-row:nth-child(2) th {
+    top: 48px;
+    /* Height of your first header row */
+    z-index: 2;
+}
+
+/* Table borders (if required) */
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6 !important;
+}
+
+/* Optional: Freeze first column horizontally (if needed)
+th:first-child, td:first-child {
+  position: sticky;
+  left: 0;
+  background: #e9e9e9;
+}
+*/
+
+.mat-header-cell,
+.mat-cell {
+    white-space: wrap;
+    /* Prevent text wrap for better UX */
+}
+
+
+
+
+
+
+
+
+.mat-header-row[sticky] {
+    position: sticky;
+    // background: #ec0000;
+    z-index: 100;
+}
+
+/* Adjust top values for multiple rows */
+.mat-header-row[sticky]:nth-of-type(1) {
+    top: -1px;
+}
+
+.mat-header-row[sticky]:nth-of-type(2) {
+    top: 30px;
+}
+
+.mat-header-row[sticky]:nth-of-type(3) {
+    top: 60px;
+}
+
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(122, 122, 122, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(110, 110, 110, 0.3);
+    background-color: #bccde4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #777777;
+}

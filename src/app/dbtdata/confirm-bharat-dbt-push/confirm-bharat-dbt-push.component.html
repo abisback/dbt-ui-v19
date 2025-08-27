@@ -1,1 +1,28 @@
-<p>confirm-bharat-dbt-push works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>Confirmation: Are you sure to Push this DBT Data to Bharat DBT?</h2>
+<mat-divider></mat-divider>
+<br />
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="processForm" (ngSubmit)="onSubmit($event)">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Comments</mat-label>
+            <textarea matInput #comments formControlName="comments"></textarea>
+            <mat-error *ngIf="!processForm.controls['comments']?.valid">Please enter any Comment</mat-error>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+        <br />
+        <button mat-raised-button type="submit" id="approveBtn" color="primary" [disabled]="!processForm.valid">Push to
+            Bharat DBT</button>
+        &nbsp;&nbsp;&nbsp;
+        <!-- <button mat-raised-button type="submit" id="rejectBtn" color="warn" [disabled]="!processForm.valid">Revert Data</button>     -->
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="processForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation
+            pass)</span>
+        <br />
+        <br />
+    </form>
+    <br />
+</mat-dialog-content>

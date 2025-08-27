@@ -1,1 +1,91 @@
-<p>search-eligible-benificiary works!</p>
+<h2 mat-dialog-title>Search Benificiary Metrix</h2>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select gender</mat-label>
+                    <mat-select #gender formControlName="gender" disableRipple >
+                        <mat-option *ngFor="let item of genderList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Select Gender</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Caste</mat-label>
+                    <mat-select #caste formControlName="caste" disableRipple >
+                        <mat-option *ngFor="let item of casteList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Select Caste</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Merital Status</mat-label>
+                    <mat-select #meritalStatus formControlName="meritalStatus" disableRipple >
+                        <mat-option *ngFor="let item of maritalStatusList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Merital Status</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Religion</mat-label>
+                    <mat-select #religion formControlName="religion" disableRipple >
+                        <mat-option *ngFor="let item of religionList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Religion</mat-hint>
+                </mat-form-field>
+            </div>
+        </div> 
+        <br/>
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-raised-button type="submit" color="primary" >Search</button>    
+        &nbsp;&nbsp;&nbsp;
+        <br/>
+        <br/>
+    </form>
+
+    <div *ngIf="tableflag" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource"  matSort>
+            <ng-container matColumnDef="schemeid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Id </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.schemeid}} </td> -->
+                </ng-container>
+
+                <ng-container matColumnDef="schemename">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+                    <!-- <td mat-cell *matCellDef="let element"> {{element.schemename}} </td> -->
+                </ng-container>
+
+                <ng-container matColumnDef="iseligible">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Eligible </th>
+                    <!-- <td mat-cell *matCellDef="let element"> {{element.iseligible}} </td> -->
+                </ng-container>
+
+                <ng-container matColumnDef="isapplied">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Has Applied </th>
+                    <!-- <td mat-cell *matCellDef="let element"> {{element.isapplied}} </td> -->
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
+        </table>
+    </div>
+
+</mat-dialog-content>

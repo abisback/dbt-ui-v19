@@ -1,1 +1,89 @@
-<p>add-scheme-budget works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button> 
+<h1 mat-dialog-title>
+    Add Scheme Budget Details
+</h1>
+<mat-divider></mat-divider>
+<br/>
+
+<table class="table">
+    <tr class="row">
+        <th class="col-md-5">Department: </th>
+        <td class="col-md-7">{{viewData?.deptCode}} - {{viewData?.deptName}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Scheme: </th>
+        <td class="col-md-7">{{viewData?.schemeCode}}-{{viewData?.schemeName}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Scheme Type: </th>
+        <td class="col-md-7">{{helperService.getSchemeType(viewData?.schemeType)}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Funding Pattern(Central Share : State Share): </th>
+        <td class="col-md-7">{{viewData?.fundingPattern}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Progress of scheme specific MIS: </th>
+        <td class="col-md-7">{{helperService.getProgress(viewData?.progress)}}:</td>
+    </tr>
+</table>
+<br/>
+<mat-card-subtitle>
+    <mat-card-header>Financial Year wise Budget Allocation</mat-card-header>
+</mat-card-subtitle>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">    
+    <form class="example-form"  [formGroup]="schemeBudgetForm" (ngSubmit)="onSubmit()"> 
+        <mat-form-field  class="example-full-width"  appearance="outline">
+            <mat-label>Select Financial Year</mat-label>
+            <mat-select #finYr formControlName="finYr" disableRipple (selectionChange)="updateFinYear($event)">
+                <mat-option  [value]="financialYear.codeValueId">
+                    {{financialYear.codeValueDesc}}
+                </mat-option>
+            </mat-select>
+            <mat-hint>Please select Financial Year</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-half-width" appearance="outline">
+            <mat-label>Central Allocation</mat-label>
+            <input matInput #centralAllocation formControlName="centralAllocation" placeholder="" required (change)="updateTotalAllocation()">
+            <span matPrefix>&#8377;</span>
+            <mat-hint>Please enter central Budget Allocation</mat-hint>
+            <mat-error *ngIf="!schemeBudgetForm.controls['centralAllocation']?.valid">Please enter valid amount</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-half-width" appearance="outline">
+            <mat-label>State Allocation</mat-label>
+            <input matInput #stateAllocation formControlName="stateAllocation" placeholder="" required (change)="updateTotalAllocation()">
+            <span matPrefix>&#8377;</span>
+            <mat-hint>Please enter state Budget Allocation</mat-hint>
+            <mat-error *ngIf="!schemeBudgetForm.controls['stateAllocation']?.valid">Please enter valid amount</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-half-width" appearance="outline">
+            <mat-label>Additional Allocation</mat-label>
+            <input matInput #additionalAllocation formControlName="additionalAllocation" placeholder="" required (change)="updateTotalAllocation()">
+            <span matPrefix>&#8377;</span>
+            <mat-hint>Please enter Additional Budget Allocation</mat-hint>
+            <mat-error *ngIf="!schemeBudgetForm.controls['additionalAllocation']?.valid">Please enter valid amount</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Total Allocation</mat-label>
+            <input matInput #totalAllocation formControlName="totalAllocation" placeholder="" readonly>
+            <span matPrefix>&#8377;</span>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Remarks</mat-label>
+            <textarea matInput #remarks formControlName="remarks" placeholder="" required>
+            </textarea>
+            <mat-error *ngIf="!schemeBudgetForm.controls['remarks']?.valid">Please enter valid remarks</mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!schemeBudgetForm.valid">Save Scheme Budget</button>    
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="schemeBudgetForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation pass)</span>
+        <br/>
+        <br/>
+    </form>
+</mat-dialog-content>

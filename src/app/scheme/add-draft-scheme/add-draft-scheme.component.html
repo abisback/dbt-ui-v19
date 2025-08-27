@@ -1,1 +1,146 @@
-<p>add-draft-scheme works!</p>
+<div class="d-flex justify-content-between">
+
+  <div class="header-row">
+    <mat-icon color="primary">new_releases</mat-icon>
+    <h2>Add New Scheme(Drafted)</h2>
+  </div>
+  <button mat-icon-button class="close-icon" [mat-dialog-close]="true" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<!-- <h2 mat-dialog-title>Add New Scheme(Drafted)</h2> -->
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <form class="example-form" [formGroup]="schemeForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex gap-3 w-100 mt-3">
+      <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-label>Select Department</mat-label>
+        <mat-select #deptCode formControlName="deptCode" disableRipple>
+          <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+            {{item.name_Code+"-"+item.name}}
+          </mat-option>
+        </mat-select>
+        <!-- <mat-hint>Please select Department Name</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-label>Select Scheme type</mat-label>
+        <mat-select #schemeType formControlName="schemeType" disableRipple>
+          <mat-option *ngFor="let item of schemeTypeList" [value]="item.codeValueId">
+            {{item.codeValueDesc}}
+          </mat-option>
+        </mat-select>
+        <!-- <mat-hint>Please select scheme type</mat-hint> -->
+      </mat-form-field>
+
+    </div>
+    <div class="d-flex gap-3 mt-3">
+      <div class="scheme-name">
+        <mat-form-field class="example-full-width slim-field" appearance="outline">
+          <mat-label>Scheme Name</mat-label>
+          <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+          <!-- <mat-hint>Please enter a new scheme name</mat-hint> -->
+          <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="transfer-type">
+        <mat-form-field class="example-full-width compact-field" appearance="outline">
+          <mat-label>Type of Transfer</mat-label>
+          <mat-select #transferType formControlName="transferType" disableRipple>
+            <mat-option *ngFor="let item of benefitTypeList" [value]="item.codeValueId">
+              {{item.codeValueDesc}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>(Cash/ In-Kind / Cash & In-Kind)</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!---------------------------------------------------------------------------------->
+<div class="funding-section mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-label class="funding-title">Funding Pattern of Scheme <b>(In Percentage)</b><mat-icon
+            matTooltip="Please Note (Central Share % + State Share % will always be = 100%) Topup % will additional over this. E.g. For a CSS scheme Central Share=30%, State Share=70% and Additional State Share=20%">info</mat-icon></mat-label>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="w-100 slim-field mt-2" appearance="outline" >
+          <mat-label>Central Share</mat-label>
+          <input matInput #fundingPattern formControlName="centralShare" (blur)="clampToPercentRange()" placeholder="" required>
+          <mat-icon matSuffix>%</mat-icon>
+          <!-- <mat-hint>Central Share in Percentage</mat-hint> -->
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="w-100 slim-field mt-2" appearance="outline" >
+          <mat-label>State Share</mat-label>
+          <input matInput #fundingPattern formControlName="stateShare" (blur)="clampToPercentRange()" placeholder="" required>
+          <mat-icon matSuffix>%</mat-icon>
+          <!-- <mat-hint>State Share in Percentage</mat-hint> -->
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="w-100 slim-field mt-2" appearance="outline">
+          <mat-label>Additional State Share</mat-label>
+          <input matInput #fundingPattern formControlName="additionalStateShare" (blur)="clampToPercentRange()" placeholder="" required>
+          <mat-icon matSuffix>%</mat-icon>
+          <!-- <mat-hint>Additional Share in Percentage</mat-hint> -->
+        </mat-form-field>
+      </div>
+
+    </div>
+    </div>
+
+    <!---------------------------------------------------------------------------------->
+ <div class="d-flex gap-1 mt-2">
+    <mat-form-field class="example-full-width compact-field" appearance="outline">
+      <mat-label>Progress of scheme specific MIS</mat-label>
+      <mat-select #progress formControlName="progress" disableRipple>
+        <mat-option *ngFor="let item of progressTypeList" [value]="item.codeValueId">
+          {{item.codeValueDesc}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <!-- <mat-form-field class="example-half-width" appearance="outline">
+            <mat-label>Select Data Entry Financial Year</mat-label>
+            <mat-select #onBoarded formControlName="dataShareType" disableRipple>
+                <mat-option *ngFor="let item of finYearList" [value]="item.codeValueId">
+                    {{item.codeValueDesc}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+
+    <mat-form-field class="example-half-width compact-field" appearance="outline">
+      <mat-label>Data Share Type</mat-label>
+      <mat-select #onBoarded formControlName="dataShareType" disableRipple>
+        <mat-option *ngFor="let item of dataShareType" [value]="item.codeValueId">
+          {{item.codeValueDesc}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-half-width compact-field" appearance="outline">
+      <mat-label>Whether scheme API integrated with State DBT Portal</mat-label>
+      <mat-select #misIntegrated formControlName="apiIntegrated" disableRipple>
+        <mat-option *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+          {{item.codeValueDesc}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+    <br />
+    <button mat-raised-button type="submit" color="primary" [disabled]="!schemeForm.valid">Save Scheme</button>
+    &nbsp;&nbsp;&nbsp;
+    <span [hidden]="schemeForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation
+      pass)</span>
+    <br />
+    <br />
+  </form>
+  <br />
+</mat-dialog-content>

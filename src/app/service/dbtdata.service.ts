@@ -185,8 +185,8 @@ export class DbtdataService {
   GetCommentsDbtData(dbtid:number):Observable<any>{
     return this.http.get<any>(this.apiurl+"viewComments/"+dbtid);
   }
-  GetDepartmentWiseMisReport(deptCode:any,monthId:any):Observable<any>{
-    return this.http.get<any>(this.apiurl+"getDepartmentWiseMisReport/"+deptCode+"/"+monthId);
+  GetDepartmentWiseMisReport(deptCode:any,monthId:any, currentPage: any, pageSize: any):Observable<any>{
+    return this.http.get<any>(this.apiurl+"getDepartmentWiseMisReport/"+deptCode+"/"+monthId+"/"+"?PageNumber="+currentPage +"&PageSize="+pageSize);
   }
 
   GetAllDepartmentWiseMisReport():Observable<any>{
@@ -233,5 +233,7 @@ export class DbtdataService {
   GetReportPushData(deptcode:number,schemecode:number,finyr:number, month:number):Observable<any>{
     return this.http.get<any>(this.apiurl+"GetReportPushData/"+deptcode+"/"+schemecode+"/"+finyr+"/"+month);
   }
-
+  GetReportPushDataPaged(deptcode:number,schemecode:number,finyr:number, month:number, payload: any):Observable<any>{
+    return this.http.post<any>(this.apiurl+"GetReportPushDataPaged/"+deptcode+"/"+schemecode+"/"+finyr+"/"+month, payload);
+  }
 }

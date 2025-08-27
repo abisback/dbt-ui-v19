@@ -1,1 +1,40 @@
-<p>view-comments works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>Comments Details</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" >
+        <div class="row" >
+            <div class="col-md-12">
+                <mat-divider></mat-divider>
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th> Id</th>
+                                <th> Comment</th>
+                                <th>Commented By</th>
+                                <th>Comment Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let index of comment ; let rowIndex=index" style="text-align: center;">
+                                <td style="max-width: 4vw">{{rowIndex+1}}</td>
+                                <td style="max-width: 4vw">{{index.comments}}</td>
+                                <td style="max-width: 4vw">{{index.commentby}}</td>
+                                <td style="max-width: 4vw">{{index.date}}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+    </form>
+    <br />
+</mat-dialog-content>

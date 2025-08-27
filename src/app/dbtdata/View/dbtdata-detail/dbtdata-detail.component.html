@@ -1,1 +1,210 @@
-<p>dbtdata-detail works!</p>
+  <div class="d-flex justify-content-between">
+
+    <div class="header-row">
+      <!-- <mat-icon color="primary">new_releases</mat-icon> -->
+      <h2>DBT Consolidated data</h2>
+    </div>
+    <button mat-icon-button class="close-icon" [mat-dialog-close]="true" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+<!-- <h2 mat-dialog-title>DBT Consolidated data</h2> -->
+<mat-divider></mat-divider>
+<br />
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-5">
+            <mat-label class="field-label">Department: </mat-label>
+            {{dbtData.deptName}}
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
+            <mat-label class="field-label">Level of Data Upload: </mat-label>
+            {{helperService.getDataUploadLevelType(dbtData.entryLevel)}}
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5" *ngIf="showDistrict">
+            <mat-label class="field-label">District: </mat-label>
+            {{districtName}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <mat-label class="field-label">Scheme: </mat-label>
+            {{dbtData.schemeName}}
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">Financial year: </mat-label>
+            {{dbtData.financialYear}}
+        </div>
+        <div class="col-md-1" *ngIf="isSchemeFound"></div>
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">Reporting Month: </mat-label>
+            {{dbtData.reportingMonthName}}
+        </div>
+    </div>
+    <div class="row" *ngIf="isSchemeFound">
+        <div class="col-md-12">
+            <br />
+            <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Year)</b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <br />
+        </div>
+        <div class="col-md-5">
+            <mat-label class="field-label">Total No of Beneficiaries: </mat-label>
+            {{dbtData.totalBen}}
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <mat-label class="field-label">Total No of Beneficiaries with Bank A/c: </mat-label>
+            {{dbtData.totalBenWithBank}}
+        </div>
+    </div>
+    <div class="row" *ngIf="isSchemeFound">
+        <div class="col-md-5">
+            <mat-label class="field-label">Total No of Beneficiaries digitized(Z): </mat-label>
+            {{dbtData.totalBenDigitized}}
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <mat-label class="field-label">No. of Aadhaar authenticated and seeded Beneficiaries(Out of Z): </mat-label>
+            {{dbtData.benAadharSeeded}}
+        </div>
+    </div>
+    <div class="row" *ngIf="isSchemeFound">
+        <div class="col-md-5">
+            <mat-label class="field-label">No. of Beneficiaries for whom mobile number is captured(Out of Z):
+            </mat-label>
+            {{dbtData.mobileCaptured}}
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <div class="row" *ngIf="isSchemeFound">
+        <div class="col-md-5">
+            <mat-label class="field-label">Benefit Type: </mat-label>
+            {{helperService.getTransferType(dbtData.benefitType)}}
+        </div>
+        <div class="col-md-7"></div>
+    </div>
+    <div class="row">
+        <br />
+        <div class="col-md-12" *ngIf="showCashTypeField">
+            <mat-card-subtitle><b>Funds Transferred (Cash Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Total Funds Transferred: </mat-label>
+            {{dbtData.fundTrnsferCash}}
+        </div>
+        <div class="col-md-6" *ngIf="showCashTypeField"></div>
+        <div class="col-md-12" *ngIf="showKindTypeField">
+            <br />
+            <mat-card-subtitle><b>Expenditure Incurred (In-kind Scheme) to beneficiaries (in ₹):
+                </b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-md-5" *ngIf="showKindTypeField">
+            <mat-label class="field-label">Total Expenditure Incurred: </mat-label>
+            {{dbtData.expenditureKind}}
+        </div>
+        <div class="col-md-6" *ngIf="showKindTypeField"></div>
+        <div class="col-md-12" *ngIf="showCashTypeField">
+            <br />
+            <mat-card-subtitle><b>Transaction Details of Funds Transferred (Cash Scheme) in a month:
+                </b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-md-12" *ngIf="showCashTypeField">
+            <mat-card-subtitle><u>
+                    <ul>
+                        <li>Through Electronic Modes (ABP, NEFT, RTGS, AEPS) </li>
+                    </ul>
+                </u></mat-card-subtitle>
+        </div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Total No. of Transactions: </mat-label>
+            {{dbtData.noTrnsCashElectronic}}
+        </div>
+        <div class="col-md-1" *ngIf="showCashTypeField"></div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Amount transferred (in ₹): </mat-label>
+            {{dbtData.amntTrnsCashElectronic}}
+        </div>
+        <div class="col-md-12" *ngIf="showCashTypeField">
+            <br />
+            <mat-card-subtitle>
+                <ul>
+                    <li><u>Through Other Modes (Cash, Cheque, DD, MO)</u></li>
+                </ul>
+            </mat-card-subtitle>
+        </div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Total No. of Transactions: </mat-label>
+            {{dbtData.noTrnsCashOther}}
+        </div>
+        <div class="col-md-1" *ngIf="showCashTypeField"></div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Amount transferred (in ₹): </mat-label>
+            {{dbtData.amntTrnsCashOther}}
+        </div>
+        <div class="col-md-5" *ngIf="showCashTypeField">
+            <mat-label class="field-label">Total No. of Transactions with Aadhaar seeded: </mat-label>
+            {{dbtData.trnsAadharSeeded}}
+        </div>
+        <div class="col-md-12" *ngIf="showKindTypeField">
+            <br />
+            <mat-card-subtitle><b>Transaction Details of Benefit Transferred (In-kind Scheme) in a month:
+                </b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-md-5" *ngIf="showKindTypeField">
+            <mat-label class="field-label">Unit of Measurement: </mat-label>
+            {{dbtData.unitKind}}
+        </div>
+        <div class="col-md-1" *ngIf="showKindTypeField"></div>
+        <div class="col-md-5" *ngIf="showKindTypeField">
+            <mat-label class="field-label">Quantity Transferred: </mat-label>
+            {{dbtData.qtyTransferedKind}}
+        </div>
+        <div class="col-md-5" *ngIf="showKindTypeField">
+            <mat-label class="field-label">No. of Aadhaar Authenticated / Validated Transactions (Bio/Demo/OTP/e-Sign):
+            </mat-label>
+            {{dbtData.aadharTransKind}}
+        </div>
+        <div class="col-md-12" *ngIf="isSchemeFound">
+            <br />
+            <mat-card-subtitle><b>Savings data for the month</b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">No. of Records De-duplicated: </mat-label>
+            {{dbtData.noDeDuplicated}}
+        </div>
+        <div class="col-md-1" *ngIf="isSchemeFound"></div>
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">No. of Ghost / Fake Beneficiaries removed: </mat-label>
+            {{dbtData.noGhost}}
+        </div>
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">Other savings due to process improvement/ efficiency: </mat-label>
+            {{dbtData.otherSavings}}
+        </div>
+        <div class="col-md-1" *ngIf="isSchemeFound"></div>
+        <div class="col-md-5" *ngIf="isSchemeFound">
+            <mat-label class="field-label">Savings Amount: </mat-label>
+            {{dbtData.savingAmnt}}
+        </div>
+        <div class="col-md-12" *ngIf="isSchemeFound">
+            <br />
+            <mat-card-subtitle><b>Remarks</b></mat-card-subtitle>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-md-12" *ngIf="isSchemeFound">
+            {{dbtData.remarks}}
+        </div>
+    </div>
+    <br />
+</mat-dialog-content>

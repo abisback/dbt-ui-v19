@@ -1,1 +1,140 @@
-<p>entry-details works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button> 
+<h2 mat-dialog-title>Entry Details Form</h2>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()"> 
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Scheme</mat-label>
+                    <mat-select #schemeCode formControlName="schemeCode" disableRipple >
+                        <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                            {{item.schemeName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Scheme</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select gender</mat-label>
+                    <mat-select #gender formControlName="gender" disableRipple >
+                        <mat-option *ngFor="let item of genderList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Select Gender</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Caste</mat-label>
+                    <mat-select #caste formControlName="caste" disableRipple >
+                        <mat-option *ngFor="let item of casteList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Select Caste</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Merital Status</mat-label>
+                    <mat-select #meritalStatus formControlName="meritalStatus" disableRipple >
+                        <mat-option *ngFor="let item of maritalStatusList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Merital Status</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Religion</mat-label>
+                    <mat-select #religion formControlName="religion" disableRipple >
+                        <mat-option *ngFor="let item of religionList" [value]="item.codeValueDesc">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please Religion</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Minimum Age</mat-label>
+                    <input type="number" matInput #minAge formControlName="minAge" placeholder="" required>
+                    <mat-hint>Please enter Minimum Age</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Maximum Age</mat-label>
+                    <input type="number" matInput #maxAge formControlName="maxAge" placeholder="" required>
+                    <mat-hint>Please enter Maximum Age</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-2 mt-4">              
+                <!-- <mat-radio-group aria-label="Do You Have Aadhar"> -->
+                    <mat-radio-group matInput #aadharExist formControlName="aadharExist">
+                    <mat-label>Is Aadhar Mandatory</mat-label>&nbsp;
+                    <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>          
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Residency Period In State</mat-label>
+                    <input type="number" matInput #resPeriodInState formControlName="resPeriodInState" placeholder="" required>
+                    <mat-hint>Please enter Valid Data</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Family Income Bar (Annually)</mat-label>
+                    <input type="number" matInput #familyIncome formControlName="familyIncome" placeholder="" required>
+                    <mat-hint>Please Enter Valid Data</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <br/>
+            <div class="col-md-4 mt-4">              
+                <!-- <mat-radio-group aria-label="Do You Have Swasthasathi">-->
+                    <mat-label>Is Swasthasathi Mandatory</mat-label>&nbsp;
+                    <mat-radio-group matInput #swasthasathiExist formControlName="swasthasathiExist">
+                    <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;
+                    <mat-radio-button value="2">No</mat-radio-button>
+                  </mat-radio-group>          
+            </div>
+        </div>
+        <br/>
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-raised-button type="submit" color="primary" >Save Details</button>    
+        &nbsp;&nbsp;&nbsp;
+        <br/>
+        <br/>
+
+    </form>
+   
+</mat-dialog-content>

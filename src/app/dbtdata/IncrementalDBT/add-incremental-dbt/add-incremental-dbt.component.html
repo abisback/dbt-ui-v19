@@ -1,1 +1,383 @@
-<p>add-incremental-dbt works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>Upload DBT Incremental data</h2>
+<mat-divider></mat-divider>
+<br />
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Department</mat-label>
+                    <mat-select #deptCode formControlName="deptCode" disableRipple
+                        (selectionChange)="onDepartmentChange($event)">
+                        <!-- <select matNativeControl required></select> -->
+                        <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Department</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-7"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Level of Data Upload</mat-label>
+                    <mat-select #entryLevel formControlName="entryLevel" disableRipple
+                        (selectionChange)="onDataUploadLevelChange($event)">
+                        <mat-option *ngFor="let item of dataUploadLevelList" [value]="item.codeValueId">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>(Select District Name if entry is at District level)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline" *ngIf="showDistrictDropDown">
+                    <mat-label>Select District</mat-label>
+                    <mat-select #districtCode formControlName="districtCode" disableRipple>
+                        <mat-option *ngFor="let item of districtList" [value]="item.districtCode">
+                            {{item.districtName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select District</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Scheme</mat-label>
+                    <mat-select #schemeCode formControlName="schemeCode" disableRipple disableRipple
+                        (selectionChange)="onSchemeChange($event)">
+                        <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                            {{item.schemeName.trim()}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Scheme to upload data</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-7"></div>
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Financial year</mat-label>
+                    <mat-select #finYrCode formControlName="financialYear" disableRipple
+                        (selectionChange)="getFinYearFromId($event)">
+                        <mat-option [value]="financialYear.codeValueId.trim()">
+
+                            {{financialYear.codeValueDesc.trim()}}
+                        </mat-option>
+                    </mat-select>
+
+                    <mat-hint>Please select financial year</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-1" *ngIf="isSchemeFound"></div>
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Reporting Month</mat-label>
+                    <mat-select #reportingMonth formControlName="reportingMonth" disableRipple>
+                        <mat-option *ngFor="let item of reportingMonthList" [value]="item.monthId">
+                            {{item.monthName}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <input matInput #reportingMonth formControlName="reportingMonth" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint> -->
+                    <mat-error *ngIf="!dbtDataForm.controls['reportingMonth']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" *ngIf="isSchemeFound">
+            <div class="col-md-12">
+                <br />
+                <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Year)</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <br />
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries</mat-label>
+                    <input type="number" matInput #totalBen formControlName="totalBen" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries with Bank A/c</mat-label>
+                    <input type="number" matInput #totalBenWithBank formControlName="totalBenWithBank" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['totalBenWithBank']?.valid">Please Enter Valid
+                        Data</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" *ngIf="isSchemeFound">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries digitized(Z)</mat-label>
+                    <input type="number" matInput #totalBenDigitized formControlName="totalBenDigitized" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['totalBenDigitized']?.valid">Please Enter Valid
+                        Data</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Aadhaar authenticated and seeded Beneficiaries(Out of Z)</mat-label>
+                    <input type="number" matInput #benAadharSeeded formControlName="benAadharSeeded" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['benAadharSeeded']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" *ngIf="isSchemeFound">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Beneficiaries for whom mobile number is captured(Out of Z)</mat-label>
+                    <input type="number" matInput #mobileCaptured formControlName="mobileCaptured" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['mobileCaptured']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row" *ngIf="isSchemeFound">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Benefit Type</mat-label>
+                    <mat-select #benefitType formControlName="benefitType" required disableRipple
+                        (selectionChange)="onBenefitTypeChange($event)">
+                        <mat-option *ngFor="let item of benefitTypeList" [value]="item.codeValueId">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!dbtDataForm.controls['benefitType']?.valid">Please Enter Benefit Type</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-7"></div>
+        </div>
+        <div class="row">
+            <br />
+            <div class="col-md-12" *ngIf="showCashTypeField">
+                <mat-card-subtitle><b>Funds Transferred (Cash Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total Funds Transferred</mat-label>
+                    <input type="number" matInput #fundTrnsferCash formControlName="fundTrnsferCash" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['fundTrnsferCash']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6" *ngIf="showCashTypeField"></div>
+            <div class="col-md-12" *ngIf="showKindTypeField">
+                <br />
+                <mat-card-subtitle><b>Expenditure Incurred (In-kind Scheme) to beneficiaries (in
+                        ₹)</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5" *ngIf="showKindTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total Expenditure Incurred</mat-label>
+                    <input type="number" matInput #expenditureKind formControlName="expenditureKind" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['expenditureKind']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6" *ngIf="showKindTypeField"></div>
+            <div class="col-md-12" *ngIf="showCashTypeField">
+                <br />
+                <mat-card-subtitle><b>Transaction Details of Funds Transferred (Cash Scheme) in a
+                        month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-12" *ngIf="showCashTypeField">
+                <mat-card-subtitle><u>
+                        <ul>
+                            <li>Through Electronic Modes (ABP, NEFT, RTGS, AEPS)</li>
+                        </ul>
+                    </u></mat-card-subtitle>
+            </div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions</mat-label>
+                    <input type="number" matInput #noTrnsCashElectronic formControlName="noTrnsCashElectronic"
+                        placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['noTrnsCashElectronic']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1" *ngIf="showCashTypeField"></div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Amount transferred (in ₹)</mat-label>
+                    <input type="number" matInput #amntTrnsCashElectronic formControlName="amntTrnsCashElectronic"
+                        placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['amntTrnsCashElectronic']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12" *ngIf="showCashTypeField">
+                <br />
+                <mat-card-subtitle>
+                    <ul>
+                        <li><u>Through Other Modes (Cash, Cheque, DD, MO)</u></li>
+                    </ul>
+                </mat-card-subtitle>
+            </div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions</mat-label>
+                    <input type="number" matInput #noTrnsCashOther formControlName="noTrnsCashOther" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['noTrnsCashOther']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1" *ngIf="showCashTypeField"></div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Amount transferred (in ₹)</mat-label>
+                    <input type="number" matInput #amntTrnsCashOther formControlName="amntTrnsCashOther" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['amntTrnsCashOther']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5" *ngIf="showCashTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions with Aadhaar seeded</mat-label>
+                    <input type="number" matInput #trnsAadharSeeded formControlName="trnsAadharSeeded" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['trnsAadharSeeded']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12" *ngIf="showKindTypeField">
+                <br />
+                <mat-card-subtitle><b>Transaction Details of Benefit Transferred (In-kind Scheme) in a
+                        month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5" *ngIf="showKindTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Unit of Measurement</mat-label>
+                    <input type="number" matInput #unitKind formControlName="unitKind" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['unitKind']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1" *ngIf="showKindTypeField"></div>
+            <div class="col-md-5" *ngIf="showKindTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Quantity Transferred</mat-label>
+                    <input type="number" matInput #qtyTransferedKind formControlName="qtyTransferedKind" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['qtyTransferedKind']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5" *ngIf="showKindTypeField">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Aadhaar Authenticated / Validated Transactions (Bio/Demo/OTP/e-Sign)</mat-label>
+                    <input type="number" matInput #aadharTransKind formControlName="aadharTransKind" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['aadharTransKind']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12" *ngIf="isSchemeFound">
+                <br />
+                <mat-card-subtitle><b>Savings data for the month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Records De-duplicated</mat-label>
+                    <input type="number" matInput #noDeDuplicated formControlName="noDeDuplicated" placeholder=""
+                        required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['noDeDuplicated']?.valid">Please Enter Scheme
+                        Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1" *ngIf="isSchemeFound"></div>
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Ghost / Fake Beneficiaries removed</mat-label>
+                    <input type="number" matInput #noGhost formControlName="noGhost" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['noGhost']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Other savings due to process improvement/ efficiency</mat-label>
+                    <input type="number" matInput #otherSavings formControlName="otherSavings" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['otherSavings']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1" *ngIf="isSchemeFound"></div>
+            <div class="col-md-5" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Savings Amount (in ₹)</mat-label>
+                    <input type="number" matInput #savingAmnt formControlName="savingAmnt" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!dbtDataForm.controls['savingAmnt']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12" *ngIf="isSchemeFound">
+                <br />
+                <mat-card-subtitle><b>Remarks</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-12" *ngIf="isSchemeFound">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput #remarks formControlName="remarks" placeholder="" required></textarea>
+                    <mat-error *ngIf="!dbtDataForm.controls['remarks']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <br />
+        <button mat-raised-button type="submit" color="primary" [disabled]="!dbtDataForm.valid"
+            *ngIf="isSchemeFound">Save Scheme</button>
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="dbtDataForm.valid" id="form-button-msg" *ngIf="isSchemeFound">(<b>N.B.</b> Button will be
+            enabled once validation pass)</span>
+        <span style="color: darkorange;" *ngIf="!isSchemeFound">
+            <h3>(<b>N.B.</b> Please select A valid Scheme to proceed)</h3>
+        </span>
+        <br />
+        <br />
+    </form>
+</mat-dialog-content>

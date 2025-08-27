@@ -1,1 +1,306 @@
-<p>uploaddata works!</p>
+<h2 mat-dialog-title>Upload DBT Consolidated data</h2>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">    
+    <form class="example-form"  [formGroup]="schemeForm" >
+    <!-- (ngSubmit)="onSubmit()"> -->
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Level of Data Upload</mat-label>
+                    <mat-select #deptCode formControlName="deptCode" disableRipple>
+                        <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                            {{item.name_Code+"-"+item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>(Select District If Not State Level Data)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select District</mat-label>
+                    <mat-select #deptCode formControlName="deptCode" disableRipple>
+                        <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                            {{item.name_Code+"-"+item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select District</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Scheme</mat-label>
+                    <mat-select #deptCode formControlName="deptCode" disableRipple>
+                        <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                            {{item.name_Code+"-"+item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Scheme to upload data</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                    <mat-label>Select Financial year</mat-label>
+                    <mat-select #schemeType formControlName="schemeType" disableRipple>
+                        <mat-option *ngFor="let item of schemeTypeList" [value]="item.codeValueId">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select financial year</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <br/>
+        <mat-card-subtitle><b>Beneficiary Details (Cumulative as on date for the Year)</b></mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <br/>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>    
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries with Bank A/c</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No of Beneficiaries digitized(Z)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>    
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Aadhaar authenticated and seeded Beneficiaries(Out of Z)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Beneficiaries for whom mobile number is captured(Out of Z)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6"></div>    
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Benefit Type</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Reporting Month</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card-subtitle><b>Funds Transferred (Cash Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total Funds Transferred</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6"></div> 
+            <div class="col-md-12"><br/></div> 
+            <div class="col-md-12">
+                <mat-card-subtitle><b>Expenditure Incurred (In-kind Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total Expenditure Incurred</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6"></div>
+            
+            <div class="col-md-12"><br/></div>
+            <div class="col-md-12">
+                <mat-card-subtitle><b>Transaction Details of Funds Transferred (Cash Scheme) in a month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-12">
+                <mat-card-subtitle><u><ul><li>Through Electronic Modes (ABP, NEFT, RTGS, AEPS)</li></ul></u></mat-card-subtitle>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Amount transferred (in ₹)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <br/>
+                <mat-card-subtitle><ul><li><u>Through Other Modes (Cash, Cheque, DD, MO)</u></li></ul></mat-card-subtitle>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Amount transferred (in ₹)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total No. of Transactions with Aadhaar seeded</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12"><br/></div>
+            <div class="col-md-12">
+                <mat-card-subtitle><b>Transaction Details of Benefit Transferred (In-kind Scheme) in a month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Unit of Measurement</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Quantity Transferred</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Aadhaar Authenticated / Validated Transactions (Bio/Demo/OTP/e-Sign)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12"><br/></div>
+            <div class="col-md-12">
+                <mat-card-subtitle><b>Savings data for the month</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Records De-duplicated</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>No. of Ghost / Fake Beneficiaries removed</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Other savings due to process improvement/ efficiency</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Savings Amount (in ₹)</mat-label>
+                    <input matInput #schemeName formControlName="schemeName" placeholder="" required>
+                    <mat-hint>Please enter a new scheme name</mat-hint>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <br/>
+                <mat-card-subtitle><b>Remarks</b></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput #schemeName formControlName="schemeName" placeholder="" required></textarea>
+                    <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!schemeForm.valid">Save Scheme</button>    
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="schemeForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation pass)</span>
+        <br/>
+        <br/>
+    </form>  
+    <br/>
+</mat-dialog-content>    

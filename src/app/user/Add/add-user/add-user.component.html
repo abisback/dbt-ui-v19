@@ -1,1 +1,284 @@
-<p>add-user works!</p>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+<h2 mat-dialog-title>User Registration</h2>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form"  [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+        <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+                <mat-form-field class="full-width slim-field" appearance="outline">
+                    <mat-label>User Id</mat-label>
+                    <input matInput #userId formControlName="userId" placeholder="" required>
+                    <mat-hint>Please enter a new login user id</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['userId']?.valid">System not accepting user Id entered. Please change the user Id</mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="full-width slim-field"  appearance="outline">
+                    <mat-label>Salutation</mat-label>
+                    <mat-select #salutation formControlName="salutation" disableRipple required>
+                        <mat-option *ngFor="let item of salutationList" [value]="item.codeValueId">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select salutation</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['salutation']?.valid">Please select salutation</mat-error>
+                </mat-form-field>
+            </td>
+          </tr></table>
+
+          <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+                <mat-form-field class="full-width slim-field" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput #firstName formControlName="firstName" placeholder="" required>
+                    <mat-hint>Please enter First Name</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['firstName']?.valid">First Name entered not valid</mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="full-width slim-field" appearance="outline">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput #middleName formControlName="middleName" placeholder="">
+                    <mat-hint>Please enter Middle Name</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['middleName']?.valid">Middle Name entered not valid</mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="full-width slim-field" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput #lastName formControlName="lastName" placeholder="" required>
+                    <mat-hint>Please enter Last Name</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['lastName']?.valid">Last Name entered not valid</mat-error>
+                </mat-form-field>
+            </td>
+          </tr></table> -->
+
+
+        <!-- <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+
+            <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="" (blur)="encryptPassword()">
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{showPassword?'visibility_off':'visibility'}}
+            </mat-icon>
+            <mat-hint>Please enter password</mat-hint>
+            <mat-error *ngIf="!userForm.controls['password']?.valid"> Password Should contain atleast one capital letter(A-Z), one small letter(a-z), atleast one special charecter(!,@,#,$,%,^,&,*) and number 0-9 and have atleast 8 charecter long</mat-error>
+        </mat-form-field> -->
+
+        <!-- <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+                <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput #email formControlName="email" placeholder="Ex. pat@example.com">
+                    <mat-hint>Please enter Email</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['email']?.valid">Email entered not valid</mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+                    <mat-label>Phone No</mat-label>
+                    <input matInput #phoneno formControlName="phoneno" placeholder="">
+                    <mat-hint>Please enter Phone No</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['phoneno']?.valid">Phone No entered not valid</mat-error>
+                </mat-form-field>
+            </td>
+          </tr></table>
+
+
+          <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+
+        <mat-form-field  class="full-width slim-field mt-2"  appearance="outline">
+            <mat-label>User Role</mat-label>
+            <mat-select #role formControlName="role" disableRipple required (selectionChange)="RoleChange($event)">
+                <mat-option *ngFor="let item of userRoleList" [value]="item.userRole">
+                    {{item.userRoleDesc}}
+                </mat-option>
+            </mat-select>
+            <mat-hint>Please select User Role</mat-hint>
+            <mat-error *ngIf="!userForm.controls['role']?.valid">Please select user role</mat-error>
+        </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field  class="example-full-width"  appearance="outline" *ngIf="showDepartmentList">
+                    <mat-label>Select Department</mat-label>
+                    <mat-select #deptCode formControlName="deptCode" disableRipple required (selectionChange)="DepartmentChange($event)">
+                        <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                            {{item.nameCode+"-"+item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Department Name</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['deptCode']?.valid">Please select department</mat-error>
+                </mat-form-field>
+
+            </td>
+            <td> -->
+                <!-- <mat-form-field  class="example-full-width"  appearance="outline" *ngIf="showSchemeList">
+                    <mat-label>Select Scheme</mat-label>
+                    <mat-select #SchemeType formControlName="SchemeType"  disableRipple required (selectionChange)="SchemeChange($event)">
+                        <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                                    {{item.schemeName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select Scheme Name</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['deptCode']?.valid">Please select Scheme Name</mat-error>
+                </mat-form-field> -->
+
+                <!-- // ============================= MY ADDITION ==================================================== -->
+                <!-- <mat-form-field class="example-full-width"  appearance="outline" *ngIf="showSchemeList">
+                    <mat-label>Select Scheme</mat-label>
+                    <mat-select #SchemeType formControlName="SchemeType"  disableRipple required (selectionChange)="SchemeChange($event)" multiple>
+                        <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                            {{item.schemeName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <!-- //=============================================================================================== -->
+            <!-- </td> -->
+            <!-- <td>
+                <mat-form-field class="example-level"  appearance="outline" *ngIf="showLevelList">
+                    <mat-label>Level</mat-label>
+                    <mat-select #codeTypeId formControlName="codeValueId"  disableRipple >
+                        <mat-option *ngFor="let item of DataUploadLevelList" [value]="item.codeValueId">
+                            {{item.codeValueDesc}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Please select level</mat-hint>
+                    <mat-error *ngIf="!userForm.controls['salutation']?.valid">Please select salutation</mat-error>
+                </mat-form-field>
+            </td> -->
+          <!-- </tr></table>
+
+
+        <mat-divider></mat-divider>
+
+        <button mat-raised-button type="submit" color="primary" [disabled]="!userForm.valid">Register User</button>
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="userForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation pass)</span>
+
+    </form>
+    <br/>
+</mat-dialog-content> -->
+
+
+
+
+<div class="registration-card">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="form-logo">
+    <mat-icon class="fa-size">person_add</mat-icon>
+  </div>
+
+  <h2 class="form-title">User Registration</h2>
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-section">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="flex-2 full-width slim-field mt-2">
+          <mat-label>User Id</mat-label>
+          <input matInput formControlName="userId" required autocomplete="off" />
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-hint>Please enter a new login user id</mat-hint>
+          <mat-error *ngIf="userForm.controls['userId'].invalid">System not accepting user Id entered. Please change the user Id.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Salutation</mat-label>
+          <mat-select formControlName="salutation" required>
+            <mat-option *ngFor="let item of salutationList" [value]="item.codeValueId">
+              {{item.codeValueDesc}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matPrefix>emoji_people</mat-icon>
+          <mat-hint>Please select salutation</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="flex-1 full-width slim-field ">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" required autocomplete="given-name" />
+          <mat-icon matPrefix>badge</mat-icon>
+          <!-- <mat-hint>Enter First Name</mat-hint> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1 full-width slim-field">
+          <mat-label>Middle Name</mat-label>
+          <input matInput formControlName="middleName" autocomplete="additional-name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1 full-width slim-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required autocomplete="family-name " />
+          <!-- <mat-hint>Enter Last Name</mat-hint> -->
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="flex-1 full-width slim-field mt-2">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required autocomplete="email"/>
+          <mat-icon matPrefix>email</mat-icon>
+          <!-- <mat-hint>Enter a valid email</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-1 full-width slim-field mt-2">
+          <mat-label>Phone No</mat-label>
+          <input matInput formControlName="phoneno" required autocomplete="tel"
+          maxlength="10" inputmode="numeric" pattern="[6-9]{1}[0-9]{9}"
+           (keypress)="allowOnlyNumbers($event)"(paste)="validatePaste($event)"/>
+          <mat-icon matPrefix>phone</mat-icon>
+          <!-- <mat-hint>Enter your contact number</mat-hint> -->
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>User Role</mat-label>
+          <mat-select formControlName="role" required (selectionChange)="RoleChange($event)">
+            <mat-option *ngFor="let item of userRoleList" [value]="item.userRole">
+              {{item.userRoleDesc}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Choose Role</mat-hint>
+        </mat-form-field>
+        <ng-container *ngIf="showDepartmentList">
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="deptCode" required (selectionChange)="DepartmentChange($event)">
+              <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
+                {{item.name_Code}}-{{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="showSchemeList">
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Scheme</mat-label>
+            <mat-select formControlName="SchemeType" multiple required (selectionChange)="SchemeChange($event)">
+              <mat-option *ngFor="let item of schemeList" [value]="item.id">
+                {{item.schemeName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Register User</button>
+      <span *ngIf="!userForm.valid" class="form-note">(<b>N.B.</b> Button will be enabled once validation passes)</span>
+    </div>
+  </form>
+</div>
+

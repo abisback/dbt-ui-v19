@@ -1,0 +1,89 @@
+.label-success {
+    color: rgb(7, 139, 7);
+    font-size: large;
+    font-weight: bold;
+}
+
+.label-danger {
+    color: rgb(255, 10, 10);
+    font-size: large;
+    font-weight: bold;
+}
+
+.report-card {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+
+.State_Rejected {
+    color: red;
+    font-weight: 550;
+}
+
+.Not_Uploaded {
+    color: coral;
+    font-weight: 550;
+}
+
+.Uploaded {
+    color: rgb(188, 158, 13);
+    font-weight: 550;
+}
+
+.Approved_By_Department {
+    color: blue;
+    font-weight: 550;
+}
+
+.Approved_By_State {
+    color: green;
+    font-weight: 550;
+}
+// .Data_Pushed_To_Bharat_DBT{
+//     color: #02011c
+// }
+
+
+.custom-field {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 104px;
+  margin-bottom: 8px;
+}
+
+
+.pretty-selection-row {
+  margin-top: 20px;
+}
+
+.selection-card {
+  background-color: #fff;
+  transition: box-shadow 0.2s ease-in-out;
+  border-radius: 12px;
+}
+
+.selection-card:hover {
+  box-shadow: 0 0 0 2px #1976d2;
+}
+
+.pretty-label {
+  font-size: 16px;           /* Slightly larger for clarity */
+  font-weight: 600;            /* Semi-bold */
+  color: #1565c0;              /* Deep blue accent */
+  margin-bottom: 8px;          /* Spacing below label */
+  letter-spacing: 0.02em;      /* A little tracking for neatness */
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  user-select: none;           /* Optional: prevent selecting label text */
+}
+
+.Data_Pushed {
+  font-weight: 550;
+}
+
+.small-icon-btn mat-icon {
+  font-size: 21px;
+  height: 16px;
+  line-height: 31px;
+}

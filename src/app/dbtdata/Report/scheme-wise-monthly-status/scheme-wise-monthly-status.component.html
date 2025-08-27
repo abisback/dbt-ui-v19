@@ -1,1 +1,88 @@
-<p>scheme-wise-monthly-status works!</p>
+<div class="body">
+  <div class="row d-flex custom-field">
+    <div class="col-md-6 p-2 ">
+      <div class="">
+        <p class="pretty-label">Please Select Department</p>
+      </div>
+      <div class="">
+        <mat-form-field class="w-100" appearance="outline" color="primary">
+          <mat-label>Select Department</mat-label>
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #department disableRipple > -->
+          <input matInput type="text" [matAutocomplete]="deptAuto"  [formControl]="deptControl" (keyup)="searchdept($event);" />
+          <mat-autocomplete #deptAuto="matAutocomplete" [panelWidth]="'auto'" [displayWith]="displayFnDepartment.bind(this)">
+            <mat-option *ngFor="let item of departmentList" (onSelectionChange)="departmentChange($event,item.deptCode)"
+              [value]="item.deptCode">
+              {{item.name}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- <div class="col-md-6"></div> -->
+    <div class="col-md-6 p-2">
+        <div><p class="pretty-label">Please Select Scheme</p></div>
+        <mat-card-content class="d-flex justify-content-between ">
+          <mat-form-field class="w-100" appearance="outline" color="primary">
+            <mat-label>Select Scheme</mat-label>
+            <mat-icon matSuffix>arrow_drop_down</mat-icon>
+            <!-- <mat-select #scheme disableRipple (selectionChange)="schemeChange($event)"> -->
+              <input matInput type="text" [matAutocomplete]="schemeAuto"  [formControl]="schemeControl" (keyup)="searchScheme($event);" />
+            <mat-autocomplete #schemeAuto="matAutocomplete" [panelWidth]="'auto'" [displayWith]="displaySchemeFn.bind(this)">
+              <mat-option *ngFor="let item of schemeList" [value]="item.id" (onSelectionChange)="schemeChange($event)">
+                {{item.schemeCode}} - {{item.schemeName}}
+              </mat-option>
+            <!-- </mat-select> -->
+            </mat-autocomplete>
+          </mat-form-field>
+             <button mat-icon-button color="warn" class="small-icon-btn"  (click)="resetForm()" matTooltip="Reset">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </mat-card-content>
+
+    </div>
+    <div class="col-md-6" style="float: none; margin-bottom:0px;" *ngIf="displayMonthlySchemeStatus">
+      <ul>
+        <li><span class="State_Rejected">State Rejected: </span>State Reject the data</li>
+        <li><span class="Not_Uploaded">Not Uploaded: </span> Not Uploaded yet</li>
+        <li><span class="Uploaded">Uploaded: </span> Data Uploaded by operator but not yet approved</li>
+        <li><span class="Approved_By_Department">Approved By Department: </span> Approved By Department but
+          not accessible to Bharat DBT</li>
+        <li><span class="Approved_By_State">Approved By State: </span> Approved By State, accessible by Bharat
+          DBT</li>
+        <li><span class="Data_Pushed">Push to Bharat DBT: </span> Data Pushed to Bharat DBT</li>
+      </ul>
+    </div>
+    <div class="col-md-12"><br /></div>
+    <div class="col-md-12" *ngIf="displayMonthlySchemeStatus">
+      <mat-card class="report-card">
+        <mat-card-header>
+          <mat-card-title>Monthwise DBT Data Upload Status</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <br />
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Financial Year</th>
+                <th *ngFor="let month of monthlist">{{month.monthName}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <th>{{item.financialYear}}</th>
+                <td *ngFor="let status of item.status" [ngClass]="status">
+                  <!-- <span class="label label-success" *ngIf="status">Uploaded</span>
+                            <span class="label label-danger" *ngIf="!status">Not Uploaded</span> -->
+                  <span class="label">{{replaceAll(status,'_',' ')}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,108 @@
-<p>approve-scheme works!</p>
+<div class="body">
+  <!-- <div class="row">
+    <div class="col-xl-2 col-lg-4 col-md-6">
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Select Department</mat-label>
+            <mat-select #deptName formControlName="deptCode" disableRipple>
+                <mat-option *ngFor="let item of departmentList"
+                    (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+            <mat-hint>Please Select Department</mat-hint>
+        </mat-form-field>
+    </div>
+</div> -->
+
+  <!-- <mat-dialog-content class="mat-typography"> -->
+  <!-- <div class="container"> -->
+    <div class="row  custom-field">
+      <div class="row justify-content-end">
+        <div class="col-md-4 justify-content-end">
+          <form action="" [formGroup]="searchForm">
+            <mat-form-field appearance="outline" class="full-width slim-field mt-2">
+              <mat-label>Search Here</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter"
+                formControlName="searchString" style="color: black;">
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+      <!-- deptCode Column -->
+      <ng-container matColumnDef="serialNo">
+        <th mat-header-cell *matHeaderCellDef> Serial No. </th>
+        <td mat-cell *matCellDef="let row; let rowIndex = index"> {{ (paginator.pageIndex * paginator.pageSize) +
+          (rowIndex + 1) }} </td>
+      </ng-container>
+      <ng-container matColumnDef="deptName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.deptName}} </td>
+      </ng-container>
+      <!-- schemeType Column -->
+      <ng-container matColumnDef="schemeType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Type </th>
+        <td mat-cell *matCellDef="let element"> {{helper.getSchemeType(element.schemeType)}} </td>
+      </ng-container>
+
+      <!-- schemeName Column -->
+      <ng-container matColumnDef="schemeName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.schemeName}} </td>
+      </ng-container>
+      <!-- SchemeCode Column -->
+      <ng-container matColumnDef="schemeCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.schemeCode}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+        <td mat-cell *matCellDef="let element"> {{helper.getProgress(element.progress)}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef style="align-content: center;"> Action </th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <button class="edit-btn" mat-flat-button matTooltip="Click to Edit" (click)="editScheme(element)">
+            <mat-icon color="accent">edit</mat-icon>
+          </button>
+          <button class="view-btn" mat-flat-button matTooltip="Click to View" (click)="viewScheme(element)">
+            <mat-icon color="primary">visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- selection Column -->
+      <!-- <ng-container matColumnDef="bulkApprove">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="clickedRows.size > 0 && isAllSelected()"
+                        [indeterminate]="clickedRows.size > 0 && !isAllSelected()"> </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? tickRow($event, row) : null"
+                        [checked]="clickedRows.has(row)"> </mat-checkbox>
+                </td>
+
+            </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+    </mat-paginator>
+
+  </div>
+
+  <!-- </mat-dialog-content> -->
+</div>

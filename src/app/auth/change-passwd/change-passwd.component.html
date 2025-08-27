@@ -1,1 +1,90 @@
-<p>change-passwd works!</p>
+<form class="example-form" [formGroup]="changePassword">
+    <mat-card>
+        <mat-card-title>
+            Change Password
+        </mat-card-title>
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+        <br />
+
+        <!-- <mat-card-content>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Existing Password</mat-label>
+          <input type="password" matInput #oldPasswd formControlName="oldpassword" placeholder="" (blur)="encryptPassword(1)">
+          <mat-hint>Please enter existing password</mat-hint>
+          <mat-error *ngIf="!changePassword.controls['password']?.valid">Please Enter Valid Password</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>New Password</mat-label>
+            <input type="password" matInput #newPasswd formControlName="password" placeholder="" (blur)="encryptPassword(2)">
+            <mat-hint>Please use a new strong password</mat-hint>
+            <mat-error *ngIf="!changePassword.controls['password']?.valid">Please Enter Valid Password</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput #confirmPassword formControlName="confirmPassword" placeholder="" (blur)="encryptPassword(3)" >
+            <mat-hint>Please Re-enter the password</mat-hint>
+            <mat-error *ngIf="!changePassword.controls['confirmPassword']?.valid">Confirm Password dows not match with New Password</mat-error>
+        </mat-form-field> 
+
+        <br/>        
+        <br/>
+        <br/>
+    </mat-card-content> -->
+
+        <mat-card-content>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Existing Password</mat-label>
+                <input type="{{ hideOldPassword ? 'password' : 'text' }}" matInput #oldPasswd
+                    formControlName="oldpassword" placeholder="" (blur)="encryptPassword(1)">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility('oldPassword')">
+                    <mat-icon>{{ hideOldPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint>Please enter existing password</mat-hint>
+                <mat-error *ngIf="!changePassword.controls['oldpassword']?.valid">Please Enter a Valid
+                    Password</mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>New Password</mat-label>
+                <input type="{{ hideNewPassword ? 'password' : 'text' }}" matInput #newPasswd formControlName="password"
+                    placeholder="" (blur)="encryptPassword(2)">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility('newPassword')">
+                    <mat-icon>{{ hideNewPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint>Please use a new strong password</mat-hint>
+                <mat-error *ngIf="!changePassword.controls['password']?.valid">Please Enter a Valid Password</mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input type="{{ hideConfirmPassword ? 'password' : 'text' }}" matInput #confirmPassword
+                    formControlName="confirmPassword" placeholder="" (blur)="encryptPassword(3)">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility('confirmPassword')">
+                    <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint>Please Re-enter the password</mat-hint>
+                <mat-error *ngIf="!changePassword.controls['confirmPassword']?.valid">Confirm Password does not match
+                    New Password</mat-error>
+                <!-- <div *ngIf="changePassword.controls['confirmPassword']?.errors?.['mustMatch']">Password and confirm not match</div> -->
+            </mat-form-field>
+
+            <br />
+            <br />
+            <br />
+        </mat-card-content>
+
+
+        <mat-card-actions>
+            <button mat-raised-button type="submit" color="primary" (click)="onSubmit()"
+                [disabled]="!changePassword.valid">Submit</button>
+            &nbsp;&nbsp;&nbsp;
+            <span [hidden]="changePassword.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once
+                validation pass. Password must contain minimum one capital letter, one small letter, one number, one
+                special charecter and minimum 8 character long)</span>
+        </mat-card-actions>
+    </mat-card>
+</form>

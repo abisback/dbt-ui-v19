@@ -1,0 +1,204 @@
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+.example-form {
+  min-width: 500px;
+  width: 100%;
+  height: fit-content;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+#form-button-msg{
+  color: red;
+}
+.mat-form-field {
+  margin-bottom: 10px;
+}
+.form-dialog .mat-dialog-container {
+  background: #eef7ff;
+  border: 1px solid #438bad;
+}
+.mat-dialog-title {
+  color: #2e6c8b;
+}
+.mat-dialog-content{
+  height: 90%;
+  max-height: max-content;
+  //overflow-y: hidden;
+  overflow-x: hidden;
+}
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 94%;
+}
+.mat-dialog-container#mat-dialog-1 {
+  height: 90%;
+}
+.mat-form-field-label {
+  color: rgb(11 94 201) !important;
+}
+.mat-dialog-container{
+  height: 90% !important;
+}
+.cdk-overlay-pane.my-dialog {
+  position: relative!important;
+}
+// .close-icon.mat-button {
+//   position: absolute;
+//   top: 0;
+//   right: 20%;
+//   padding: 5px;
+//   line-height: 14px;
+//   min-width: auto;
+// }
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+
+
+
+//-------------------------------------
+
+
+
+::ng-deep .mat-form-field.slim-field {
+  font-size: 13px;
+  height: 36px;
+  --mat-form-field-container-height: 36px; /* Material v16+ support */
+}
+
+::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
+  padding: 5px 0; /* minimal vertical padding */
+  border-top: 0;
+
+}
+
+::ng-deep .mat-form-field.slim-field input.mat-input-element {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 6px;
+  font-size: 13px;
+  color: #000000;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  padding: 2px .75em 0 .75em !important;
+}
+
+
+.registration-card {
+  // max-width: 700px;
+  // margin: 32px auto;
+  // box-shadow: 0 8px 32px 0 rgba(40, 100, 180, 0.12);
+  border-radius: 15px;
+  // padding: 30px 32px 16px 32px;
+  position: relative;
+  // background: linear-gradient(120deg, #e0eafc 50%, #cfdef3 100%);
+}
+
+.close-button {
+  position: absolute;
+  top: 24px; right: 24px;
+  z-index: 2;
+  color: #f44336 !important;
+  background-color: rgba(255,255,255,0.85);
+}
+
+.form-logo {
+  text-align: center;
+  // margin-bottom: 10px;
+}
+
+.fa-size { font-size: 48px; color: #2196f3;}
+
+.form-title {
+  text-align: center;
+  letter-spacing: 1px;
+  color: #2c387e;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-left: 48px;
+}
+
+.form-section {
+  margin-top: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1 1 150px;
+  min-width: 180px;
+}
+.flex-2 {
+  flex: 2 1 260px;
+  min-width: 220px;
+}
+
+.mat-form-field {
+  background: #fff !important;
+  border-radius: 8px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #90caf9;
+}
+
+.mat-input-element {
+  font-size: 15px;
+}
+
+.mat-hint, .mat-error {
+  font-size: 12px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 24px;
+}
+
+button[mat-raised-button] {
+  padding: 0 36px;
+  border-radius: 23px;
+  font-size: 1.1rem;
+  min-height: 40px;
+  box-shadow: 0 2px 12px 0 rgba(42,131,236,.1);
+  // background: linear-gradient(90deg, #b5c1ce 50%, #acc7e4 100%);
+  color: #fff;
+  transition: background 0.2s;
+}
+button[mat-raised-button]:hover {
+  // background: linear-gradient(90deg, #b6bec7 40%, #2196F3 100%);
+}
+
+.form-note {
+  font-size: 13px;
+  color: #e53935;
+  margin-left: 18px;
+  vertical-align: middle;
+}

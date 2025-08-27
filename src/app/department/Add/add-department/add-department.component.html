@@ -1,1 +1,57 @@
-<p>add-department works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>Add New Department</h2>
+<mat-divider></mat-divider>
+<br />
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="deptForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department Name</mat-label>
+            <input matInput #name formControlName="name" placeholder="" required>
+            <mat-hint>Department Short Code</mat-hint>
+            <mat-error *ngIf="!deptForm.controls['name']?.valid">Please Enter Department Name</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department Code</mat-label>
+            <input matInput #deptCode formControlName="deptCode" placeholder="" required>
+            <mat-hint>Unique Code Preferably Local Govt. Directory Code</mat-hint>
+            <mat-error *ngIf="!deptForm.controls['deptCode']?.valid">Please Enter Valid Code</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Demand Number</mat-label>
+            <input matInput #nameCode formControlName="nameCode" placeholder="" required>
+            <mat-hint>Demand Number</mat-hint>
+            <mat-error *ngIf="!deptForm.controls['nameCode']?.valid">Please Enter Valid Demand Number</mat-error>
+        </mat-form-field>
+
+
+        <mat-card-subtitle>Department Primary Contact</mat-card-subtitle>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile No</mat-label>
+            <input matInput #mobile formControlName="mobile" placeholder="" required>
+            <mat-hint>Department primary mobile contact</mat-hint>
+            <mat-error *ngIf="!deptForm.controls['mobile']?.valid">Please enter valid mobile number</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput #email formControlName="email" placeholder="" required>
+            <mat-hint>Department Short Code</mat-hint>
+            <mat-error *ngIf="!deptForm.controls['email']?.valid">Please enter valid department email
+                address</mat-error>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+        <br />
+        <button mat-raised-button type="submit" color="primary" [disabled]="!deptForm.valid">Save Department</button>
+        &nbsp;&nbsp;&nbsp;
+        <span [hidden]="deptForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation
+            pass)</span>
+        <br />
+        <br />
+    </form>
+    <br />
+</mat-dialog-content>

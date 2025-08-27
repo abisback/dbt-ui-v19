@@ -1,1 +1,74 @@
-<p>department-detail works!</p>
+<!-- <button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>View Scheme Details</h2>
+<mat-divider></mat-divider>
+<br /> -->
+
+<!-- <table mat-table matSort>
+    <tr mat-row>
+        <th mat-header-cell>Department Name:</th>
+        <td mat-cell></td>
+    </tr>
+</table> -->
+<!-- <table class="table">
+    <tr class="row">
+        <th class="col-md-5">Department Name: </th>
+        <td class="col-md-7"> {{viewData?.name}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Department Code: </th>
+        <td class="col-md-7">{{viewData?.deptCode}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Demand Number: </th>
+        <td class="col-md-7">{{viewData?.nameCode}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Mobile No: </th>
+        <td class="col-md-7">{{viewData?.mobile}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Email: </th>
+        <td class="col-md-7">{{viewData?.email}}</td>
+    </tr>
+
+</table> -->
+
+
+<mat-card class="scheme-details-card">
+  <button mat-icon-button class="close-btn" [mat-dialog-close]="true" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="scheme-header">
+    <mat-icon color="primary" class="header-icon">info</mat-icon>
+    <h2>View Scheme Details</h2>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="details-section">
+
+    <div class="detail-row">
+      <span class="detail-label">Department Name:</span>
+      <span class="detail-value">{{viewData?.name}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Department Code:</span>
+      <span class="detail-value">{{viewData?.deptCode}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Demand Number:</span>
+      <span class="detail-value">{{viewData?.name_Code}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Mobile No:</span>
+      <span class="detail-value">{{viewData?.mobile}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Email:</span>
+      <span class="detail-value">{{viewData?.email}}</span>
+    </div>
+
+  </div>
+</mat-card>

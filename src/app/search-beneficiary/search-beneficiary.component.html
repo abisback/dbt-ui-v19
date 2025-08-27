@@ -1,1 +1,77 @@
-<p>search-beneficiary works!</p>
+<h2 mat-dialog-title>Search Beneficiary</h2>
+<mat-divider></mat-divider>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()"> 
+        <div class="row">
+            <div class="col-md-2 mt-4">              
+                <mat-form-field appearance="fill">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select [(value)]="selected" (selectionChange)="onSelectionChange($event)">
+                      <mat-option value="0">    ---- Please Select ----</mat-option>
+                      <mat-option value="1">Mobile Number</mat-option>
+                      <mat-option value="2">Aadhar Number</mat-option>
+                      <mat-option value="3">Bank Account Number</mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+            </div>
+            <div class="col-md-1"></div>
+            <div *ngIf="flagMob" class="col-md-4 mt-4">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label *ngIf="lblflafgMob">Mobile Number</mat-label>
+                    <mat-label *ngIf="lblflafgaadhar">Aadhar Number</mat-label>
+                    <mat-label *ngIf="lblflafgBank">Bank Account Number</mat-label>
+                    <input type="number" matInput #mobNo formControlName="mobNo" placeholder="" required>
+                    <mat-hint>Please enter valid data</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div *ngIf="flagIfsc" class="col-md-4 mt-4">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label >Bank IFSC Number</mat-label>
+                    <input type="text" matInput #bankIfsc formControlName="bankIfsc" placeholder="" required>
+                    <mat-hint>Please enter valid data</mat-hint>
+                    <!-- <mat-error *ngIf="!dbtDataForm.controls['totalBen']?.valid">Please Enter Valid data</mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+
+        <br/>
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-raised-button type="submit" color="primary" >Search</button>    
+        &nbsp;&nbsp;&nbsp;
+        <br/>
+        <br/>
+    </form>
+
+
+    <div *ngIf="tableflag" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource"  matSort>
+            <ng-container matColumnDef="schemeid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.schemeid}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="schemename">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.schemename}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="iseligible">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Eligible </th>
+                    <td mat-cell *matCellDef="let element"> {{element.iseligible}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isapplied">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Has Applied </th>
+                    <td mat-cell *matCellDef="let element"> {{element.isapplied}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
+        </table>
+    </div>
+
+</mat-dialog-content>

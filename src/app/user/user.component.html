@@ -1,1 +1,233 @@
-<p>user works!</p>
+<div class="body">
+  <!-- <div class="container-fluid justify-content-end d-flex">
+    <button class="btn custom-primary-btn d-flex align-items-center"
+      mat-raised-button color="primary" (click)="openAddDialog()">
+      <mat-icon class="me-2">person_add</mat-icon>
+      Add User
+    </button>
+  </div> -->
+  <div class="container-fluid justify-content-end d-flex">
+    <button class="btn custom-primary-btn d-flex align-items-center" mat-raised-button color="primary" mat-button (click)="openAddDialog()">
+      <mat-icon>person_add</mat-icon>
+      Add User
+    </button>
+  </div>
+  <div class="mat-typography">
+    <div>
+      <form [formGroup]="searchForm" class="row custom-field">
+        <div class="col-xl-2 col-lg-4 col-md-4" *ngIf="admin">
+          <mat-form-field class="full-width slim-field mt-2"
+            appearance="outline">
+            <mat-label>Select Department</mat-label>
+            <input matInput type="text" formControlName="deptCode"
+              [matAutocomplete]="mjrHd"
+              (keyup)="searchDept($event);" />
+            <mat-icon matSuffix>arrow_drop_down</mat-icon>
+            <mat-autocomplete #mjrHd="matAutocomplete" [panelWidth]="'auto'"
+              [displayWith]="displayFnDepartment.bind(this)">
+              <mat-option *ngFor="let item of departmentList"
+                (onSelectionChange)="onDepartmentSelect($event,item.deptCode)"
+                [value]="item.deptCode">
+                {{item.name}}
+              </mat-option>
+            </mat-autocomplete>
+            <!-- <mat-hint>Please Select Department</mat-hint> -->
+          </mat-form-field>
+
+          <!-- <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+                    <mat-label>Search by Scheme Name</mat-label>
+                    <input matInput type="text" [matAutocomplete]="mjrHd" (keyup)="searchScheme($event);" />
+                    <mat-icon matSuffix>arrow_drop_down</mat-icon>
+
+
+                    <mat-autocomplete #mjrHd="matAutocomplete" [panelWidth]="'100px'">
+                      <mat-option class="ctm-auto-ddl" *ngFor="let scheme of schemeListName" [title]="scheme.name"
+                        (onSelectionChange)="onSchemeSelect($event, scheme.id)" [value]="scheme.schemeName"> {{
+                        scheme.id }}:{{ scheme.schemeName }} </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field> -->
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-4" *ngIf="admin">
+          <mat-form-field class="full-width slim-field mt-2"
+            appearance="outline">
+            <mat-label>Select Role</mat-label>
+            <input matInput type="text" [matAutocomplete]="role"
+              formControlName="roleCode" />
+            <mat-icon matSuffix>arrow_drop_down</mat-icon>
+            <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
+            <mat-autocomplete #role="matAutocomplete"
+              [displayWith]="displayFnRole.bind(this)">
+              <mat-option *ngFor="let item of roles"
+                (onSelectionChange)="onRoleSelect($event,item.codeValueId)"
+                [value]="item.codeValueId">
+                {{item.codeValueDesc}}
+              </mat-option>
+            </mat-autocomplete>
+            <!-- </mat-select> -->
+            <!-- <mat-hint>Please Select Role</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div class=" col-md-4 justify-content-end d-flex ">
+          <!-- <form action="" [formGroup]="searchForm"> -->
+          <mat-form-field class="full-width slim-field mt-2"
+            appearance="outline">
+            <mat-label>Search Here</mat-label>
+            <input matInput (keyup)="applyFilter($event)"
+              placeholder="Enter text to filter"
+              formControlName="searchString" style="color: black; ">
+          </mat-form-field>
+
+          <button mat-icon-button color="warn" class="small-icon-btn"
+            (click)="resetForm()" matTooltip="Reset">
+            <mat-icon>refresh</mat-icon>
+          </button>
+          <!-- </form> -->
+        </div>
+        <!-- <div class="col-3">
+        <button mat-raised-button type="submit" color="primary" >Search</button>
+          </div> -->
+      </form>
+    </div>
+    <div class="mat-elevation-z8">
+
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="serialNo">
+          <th mat-header-cell *matHeaderCellDef> Serial No. </th>
+          <td mat-cell *matCellDef="let row; let rowIndex = index"> {{ (paginator.pageIndex * paginator.pageSize) +
+            (rowIndex + 1) }} </td>
+        </ng-container>
+        <!-- userId Column -->
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> User Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container>
+        <!-- deptCode Column -->
+        <ng-container matColumnDef="deptCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.deptCode}} </td>
+        </ng-container>
+        <!-- role Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+          <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+        </ng-container>
+        <!-- firstName Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        <!-- middleName Column -->
+        <ng-container matColumnDef="middleName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.middleName}} </td>
+        </ng-container>
+        <!-- lastName Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <!-- phoneNo Column -->
+        <ng-container matColumnDef="phoneNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.phoneNo}} </td>
+        </ng-container>
+
+        <!-- Scheme Column    -->
+
+        <!-- <ng-container matC -->
+
+        <!--   -->
+
+        <!-- isActive Column -->
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Status </th>
+          <!-- <td mat-cell *matCellDef="let element">
+            <mat-button-toggle-group [value]="element.isActive?'true':'false'" (change)="toggleActive(element.id)">
+              <mat-button-toggle *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+                {{item.codeValueDesc}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </td> -->
+
+          <!-- test  demo -->
+          <!-- <td mat-cell *matCellDef="let element">
+            <mat-button-toggle-group [value]="element.isActive ? 'true' : 'false'" appearance="legacy"
+              class="toggle-status" (change)="toggleActive(element.id)">
+              <mat-button-toggle *ngFor="let item of decisionTypeList" [value]="item.codeValueId" class="toggle-btn">
+                {{item.codeValueDesc}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </td> -->
+
+
+          <td mat-cell *matCellDef="let element" class="status-td">
+            <mat-button-toggle-group [value]="element.isActive ? 'true' : 'false'" appearance="legacy"
+              class="toggle-status" (change)="onToggleChange($event, element)">
+              <mat-button-toggle *ngFor="let item of decisionTypeList" [value]="item.codeValueId" class="toggle-btn">
+                {{item.codeValueDesc}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </td>
+
+
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef style="align-content: center;"> Edit </th>
+          <!-- <td mat-cell *matCellDef="let element" class="action-link">
+            <button mat-flat-button matTooltip="Click to Edit" (click)="openEditDialog(element.id)">
+              <mat-icon color="accent">edit</mat-icon>
+            </button>
+
+          </td> -->
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <button mat-flat-button color="primary" matTooltip="Click to Edit" (click)="openEditDialog(element.id)"
+              class="edit-btn">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="newpass">
+          <th mat-header-cell *matHeaderCellDef style="align-content: center !important;"> New Password Genarate</th>
+          <!-- <td mat-cell *matCellDef="let element">
+            <button mat-raised-button type="submit" id="approveBtn" color="primary"
+              (click)="openPopUp(element.id)"><mat-icon>autorenew</mat-icon> </button>
+          </td> -->
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" class="renew-btn" matTooltip="Generate New Password" type="button"
+              (click)="openPopUp(element.id)">
+              <mat-icon>autorenew</mat-icon>
+            </button>
+          </td>
+
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+
+    </div>
+  </div>
+</div>

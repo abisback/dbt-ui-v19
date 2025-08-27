@@ -1,1 +1,52 @@
-<p>scheme-budget-detail works!</p>
+<button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button> 
+<h1 mat-dialog-title>
+    View Scheme Budget Details
+</h1>
+<mat-divider></mat-divider>
+<br/>
+
+<table class="table">
+    <tr class="row">
+        <th class="col-md-5">Department: </th>
+        <td class="col-md-7">{{viewData?.scheme?.deptCode}} - {{viewData?.scheme?.deptName}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Scheme: </th>
+        <td class="col-md-7">{{viewData?.scheme?.schemeCode}}-{{viewData?.scheme?.schemeName}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Scheme Type: </th>
+        <td class="col-md-7">{{helperService.getSchemeType(viewData?.scheme?.schemeType)}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Funding Pattern(Central Share : State Share): </th>
+        <td class="col-md-7">{{viewData?.scheme?.fundingPattern}}</td>
+    </tr>
+    <tr class="row">
+        <th class="col-md-5">Progress of scheme specific MIS: </th>
+        <td class="col-md-7">{{helperService.getProgress(viewData?.scheme?.progress)}}:</td>
+    </tr>
+</table>
+<br/>
+<mat-card-subtitle>
+    <mat-card-header>Financial Year wise Budget Allocation</mat-card-header>
+</mat-card-subtitle>
+<mat-divider></mat-divider>
+<table class="table">
+    <tr class="row">
+        <th class="col-md-4">Financial Year</th>
+        <th class="col-md-2">Central Allocation</th>
+        <th class="col-md-2">State Allocation</th>
+        <th class="col-md-2">Additional Allocation</th>
+        <th class="col-md-2">Total Allocation</th>
+    </tr>
+    <tr class="row">
+        <td class="col-md-4">{{viewData?.financialYear}}</td>
+        <td class="col-md-2">{{viewData?.centralAllocation}}</td>
+        <td class="col-md-2">{{viewData?.stateAllocation}}</td>
+        <td class="col-md-2">{{viewData?.additionalAllocation}}</td>
+        <th class="col-md-2">{{viewData?.totalAllocation}}</th>
+    </tr>
+</table>

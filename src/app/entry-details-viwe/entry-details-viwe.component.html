@@ -1,1 +1,104 @@
-<p>entry-details-viwe works!</p>
+<!-- <mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter" #input>
+</mat-form-field> -->
+<button mat-raised-button color="primary"  mat-button (click)="openAddDialog()">
+    <mat-icon>playlist_add</mat-icon>
+    Add New Scheme's Eligibility Details
+</button>
+<br/>
+<br/>
+<mat-dialog-content class="mat-typography">    
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource"  matSort>
+    <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    <!-- deptCode Column -->
+    <ng-container matColumnDef="schemeid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.schemeid}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="schemename">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.schemename}} </td>
+            </ng-container>
+    <!-- schemeType Column -->
+    <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+    
+    <!-- schemeName Column -->
+    <ng-container matColumnDef="caste">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Caste </th>
+        <td mat-cell *matCellDef="let element"> {{element.caste}} </td>
+    </ng-container>
+    <!-- SchemeCode Column -->
+    <ng-container matColumnDef="min_age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Minimum Age </th>
+        <td mat-cell *matCellDef="let element"> {{element.min_age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="max_age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Maximum Age </th>
+        <td mat-cell *matCellDef="let element"> {{element.max_age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="religion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Religion </th>
+        <td mat-cell *matCellDef="let element"> {{element.religion}} </td>
+    </ng-container>
+
+    
+    <!-- isActive Column -->
+    <ng-container matColumnDef="has_aadhar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Aadhar Mandatory </th>
+        <!-- <td mat-cell *matCellDef="let element">  -->
+            
+            <!-- <mat-button-toggle-group [value]="element.has_aadhar?'true':'false'" >
+                <mat-button-toggle *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+                    {{item.codeValueDesc}}
+                </mat-button-toggle>
+            </mat-button-toggle-group> -->
+        <!-- </td> -->
+        <td mat-cell *matCellDef="let element" > {{element.has_aadhar == 1 ? 'YES': 'NO'}} </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="has_swasthasathi">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Swasthasathi Mandatory </th>
+        <!-- <td mat-cell *matCellDef="let element">  -->
+            <!-- <mat-button-toggle-group [value]="element.has_swasthasathi?'true':'false'">
+                <mat-button-toggle *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+                    {{item.codeValueDesc}}
+                </mat-button-toggle>
+            </mat-button-toggle-group> -->
+        <!-- </td> -->
+        <td mat-cell *matCellDef="let element" > {{element.has_swasthasathi == 1 ? 'YES': 'NO'}} </td>
+
+    </ng-container>
+
+    <!-- Action Column -->
+    <!-- <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef style="align-content: center;"> Action </th>
+    <td mat-cell *matCellDef="let element" class="action-link"> 
+        <button mat-flat-button matTooltip="Click to Edit" >
+            <mat-icon color="accent">edit</mat-icon>
+        </button> 
+        <button mat-flat-button matTooltip="Click to View">
+            <mat-icon color="primary">visibility</mat-icon> 
+        </button> 
+    </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
+    </table>
+
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" >
+    </mat-paginator> 
+
+</div>
+</mat-dialog-content>

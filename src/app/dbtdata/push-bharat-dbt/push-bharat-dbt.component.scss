@@ -1,0 +1,490 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: seashell;
+  // box-shadow: inset 2px 3px 8px #c1c1c1;
+  border-radius: 8px;
+}
+
+.element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+tr {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.field-label {
+  font-size: unset;
+  font-weight: bold;
+}
+
+//------------------------
+
+/* Add some styles to the table */
+.mat-elevation-z8 {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  // overflow: hidden;
+}
+
+/* Style the header cells */
+.mat-header-cell {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  padding: 12px;
+}
+
+/* Style the data cells */
+.mat-cell {
+  padding: 8px;
+}
+
+/* Style the filter input */
+mat-form-field {
+  margin-right: 16px;
+}
+
+/* Style the filter input placeholder */
+.mat-form-field-label {
+  color: #757575;
+}
+
+/* Style the filter input underline and text */
+.mat-form-field-underline,
+.mat-input-element {
+  border-bottom-color: #009688 !important;
+}
+
+/* Hover effect on rows */
+.mat-row:hover {
+  background-color: #f0f0f0;
+}
+
+/* Add some spacing to the header row */
+.mat-header-row {
+  margin-bottom: 8px;
+}
+
+/* Style the action buttons */
+.action-link button {
+  margin-right: 8px;
+  background-color: #2196f3;
+  color: #ffffff;
+}
+
+/* Style the new password button */
+.mat-cell button {
+  background-color: rgb(132, 103, 204);
+  color: #ffffff;
+}
+
+
+
+//----------------------------
+
+
+/* Style the odd and even rows differently for better readability */
+.mat-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Style the odd and even rows differently for better readability */
+.mat-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+
+/* Style the header cells */
+// .mat-header-cell {
+//   background-color: #b3f0ea;
+//   /* Header background color */
+//   color: #ffffff;
+//   /* Header text color */
+//   font-weight: bold;
+//   padding: 12px;
+// }
+
+/* Style the header cells */
+.mat-header-cell {
+  background-color: #bbdefb ;
+  /* Header background color */
+  color: #ffffff;
+  /* Header text color */
+  // font-weight: bold;
+  padding: 12px;
+}
+
+/* Style the filter input placeholder in the header */
+.mat-form-field-label {
+  color: #ffffff;
+  /* Filter input text color */
+}
+
+/* Style the filter input underline and text in the header */
+.mat-form-field-underline,
+.mat-input-element {
+  border-bottom-color: #ffffff !important;
+  color: #ffffff;
+  /* Filter input text color */
+}
+
+/* Add some spacing to the header row */
+.mat-header-row {
+  margin-bottom: 8px;
+}
+
+.Api_Uploaded {
+  color: rgb(236, 236, 236);
+}
+
+.From_Uploaded {
+  color: rgb(165, 213, 241);
+}
+.title{
+  font-size: 12px;
+}
+/* NEW */
+
+.custom-field {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 54px;
+  margin-bottom: 8px;
+}
+
+::ng-deep .mat-form-field.slim-field {
+  font-size: 13px;
+  height: 36px;
+  --mat-form-field-container-height: 36px; /* Material v16+ support */
+}
+
+::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
+  padding: 5px 0; /* minimal vertical padding */
+  border-top: 0;
+
+}
+
+::ng-deep .mat-form-field.slim-field input.mat-input-element {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 6px;
+  font-size: 13px;
+  color: #000000;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  padding: 2px .75em 0 .75em !important;
+}
+
+::ng-deep .mat-dialog-content{
+  overflow: none !important;
+}
+  mat-icon {
+    // position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 28px;
+    opacity: 0.8;
+  }
+
+
+
+/* Center align ALL headers and cells */
+.mat-header-cell, .mat-cell {
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 0px 6px !important;
+  font-size: 11px;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* Prevent excessive row spacing except on hover */
+.mat-row {
+  transition: box-shadow 0.22s, background 0.18s, border-spacing 0.2s, margin 0.20s;
+  border-radius: 6px;
+  box-shadow: none;
+  margin-bottom: 0px;
+}
+
+/* Visual gap and border effect on hover */
+.mat-row:hover {
+  background: #e6f0fc !important; /* Light blue hover */
+  box-shadow: 0 4px 16px rgba(60,64,67,0.09);
+  margin-bottom: 8px;
+  outline: 1px solid #9097f9;
+}
+
+/* Make all button and icon actions slim/small */
+// button.mat-flat-button,
+// button.mat-raised-button {
+//   min-width: 26px !important;
+//   height: 26px !important;
+//   padding: 0 4px !important;
+//   border-radius: 4px !important;
+//   font-size: 13px !important;
+//   margin: 0 2px;
+//   box-shadow: none;
+// }
+
+/* Make icons smaller within buttons */
+// .mat-icon {
+//   font-size: 16px !important;
+//   height: 16px !important;
+//   width: 16px !important;
+//   line-height: 16px !important;
+// }
+
+/* Action cell and toggle group align center */
+.action-link, td > mat-button-toggle-group, td > *:not(.mat-cell):not(.mat-header-cell) {
+  // display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+mat-button-toggle-group {
+  display: flex !important;
+  justify-content: center;
+}
+mat-button-toggle {
+  padding: 0 8px !important;
+  min-width: 34px !important;
+  height: 26px !important;
+  font-size: 13px !important;
+  border-radius: 3px !important;
+}
+
+/* For tight table header row and background */
+.mat-header-row {
+  height: 36px !important;
+  background: #bbdefb !important;
+}
+
+/* Optional: smaller paginator controls and centering */
+mat-paginator {
+  font-size: 12px !important;
+  justify-content: center !important;
+}
+
+::ng-deep .mat-sort-header-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+
+/* Slim, rounded, modern icon button for 'view' */
+.view-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 50% !important;
+  background: #e3f2fd !important;           /* soft blue background */
+  color: #1976d2 !important;                /* deep blue icon */
+  // display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
+  transition:
+    background 0.19s cubic-bezier(.4,0,.2,1),
+    color 0.16s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.20s cubic-bezier(.4,0,.2,1),
+    transform 0.15s cubic-bezier(.4,0,.2,1);
+  margin: 0 2px;
+  outline: none;
+  border: none !important;
+}
+
+.view-btn:hover, .view-btn:focus {
+  background: #1976d2 !important;           /* blue */
+  color: #fff !important;                   /* white icon */
+  box-shadow: 0 8px 18px -6px #1976d2;
+  transform: scale(1.08);
+}
+
+.view-btn .mat-icon {
+  font-size: 19px !important;
+  height: 19px !important;
+  width: 19px !important;
+  line-height: 12px !important;
+  margin: -9px;
+  transition: color 0.14s;
+}
+
+
+.viewComments {
+  font-size: 12px !important;
+  border-radius: 16px !important;               /* slightly less for small button */
+  background-color: #e3f2fd !important;         /* soft blue */
+  color: #1976d2 !important;                    /* deep blue text */
+  padding: 2px 12px !important;                 /* small and horizontal padding */
+  height: 24px !important;                      /* makes button short */
+  min-width: unset !important;                  /* remove material min-width */
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.10); /* soft shadow */
+  transition:
+    background-color 0.22s cubic-bezier(.4,0,.2,1),
+    color 0.18s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+    transform 0.13s cubic-bezier(.4,0,.2,1);
+  text-transform: none !important;              /* removes uppercase */
+  font-weight: 500;
+  margin: 0 2px;
+  line-height: 16px !important;
+  vertical-align: middle;
+}
+
+.viewComments:hover, .viewComments:focus {
+  background-color: #1976d2 !important;         /* dark blue on hover */
+  color: #fff !important;
+  box-shadow: 0 7px 20px -5px #1976d2;
+  transform: scale(1.05);
+}
+
+.pill-value {
+  display: inline-block;
+  padding: 2px 14px;
+  background: linear-gradient(90deg, #fff9db 0%, #ffe082 100%);
+  color: #795548;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(252, 87, 94, 0.11);
+  letter-spacing: 0.5px;
+  margin: 2px 0;
+}
+
+.pill-total-ben {
+  display: inline-block;
+  padding: 2px 14px;
+  background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%); /* Soft blue-green pill */
+  color: #006064;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 96, 100, 0.11);
+  letter-spacing: 0.5px;
+  margin: 2px 0;
+}
+.pill-reporting-month {
+  display: inline-block;
+  padding: 2px 14px;
+  background: linear-gradient(90deg, #e3eafe 0%, #b8c6f9 100%);
+  color: #26418f;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 18px;
+  box-shadow: 0 2px 6px rgba(38, 65, 143, 0.13);
+  letter-spacing: 0.5px;
+  margin: 2px 0;
+}
+
+.process-btn {
+  min-width: 120px !important;
+  height: 36px !important;
+  padding: 0 16px !important;
+  border-radius: 20px !important;
+  background-color: #1976d2 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  // font-weight: bold;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15);
+  transition:
+    background-color 0.22s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.21s cubic-bezier(.4,0,.2,1),
+    transform 0.13s cubic-bezier(.4,0,.2,1);
+  outline: none !important;
+  border: none !important;
+}
+
+/* Modern hover effect */
+.process-btn:hover, .process-btn:focus {
+  background-color: #1254a4 !important;   /* darker blue */
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(25, 118, 210, 0.28);
+  transform: translateY(-2px) scale(1.03);
+}
+
+
+.pill-benefit-type {
+  display: inline-block;
+  padding: 2px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(44, 62, 80, 0.13);
+  letter-spacing: 0.5px;
+  margin: 2px 0;
+}
+
+.pill-benefit-type.cash {
+  background: linear-gradient(90deg, #e0f7fa 0%, #a5f5d0 100%);
+  color: #009688;
+}
+
+.pill-benefit-type.kind {
+  background: linear-gradient(90deg, #ffe0e0 0%, #ffd1b3 100%);
+  color: #d9802e;
+}
+
+
+.pill-benefit-type.cash-kind {
+  background: linear-gradient(90deg, #ede7f6 0%, #ffc1e3 100%);
+  color: #7b1fa2;
+}
+
+.small-icon-btn mat-icon {
+  font-size: 23px !important;
+  height: 16px !important;
+  line-height: 31px !important;
+}

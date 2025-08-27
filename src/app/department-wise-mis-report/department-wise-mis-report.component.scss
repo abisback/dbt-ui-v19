@@ -1,0 +1,152 @@
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-header-row {
+    max-height: 50px;
+    height: 30px;
+    min-height: 30px;
+    text-align: center;
+    font-weight: bold;
+
+  }
+
+  .mat-header-cell {
+    font-weight: bold;
+    align-content: center;
+    padding: 10px;
+  }
+
+  .custom-field {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: auto;
+  margin-bottom: 8px;
+  // width: 100%;
+  // margin-left: 0px;
+  // background-image: linear-gradient( 180.2deg,  rgb(217,237,253,255) -0.6%, rgba(231, 245, 255, 1) 42%, rgb(242, 251, 255) 80.4% );
+}
+.title {
+  padding: 5px 0 0 11px;
+  font-size: 20px;
+  font-weight: 550;
+  // margin-bottom: 16px;
+}
+.btn-group{
+  margin-top: 11px;
+}
+
+//-------------------------------------------------------------------------------
+
+
+
+
+
+
+.mat-table-container {
+  max-height: 700px; /* or any height you want */
+  overflow-y: auto;
+  position: relative;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Fix mat-header-row */
+.mat-table thead,
+.cdk-table thead,
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #f1f1f1; /* For visibility */
+}
+
+/* Optional: style for inner header rows if you have multiple */
+.mat-header-row:nth-child(2) th {
+  top: 48px; /* Height of your first header row */
+  z-index: 2;
+}
+
+/* Table borders (if required) */
+.table-bordered th, .table-bordered td {
+  border: 1px solid #dee2e6 !important;
+}
+
+/* Optional: Freeze first column horizontally (if needed)
+th:first-child, td:first-child {
+  position: sticky;
+  left: 0;
+  background: #e9e9e9;
+}
+*/
+
+.mat-header-cell, .mat-cell {
+  white-space: wrap; /* Prevent text wrap for better UX */
+}
+
+
+
+
+
+
+
+
+.mat-header-row[sticky] {
+  position: sticky;
+  // background: #ec0000;
+  z-index: 100;
+}
+
+/* Adjust top values for multiple rows */
+.mat-header-row[sticky]:nth-of-type(1) { top: -1px; }
+.mat-header-row[sticky]:nth-of-type(2) { top: 30px; }
+.mat-header-row[sticky]:nth-of-type(3) { top: 60px; }
+
+
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #bccde4;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background-color: #fff; /* Ensure the background is white */
+  z-index: 10; /* Ensure it stays above other content */
+}
+th.sticky-col{
+  // left: 0 !important; /* Ensure the header cell is also sticky */
+  background-color: #d9edfd; /* Ensure the header background is white */
+  z-index: 10; /* Ensure it stays above other content */
+}
