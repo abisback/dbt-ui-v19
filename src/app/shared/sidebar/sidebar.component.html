@@ -14,7 +14,7 @@
           <h2 matSubheader *ngIf="IsNotOperator">Master Data</h2> <mat-icon
             class="right_arrow">keyboard_arrow_right</mat-icon>
         </a>
-        <div class="collapse sub_menu" id="menu_list-4" data-bs-parent="#accordion">
+        <ul class="collapse sub_menu" id="menu_list-4" data-bs-parent="#accordion">
       <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/users"
           *ngIf="IsStateLevel || IsSuperAdmin || IsStateNodal || IsDepartmentAdmin">Users Management</a></li>
       <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/department" *ngIf="IsStateLevel">Department
@@ -26,7 +26,7 @@
 
           <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/approve-scheme"
             *ngIf="IsStateLevel">New Scheme Sent for Approval</a></li>
-  </div>
+  </ul>
   </li>
 
   <li>
@@ -35,7 +35,7 @@
       <span></span>
       <h2 matSubheader>DBT Data Management</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
     </a>
-    <div class="collapse sub_menu" id="menu_list" data-bs-parent="#accordion">
+    <ul class="collapse sub_menu" id="menu_list" data-bs-parent="#accordion">
   <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata"
       *ngIf="IsStateLevel || IsStateNodal">Data Entered by department</a></li>
   <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/dbtdata"
@@ -44,7 +44,7 @@
       *ngIf="IsNotOperator && !IsSuperAdmin">Data Send By department for Approval</a></li>
   <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/push-dbt"
       *ngIf="IsStateLevel || IsStateNodal">Push to Bharat DBT</a></li>
-  </div>
+  </ul>
   </li>
 
   <li *ngIf="IsNotOperator">
@@ -53,9 +53,9 @@
       <span></span>
       <h2 matSubheader>Data Reported by Admin <br> Department</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
     </a>
-    <div class="collapse sub_menu" id="menu_list-1" data-bs-parent="#accordion">
+    <ul class="collapse sub_menu" id="menu_list-1" data-bs-parent="#accordion">
   <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/monthlystatus" *ngIf="IsNotOperator">Present Upload Status as on Date</a></li>
-  </div>
+  </ul>
   </li>
 
   <li>
@@ -64,7 +64,7 @@
       <span></span>
       <h2 matSubheader>MIS Reports</h2> <mat-icon class="right_arrow">keyboard_arrow_right</mat-icon>
     </a>
-    <div class="collapse sub_menu" id="menu_list-3" data-bs-parent="#accordion">
+    <ul class="collapse sub_menu" id="menu_list-3" data-bs-parent="#accordion">
   <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-month-dbt"
       *ngIf="IsNotOperator && !IsStateLevel">Mis month wise Entry Report</a></li>
   <!-- <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/mis-scheme-wise-beneficiary" *ngIf="IsNotOperator && !IsStateLevel">Mis Scheme wise benificiary Report</a></li> -->
@@ -74,7 +74,7 @@
 
       <li><a mat-list-item routerLinkActive="list-item-active" routerLink="/report-of-push-data"
         *ngIf="IsStateLevel">Data already send/pushed to Bharat DBT </a></li>
-  </div>
+  </ul>
   </li>
 
 

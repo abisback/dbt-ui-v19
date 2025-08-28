@@ -24,19 +24,27 @@
 .side-bar-cont ul {
   list-style-type: none;
   margin-left: -15px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .side-bar-cont ul li {
   display: block;
   width: 100%;
   position: relative;
-  border-bottom: 1px solid gainsboro;
   color: antiquewhite;
   text-decoration: none !important;
 }
 
+/* Top-level items: remove left margin and increase vertical spacing */
+.side-bar-cont > ul > li {
+  margin-left: 0;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
 a {
-  color: none !important;
+  color: inherit !important;
   text-decoration: none !important;
 }
 
@@ -46,7 +54,6 @@ mat-icon.mat-accent,
 mat-icon.mat-warn {
   color: #fff !important;
 }
-
 
 ::ng-deep .mat-mdc-list-base .mat-mdc-list-item {
   font-size: 13px;
@@ -61,6 +68,30 @@ mat-icon.mat-warn {
   font-weight: 500;
 }
 
+/* Ensure Angular Material MDC primary text inherits our sidebar color */
+:host ::ng-deep .mdc-list-item__primary-text {
+  color: antiquewhite !important;
+  white-space: normal;
+  word-break: break-word;
+  display: block;
+  line-height: 1;
+}
+
+/* Allow MDC list items in this sidebar to wrap and not clip */
+:host ::ng-deep .mat-mdc-list-base .mat-mdc-list-item {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  align-items: flex-start;
+}
+
+/* Allow list items to auto-grow with wrapped content */
+:host ::ng-deep .mat-mdc-list-item,
+:host ::ng-deep .mdc-list-item {
+  min-height: 0;
+  height: auto;
+  align-items: flex-start;
+}
 
 .side-bar-cont ul li a .mat-icon {
   position: absolute;
@@ -68,28 +99,86 @@ mat-icon.mat-warn {
   top: 13px;
 }
 
+/* Precisely center the right arrow within the toggle */
+.menu_list_main .right_arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .side-bar-cont h2 {
   padding: 0 !important;
   color: #fff !important;
+  margin: 0 !important;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.15;
 }
 
-.right_arrow {
-  transition: all 0.3s ease;
-}
-
-.menu_list_main.collapsed .right_arrow {
-  transform: rotate(90deg);
-}
-
-.menu_list_main .collapse .show .right_arrow {
-  transform: rotate(60deg);
-  transition: 0.5s 1s linear;
-}
+.right_arrow { transition: transform 0.3s ease; }
+/* Rotate arrow using aria-expanded on the trigger (primary), with collapsed as fallback */
+.menu_list_main .right_arrow { transform: rotate(0deg); }
+.menu_list_main[aria-expanded="true"] .right_arrow { transform: rotate(90deg) !important; }
+.menu_list_main[aria-expanded="false"] .right_arrow { transform: rotate(0deg) !important; }
+.menu_list_main:not(.collapsed) .right_arrow { transform: rotate(90deg); }
 
 mat-nav-list {
   // background: #2e6c8b !important;
-  background: linear-gradient(109.6deg, rgb(0, 37, 84) 11.2%, rgba(0, 37, 84, 0.32) 100.2%);
+  background: linear-gradient(
+    109.6deg,
+    rgb(0, 37, 84) 11.2%,
+    rgba(0, 37, 84, 0.32) 100.2%
+  );
   height: 100%;
   color: #fff;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Submenu spacing and typography */
+.sub_menu {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.sub_menu li a {
+  display: block;
+  padding: 10px 14px 10px 22px;
+  font-size: 12px;
+  color: #ffffff !important;
+  border-bottom: 1px solid;
+  line-height: 1;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+/* Top-level toggles */
+.menu_list_main {
+  display: block;
+  padding: 10px 36px 14px 0;
+  border-bottom: 1px solid ;
+  margin: 0;
+  position: relative;
+  user-select: none;
+}
+
+/* Remove text selection highlight color within the sidebar */
+:host ::selection { background: transparent; color: inherit; }
+:host ::-moz-selection { background: transparent; color: inherit; }
+
+/* Shift top-level toggle text left */
+.menu_list_main h2 {
+  margin-left: 0;
+}
+
+/* Active and hover states */
+a.list-item-active,
+.sub_menu li a.list-item-active {
+  background: rgba(255, 255, 255, 0.12);
+  color: antiquewhite !important;
+  font-weight: 600;
+}
+
+.sub_menu li a:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
