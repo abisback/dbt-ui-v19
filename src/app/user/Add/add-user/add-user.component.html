@@ -182,7 +182,7 @@
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-section">
+    <div class="form-section p-3">
       <div class="form-row">
         <mat-form-field appearance="outline" class="flex-2 full-width slim-field mt-2">
           <mat-label>User Id</mat-label>
@@ -276,7 +276,7 @@
 
     <mat-divider></mat-divider>
     <div class="form-actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Register User</button>
+      <button mat-raised-button color="primary mb-2" type="submit" [disabled]="!userForm.valid">Register User</button>
       <span *ngIf="!userForm.valid" class="form-note">(<b>N.B.</b> Button will be enabled once validation passes)</span>
     </div>
   </form>

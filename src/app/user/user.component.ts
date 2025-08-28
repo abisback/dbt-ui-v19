@@ -102,7 +102,7 @@ export class UserComponent {
     dialogConfig.autoFocus = true;
     dialogConfig.panelClass = 'form-dialog';
     dialogConfig.width = '60%';
-    dialogConfig.minWidth = '400px';
+    dialogConfig.minWidth = '410px';
     dialogConfig.height = 'auto';
     dialogConfig.minHeight = 'auto';
 
