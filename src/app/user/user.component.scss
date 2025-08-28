@@ -47,10 +47,10 @@ mat-form-field {
   border-bottom-color: #009688 !important;
 }
 
-/* Hover effect on rows */
-.mat-row:hover {
-  background-color: #f0f0f0;
-}
+// /* Hover effect on rows */
+// .mat-row:hover {
+//   background-color: #f0f0f0;
+// }
 
 /* Add some spacing to the header row */
 // .mat-header-row {
@@ -66,7 +66,7 @@ mat-form-field {
 
 /* Style the new password button */
 .mat-cell button {
-  background-color: rgb(132, 103, 204);
+  background-color: rgb(18, 4, 53);
   color: #ffffff;
 }
 
@@ -128,10 +128,10 @@ mat-form-field.custom-field .mat-form-field-outline {
   border-radius: 8px;
 }
 
-mat-select:hover,
-input:hover {
-  background-color: #f9f9f9;
-}
+// mat-select:hover,
+// input:hover {
+//   background-color: #f9f9f9;
+// }
 
 mat-label {
   font-weight: 400;
@@ -143,48 +143,35 @@ mat-hint {
   font-size: 12px;
 }
 
-:host ::ng-deep .body .mat-form-field.slim-field {
-  font-size: 13px;
-  height: 36px;
-  --mat-form-field-container-height: 36px;
-  /* Material v16+ support */
-}
 
-:host ::ng-deep .body .mat-form-field.slim-field .mat-form-field-infix {
-  padding: 5px 0;
-  /* minimal vertical padding */
-  border-top: 0;
-
-}
-
-:host ::ng-deep .body .mat-form-field.slim-field input.mat-input-element {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 6px;
-  font-size: 13px;
-  color: #000000;
-}
-
-:host ::ng-deep .body .mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 2px .75em 0 .75em !important;
-}
 
 .btn {
   border-radius: 20px;
+  background-color: rgb(22, 100, 131);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 
 /* Center align ALL headers and cells */
-.mat-header-cell,
-.mat-cell {
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-  vertical-align: middle !important;
-  padding: 4px 6px !important;
-  font-size: 11px;
-  font-family: 'Inter', 'Roboto', sans-serif;
-}
+// .mat-header-cell,
+// .mat-cell {
+//   justify-content: center !important;
+//   align-items: center !important;
+//   text-align: center !important;
+//   vertical-align: middle !important;
+//   padding: 4px 6px !important;
+//   font-size: 11px;
+//   font-family: 'Inter', 'Roboto', sans-serif;
+// }
 
 /* Prevent excessive row spacing except on hover */
 .mat-row {
@@ -219,30 +206,30 @@ mat-hint {
   position: relative;
 }
 
-.mat-row:hover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid #9097f9;
-  border-radius: 10px;
-  background: rgba(230, 240, 252, 0.6);
-  pointer-events: none;
-}
+// .mat-row:hover::after {
+//   content: '';
+//   position: absolute;
+//   inset: 0;
+//   border: 1px solid #8b92f8;
+//   border-radius: 10px;
+//   background: rgba(49, 167, 98, 0.6);
+//   pointer-events: none;
+// }
 
 /* MDC table row overlay (scoped) */
 :host ::ng-deep .body .mat-mdc-row {
   position: relative;
 }
 
-:host ::ng-deep .body .mat-mdc-row:hover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid #9097f9;
-  border-radius: 10px;
-  background: rgba(230, 240, 252, 0.6);
-  pointer-events: none;
-}
+// ::ng-deep .body .mat-mdc-row:hover::after {
+//   content: '';
+//   position: absolute;
+//   inset: 0;
+//   border: 1px solid #9097f9;
+//   border-radius: 10px;
+//   background: rgba(58, 140, 240, 0.6);
+//   pointer-events: none;
+// }
 
 /* Make all button and icon actions slim/small */
 // button.mat-flat-button,
@@ -266,13 +253,13 @@ mat-hint {
 // Removed overbroad global mat-icon sizing/positioning that misaligned icons in buttons
 
 /* Action cell and toggle group align center */
-.action-link,
-td>mat-button-toggle-group,
-td>*:not(.mat-cell):not(.mat-header-cell) {
-  // display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
+// .action-link,
+// td>mat-button-toggle-group,
+// td>*:not(.mat-cell):not(.mat-header-cell) {
+//   // display: flex !important;
+//   justify-content: center !important;
+//   align-items: center !important;
+// }
 
 mat-button-toggle-group {
   display: flex !important;
@@ -321,13 +308,13 @@ mat-paginator {
   height: 100%;
 }
 
-/* Force table cell itself to be a flex container for perfect vertical alignment */
-.mat-cell {
-  // display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 6px 2px !important;
-}
+// /* Force table cell itself to be a flex container for perfect vertical alignment */
+// .mat-cell {
+//   // display: flex !important;
+//   align-items: center !important;
+//   justify-content: center !important;
+//   padding: 6px 2px !important;
+// }
 
 /* --- Attractive, pill-style toggle group styling --- */
 .toggle-status {
@@ -457,9 +444,10 @@ mat-paginator {
 // }
 
 .small-icon-btn mat-icon {
-  font-size: 21px;
+  font-size: 19px;
   height: 16px;
   line-height: 31px;
+  // overflow: unset;
 }
 
 
@@ -547,16 +535,79 @@ input.mat-input-element {
   font-size: 14px;
 }
 
-/* Hover effect */
-.mat-option:hover {
-  background-color: #f0f0f0;
-}
-/* Optional: Add border radius to input field */
-.mat-mdc-form-field-outline {
-  border-radius: 4px;
+
+//-------
+
+
+/* Centering you already have */
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-footer-cell {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Reduce label font size slightly */
-.mat-mdc-floating-label {
-  font-size: 12px;
+/* Keep sortable header label + arrow centered */
+.mat-mdc-table .mat-sort-header-container {
+  justify-content: center;
 }
+
+/* Make table font smaller (headers, cells, footers) */
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-footer-cell {
+  font-size: 12px; /* adjust to 11px/13px as needed */
+  line-height: 1.4; /* keeps rows tidy at smaller sizes */
+}
+
+/* Optional: ensure the inner sort text follows the size (MDC typography) */
+.mat-mdc-table .mat-sort-header-content,
+.mat-mdc-table .mat-sort-header-button {
+  font-size: inherit; /* inherits 12px from header cell */
+  line-height: inherit;
+}
+
+/* Ensure table spans width */
+table.mat-mdc-table {
+  width: 100%;
+}
+
+
+
+
+/* Ensure rows can host absolutely positioned pseudo-elements */
+.mat-mdc-table .mat-mdc-row {
+  position: relative;
+  z-index: 0;                 /* create a stacking context */
+}
+
+/* Don’t affect header row */
+.mat-mdc-table .mat-mdc-header-row {
+  position: static;
+}
+
+/* Custom hover overlay */
+.mat-mdc-table .mat-mdc-row:hover::after {
+  content: "";
+  position: absolute;
+  inset: 2px;                 /* inset a bit so the outline doesn’t clip */
+  border: 1px solid #9097f9;
+  border-radius: 10px;
+  background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
+  pointer-events: none;
+  z-index: 1;                 /* above the row background */
+}
+
+/* Keep cell content clickable above the overlay */
+.mat-mdc-table .mat-mdc-row .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-row .mat-mdc-footer-cell {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+
+
+

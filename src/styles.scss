@@ -26,10 +26,10 @@ table.mat-table.cdk-table.mat-sort thead tr {
   background: #d9edfd;
 }
 
-table.mat-table.cdk-table.mat-sort thead tr th {
-  color: #2e6c8b;
-  font-size: 14px;
-}
+// table.mat-table.cdk-table.mat-sort thead tr th {
+//   color: #2e6c8b;
+//   font-size: 14px;
+// }
 
 .mat-dialog-container .mat-form-field-label {
   color: #427a96;
@@ -98,10 +98,10 @@ table.mat-table.cdk-table.mat-sort thead tr th {
 
 
 
-.form-dialog .mat-dialog-container {
-  border-radius: 14px !important;
-  box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
-}
+// .form-dialog .mat-dialog-container {
+//   border-radius: 14px !important;
+//   box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
+// }
 
 
 // sidebar styles
@@ -110,3 +110,31 @@ h2.mat-mdc-subheader.mdc-list-group__subheader {
   font-size: 14px;
   font-weight: 500;
 }
+
+
+
+
+// importent form field styles ----------------------------------
+
+.slim-field {
+  --mat-form-field-container-height: 36px;
+  --mat-form-field-container-vertical-padding: 4px;
+  font-size: 13px;
+}
+.small-icon-btn mat-icon {
+  overflow: unset;
+}
+th.mat-mdc-header-cell {
+  color: #2e6c8b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form-dialog .mat-mdc-dialog-container {
+  --mdc-dialog-container-elevation: 0 6px 28px 0 rgba(60, 130, 240, 0.13);
+  --mdc-dialog-container-shape: 14px;
+}
+.form-dialog .mat-mdc-dialog-container .mdc-dialog__surface {
+  box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
+}
+

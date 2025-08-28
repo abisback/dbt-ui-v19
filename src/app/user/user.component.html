@@ -12,7 +12,7 @@
       Add User
     </button>
   </div>
-  <div class="mat-typography">
+  <!-- <div class="mat-typography"> -->
     <div>
       <form [formGroup]="searchForm" class="row custom-field">
         <div class="col-xl-2 col-lg-4 col-md-4" *ngIf="admin">
@@ -93,7 +93,7 @@
     </div>
     <div class="mat-elevation-z8">
 
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table  mat-table [dataSource]="dataSource" matSort>
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
         <!-- Id Column -->
@@ -229,5 +229,5 @@
       </mat-paginator>
 
     </div>
-  </div>
+  <!-- </div> -->
 </div>
