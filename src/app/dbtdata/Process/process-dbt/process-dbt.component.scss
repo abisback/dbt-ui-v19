@@ -421,3 +421,18 @@ mat-paginator {
   transform: translateY(-2px) scale(1.03);
 }
 
+/* MDC table header (Angular Material v15+) */
+.mat-mdc-table .mat-mdc-header-cell {
+  background-color: #BBDEFB !important;
+  color: #2e6c8b;
+  font-size: 14px !important;
+  height: 20px !important;
+  line-height: 15px !important;
+  padding: 0 16 !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
+    height: 0 !important;
+}
