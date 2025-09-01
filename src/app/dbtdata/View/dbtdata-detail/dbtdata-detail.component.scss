@@ -1,27 +1,26 @@
 .table {
-    font-size: larger;
+  font-size: larger;
 }
 
 tr {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .close-icon.mat-button {
-    position: absolute;
-    // top: 0;
-    right: 20%;
-    padding: 5px;
-    padding-top: 0px;
-    line-height: 14px;
-    min-width: auto;
+  position: absolute;
+  // top: 0;
+  right: 20%;
+  padding: 5px;
+  padding-top: 0px;
+  line-height: 14px;
+  min-width: auto;
 }
 
 .field-label {
-    font-size: unset;
-    font-weight: bold;
+  font-size: unset;
+  font-weight: bold;
 }
-
 
 .close-icon {
   // position: absolute;
@@ -47,4 +46,14 @@ tr {
   font-weight: 600;
   margin: 0;
   color: #21245c;
+}
+.margin-header {
+  padding: var(--mat-dialog-content-padding, 0px 24px);
+}
+mat-label {
+  color: rgba(0, 0, 0, 0.87);
+}
+.mat-typography {
+  font: 400 14px / 20px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
 }
