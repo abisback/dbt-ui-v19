@@ -48,7 +48,7 @@
     </form>
   </div>
 
-  <div class="mat-elevation-z8" *ngIf="tableflag" #TABLE style=" overflow: auto;">
+  <div class="mat-elevation-z8" [class.hidden]="!tableflag" #TABLE style=" overflow: auto;"> <!-- *ngIf="tableflag" removed-->
 
     <!-- <div class="spinner-container" *ngIf="loadingFlag">
       <mat-spinner></mat-spinner>

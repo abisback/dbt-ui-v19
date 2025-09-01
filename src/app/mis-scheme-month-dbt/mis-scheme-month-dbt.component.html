@@ -39,7 +39,7 @@
 
   <mat-dialog-content class="mat-typography">
 
-    <div class="mat-elevation-z8" *ngIf="tableflag" #TABLE style=" overflow: auto;">
+    <div class="mat-elevation-z8" [class.hidden]="!tableflag" #TABLE style=" overflow: auto;">
       <!-- <mat-divider></mat-divider> -->
       <div class="toolbar">
         <button mat-raised-button color="accent" (click)="exportToExcel()">Export to Excel</button>
