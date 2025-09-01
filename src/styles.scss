@@ -138,6 +138,11 @@ th.mat-mdc-header-cell {
   box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
 }
 
+/* Hide any pseudo-elements that might contain checkmarks */
+.mat-button-toggle *::before,
+.mat-button-toggle *::after {
+  display: none !important;
+}
 
 
 // table styles----------------------------------center align

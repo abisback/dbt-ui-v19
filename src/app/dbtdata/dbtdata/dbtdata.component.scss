@@ -90,13 +90,17 @@ mat-form-field {
 
 
 /* Style the header cells */
+/* Legacy table header (pre-MDC) */
 .mat-header-cell {
-  background-color: #bbdefb ;
-  /* Header background color */
-  color: #ffffff;
-  /* Header text color */
-  // font-weight: bold;
-  padding: 12px;
+  background-color: #BBDEFB !important;
+  color: #2e6c8b;
+  font-size: 14px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  padding: 0 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Style the filter input placeholder in the header */
@@ -114,8 +118,27 @@ mat-form-field {
 }
 
 /* Add some spacing to the header row */
-.mat-header-row {
-  margin-bottom: 8px;
+.mat-header-row { margin-bottom: 8px; height: 36px !important; }
+
+/* MDC table header (Angular Material v15+) */
+.mat-mdc-table .mat-mdc-header-cell {
+  background-color: #BBDEFB !important;
+  color: #2e6c8b;
+  font-size: 14px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  padding: 0 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mat-mdc-header-row { background-color: #BBDEFB !important; height: 36px !important; }
+
+/* Tighten MDC header container so text aligns to 20px height */
+.mat-mdc-table .mat-mdc-header-cell .mat-sort-header-container,
+.mat-mdc-table .mat-mdc-header-cell .mat-sort-header-content {
+  height: 36px !important;
+  line-height: 36px !important;
 }
 
 .Api_Uploaded {
@@ -225,13 +248,8 @@ mat-form-field {
 //   width: 16px !important;
 //   line-height: 16px !important;
 // }
-  mat-icon {
-    // position: absolute;
-    bottom: 15px;
-    right: 15px;
-    font-size: 28px;
-    opacity: 0.8;
-  }
+  /* Do not globally reposition icons; let buttons control layout */
+  // mat-icon {}
 
 /* Action cell and toggle group align center */
 .action-link, td > mat-button-toggle-group, td > *:not(.mat-cell):not(.mat-header-cell) {
@@ -312,10 +330,11 @@ mat-paginator {
   width: 32px !important;
   height: 32px !important;
   min-width: 32px !important;
+  padding: 0 !important;
   border-radius: 50% !important;
   background: #e3f2fd !important;           /* soft blue background */
   color: #1976d2 !important;                /* deep blue icon */
-  // display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
@@ -329,6 +348,16 @@ mat-paginator {
   border: none !important;
 }
 
+/* Ensure the internal MDC label is centered and consumes full area */
+.view-btn .mdc-button__label,
+.edit-btn .mdc-button__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 .view-btn:hover, .view-btn:focus {
   background: #1976d2 !important;           /* blue */
   color: #fff !important;                   /* white icon */
@@ -337,11 +366,12 @@ mat-paginator {
 }
 
 .view-btn .mat-icon {
+  display: block;
   font-size: 19px !important;
   height: 19px !important;
   width: 19px !important;
-  line-height: 12px !important;
-  margin: -9px;
+  line-height: 19px !important;
+  margin: 0;
   transition: color 0.14s;
 }
 
@@ -397,7 +427,7 @@ mat-paginator {
     box-shadow 0.21s cubic-bezier(.4,0,.2,1),
     transform 0.13s cubic-bezier(.4,0,.2,1);
   color: #1976d2 !important;
-  // display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center !important;
   outline: none;
@@ -413,12 +443,31 @@ mat-paginator {
 
 /* Make the edit icon smaller & vertically centered */
 .edit-btn .mat-icon {
+  display: block;
   font-size: 18px !important;
   height: 18px !important;
   width: 18px !important;
-  line-height: 10px !important;
+  line-height: 18px !important;
   margin: 0 !important;
   color: #b38807 !important;
+}
+
+/* Ensure icon turns white on hover to contrast the blue background */
+.edit-btn:hover .mat-icon,
+.edit-btn:focus .mat-icon,
+.edit-btn.mat-mdc-button-base:hover .mat-icon,
+.edit-btn.mat-mdc-button-base:focus .mat-icon,
+.edit-btn:hover .mdc-button__label .mat-icon,
+.edit-btn:focus .mdc-button__label .mat-icon {
+  color: #ffffff !important;
+}
+
+/* Also ensure view icon stays centered and adopts hover color when needed */
+.view-btn:hover .mat-icon,
+.view-btn:focus .mat-icon,
+.view-btn.mat-mdc-button-base:hover .mat-icon,
+.view-btn.mat-mdc-button-base:focus .mat-icon {
+  color: inherit !important;
 }
 
 .small-icon-btn mat-icon {

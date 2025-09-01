@@ -7,13 +7,14 @@ import { TokenInterceptorService } from './service/token-interceptor.service';
 import { AutoLogoutService } from './service/auto-logout.service';
 import { ErrorInterceptorProvider } from './service/error-interceptor.service';
 import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
-    // provideAnimations(), 
+    
+    provideAnimations(),
     provideToastr({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
