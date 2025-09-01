@@ -20,12 +20,12 @@ table {
 }
 
 /* Style the header cells */
-.mat-header-cell {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  padding: 12px;
-  align-content: center;
-}
+// .mat-header-cell {
+//   background-color: #f2f2f2;
+//   font-weight: bold;
+//   padding: 12px;
+//   align-content: center;
+// }
 
 /* Style the data cells */
 .mat-cell {
@@ -49,14 +49,14 @@ mat-form-field {
 }
 
 /* Hover effect on rows */
-.mat-row:hover {
-  background-color: #f0f0f0;
-}
+// .mat-row:hover {
+//   background-color: #ffffff;
+// }
 
 /* Add some spacing to the header row */
-.mat-header-row {
-  margin-bottom: 8px;
-}
+// .mat-header-row {
+//   margin-bottom: 8px;
+// }
 
 /* Style the action buttons */
 .action-link button {
@@ -77,14 +77,14 @@ mat-form-field {
 
 
 /* Style the odd and even rows differently for better readability */
-.mat-row:nth-child(even) {
-  background-color: #f9f9f9;
-}
+// .mat-row:nth-child(even) {
+//   background-color: #f9f9f9;
+// }
 
-/* Style the odd and even rows differently for better readability */
-.mat-row:nth-child(odd) {
-  background-color: #ffffff;
-}
+// /* Style the odd and even rows differently for better readability */
+// .mat-row:nth-child(odd) {
+//   background-color: #ffffff;
+// }
 
 
 /* Style the header cells */
@@ -97,14 +97,14 @@ mat-form-field {
 //   padding: 12px;
 // }
 
-.mat-header-cell {
-  background-color: #bbdefb ;
-  /* Header background color */
-  color: #ffffff;
-  /* Header text color */
-  // font-weight: bold;
-  padding: 12px;
-}
+// .mat-header-cell {
+//   background-color: #bbdefb ;
+//   /* Header background color */
+//   color: #ffffff;
+//   /* Header text color */
+//   // font-weight: bold;
+//   padding: 12px;
+// }
 
 /* Style the filter input placeholder in the header */
 .mat-form-field-label {
@@ -121,9 +121,9 @@ mat-form-field {
 }
 
 /* Add some spacing to the header row */
-.mat-header-row {
-  margin-bottom: 8px;
-}
+// .mat-header-row {
+//   margin-bottom: 8px;
+// }
 
 
 .custom-field {
@@ -135,38 +135,50 @@ mat-form-field {
 }
 
 
-::ng-deep .mat-form-field.slim-field {
-  font-size: 13px;
-  height: 36px;
-  --mat-form-field-container-height: 36px; /* Material v16+ support */
-}
+// ::ng-deep .mat-form-field.slim-field {
+//   font-size: 13px;
+//   height: 36px;
+//   --mat-form-field-container-height: 36px; /* Material v16+ support */
+// }
 
-::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
-  padding: 5px 0; /* minimal vertical padding */
-  border-top: 0;
+// ::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
+//   padding: 5px 0; /* minimal vertical padding */
+//   border-top: 0;
 
-}
+// }
 
-::ng-deep .mat-form-field.slim-field input.mat-input-element {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 6px;
-  font-size: 13px;
-  color: #000000;
-}
+// ::ng-deep .mat-form-field.slim-field input.mat-input-element {
+//   height: 24px;
+//   line-height: 24px;
+//   padding: 0 6px;
+//   font-size: 13px;
+//   color: #000000;
+// }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 2px .75em 0 .75em !important;
-}
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+//   padding: 2px .75em 0 .75em !important;
+// }
 
 .block {
   display: block;
   width: 100%;
 }
 
-.btn{
+.btn {
   border-radius: 20px;
+  background-color: rgb(22, 100, 131);
+  border: none;
+  color: white;
+  padding: 9px 19px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  // margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
 .dept-select {
   width: 100%;
   margin-left: 16px;
@@ -185,32 +197,32 @@ mat-form-field {
 
 
 
-/* Center align ALL headers and cells */
-.mat-header-cell, .mat-cell {
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-  vertical-align: middle !important;
-  padding: 4px 6px !important;
-  font-size: 11px;
-  font-family: 'Inter', 'Roboto', sans-serif;
-}
+// /* Center align ALL headers and cells */
+// .mat-header-cell, .mat-cell {
+//   justify-content: center !important;
+//   align-items: center !important;
+//   text-align: center !important;
+//   vertical-align: middle !important;
+//   padding: 4px 6px !important;
+//   font-size: 11px;
+//   font-family: 'Inter', 'Roboto', sans-serif;
+// }
 
-/* Prevent excessive row spacing except on hover */
-.mat-row {
-  transition: box-shadow 0.22s, background 0.18s, border-spacing 0.2s, margin 0.20s;
-  border-radius: 6px;
-  box-shadow: none;
-  margin-bottom: 0px;
-}
+// /* Prevent excessive row spacing except on hover */
+// .mat-row {
+//   transition: box-shadow 0.22s, background 0.18s, border-spacing 0.2s, margin 0.20s;
+//   border-radius: 6px;
+//   box-shadow: none;
+//   margin-bottom: 0px;
+// }
 
 /* Visual gap and border effect on hover */
-.mat-row:hover {
-  background: #e6f0fc !important; /* Light blue hover */
-  box-shadow: 0 4px 16px rgba(60,64,67,0.09);
-  margin-bottom: 8px;
-  outline: 1px solid #9097f9;
-}
+// .mat-row:hover {
+//   background: #5f8bc0 !important; /* Light blue hover */
+//   box-shadow: 0 4px 16px rgba(60,64,67,0.09);
+//   margin-bottom: 8px;
+//   outline: 1px solid #9097f9;
+// }
 
 /* Make all button and icon actions slim/small */
 // button.mat-flat-button,
@@ -251,10 +263,10 @@ mat-button-toggle {
 }
 
 /* For tight table header row and background */
-.mat-header-row {
-  height: 36px !important;
-  background: #bbdefb !important;
-}
+// .mat-header-row {
+//   height: 36px !important;
+//   background: #bbdefb !important;
+// }
 
 /* Optional: smaller paginator controls and centering */
 mat-paginator {
@@ -306,6 +318,51 @@ mat-paginator {
 }
 
 
+
+
+
+//------------------------------
+
+.mat-mdc-header-row {
+  background: #bbdefb !important;
+  height: 36px !important;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+
+.toggle-status .mat-mdc-button-toggle-checked .mdc-button__icon { display: none; }
+
+/* Base hover (simple) */
+.mat-mdc-table tr.mat-mdc-row:hover {
+  background-color: rgba(153, 190, 235, 0.12); /* fallback hover fill */
+}
+
+/* Pseudo-element overlay with rounded outline */
+.mat-mdc-table tr.mat-mdc-row {
+  position: relative; /* ensure the ::after positions correctly */
+}
+.mat-mdc-table tr.mat-mdc-row:hover::after {
+  content: "";
+  position: absolute;
+  inset: 2px;                 /* avoid clipping against edges */
+  border: 1px solid #9097f9;  /* outline color */
+  border-radius: 10px;
+  // background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
+  pointer-events: none;
+  z-index: 1;                 /* above row background */
+}
+
+/* Keep cell content above overlay */
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-cell,
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-footer-cell {
+  position: relative;
+  z-index: 2;
+}
+
+
+
 /* Slim, rounded, modern action button */
 .edit-btn {
   min-width: 28px !important;
@@ -313,21 +370,22 @@ mat-paginator {
   height: 28px !important;
   padding: 0 !important;
   border-radius: 50% !important;
-  background: #e3f2fd !important;
+  background: #7eb8e6 !important;
   box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.09);
   transition:
     background 0.22s cubic-bezier(.4,0,.2,1),
     box-shadow 0.21s cubic-bezier(.4,0,.2,1),
     transform 0.13s cubic-bezier(.4,0,.2,1);
   color: #1976d2 !important;
-  // display: flex;
+  // display: flex !important;            /* enforce flex for Angular 19 */
   align-items: center;
-  justify-content: center !important;
-  outline: none;
+  justify-content: center;
+  outline: none !important;
   border: none !important;
 }
 
-.edit-btn:hover, .edit-btn:focus {
+.edit-btn:hover,
+.edit-btn:focus {
   background: #1976d2 !important;
   color: #fff !important;
   box-shadow: 0 5px 18px -4px #1976d2;
@@ -335,23 +393,24 @@ mat-paginator {
 }
 
 /* Make the edit icon smaller & vertically centered */
-.edit-btn .mat-icon {
+::ng-deep .edit-btn .mat-icon {
   font-size: 18px !important;
   height: 18px !important;
   width: 18px !important;
-  line-height: 9px !important;
+  line-height: 18px !important;
   margin: 0 !important;
 }
 
-/* Slim, rounded, modern icon button for 'view' */
+/* Slim, rounded, modern view button */
 .view-btn {
   width: 32px !important;
   height: 32px !important;
   min-width: 32px !important;
+  padding: 0 !important;
   border-radius: 50% !important;
-  background: #e3f2fd !important;           /* soft blue background */
-  color: #1976d2 !important;                /* deep blue icon */
-  // display: flex;
+  background: #8cc5f1 !important;           /* soft blue */
+  color: #1976d2 !important;
+  // display: flex !important;                /* enforce flex */
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
@@ -361,22 +420,26 @@ mat-paginator {
     box-shadow 0.20s cubic-bezier(.4,0,.2,1),
     transform 0.15s cubic-bezier(.4,0,.2,1);
   margin: 0 2px;
-  outline: none;
+  outline: none !important;
   border: none !important;
 }
 
-.view-btn:hover, .view-btn:focus {
-  background: #1976d2 !important;           /* blue */
-  color: #fff !important;                   /* white icon */
+.view-btn:hover,
+.view-btn:focus {
+  background: #1976d2 !important;
+  color: #fff !important;
   box-shadow: 0 8px 18px -6px #1976d2;
   transform: scale(1.08);
 }
 
-.view-btn .mat-icon {
+::ng-deep .view-btn .mat-icon {
   font-size: 19px !important;
   height: 19px !important;
   width: 19px !important;
-  line-height: 12px !important;
-  margin: -9px;
-  transition: color 0.14s;
+  line-height: 19px !important;
+  margin: 0 !important;
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    padding: 0 12px;
 }

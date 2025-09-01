@@ -164,83 +164,106 @@ mat-form-field {
 
 /* Slim, rounded, modern action button */
 .edit-btn {
-    min-width: 28px !important;
-    width: 28px !important;
-    height: 28px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    background: #e3f2fd !important;
-    box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.09);
-    transition:
-        background 0.22s cubic-bezier(.4, 0, .2, 1),
-        box-shadow 0.21s cubic-bezier(.4, 0, .2, 1),
-        transform 0.13s cubic-bezier(.4, 0, .2, 1);
-    color: #1976d2 !important;
-    // display: flex;
-    align-items: center;
-    justify-content: center !important;
-    outline: none;
-    border: none !important;
+  min-width: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: #7eb8e6 !important;
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.09);
+  transition:
+    background 0.22s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.21s cubic-bezier(.4,0,.2,1),
+    transform 0.13s cubic-bezier(.4,0,.2,1);
+  color: #1976d2 !important;
+  // display: flex !important;            /* enforce flex for Angular 19 */
+  align-items: center;
+  justify-content: center;
+  outline: none !important;
+  border: none !important;
 }
 
 .edit-btn:hover,
 .edit-btn:focus {
-    background: #1976d2 !important;
-    color: #fff !important;
-    box-shadow: 0 5px 18px -4px #1976d2;
-    transform: scale(1.07);
+  background: #1976d2 !important;
+  color: #fff !important;
+  box-shadow: 0 5px 18px -4px #1976d2;
+  transform: scale(1.07);
 }
 
 /* Make the edit icon smaller & vertically centered */
-.edit-btn .mat-icon {
-    font-size: 18px !important;
-    height: 18px !important;
-    width: 18px !important;
-    line-height: 10px !important;
-    margin: 0 !important;
-    color: #b38807 !important;
+::ng-deep .edit-btn .mat-icon {
+  font-size: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  line-height: 18px !important;
+  margin: 0 !important;
 }
 
-
-/* Slim, rounded, modern icon button for 'view' */
+/* Slim, rounded, modern view button */
 .view-btn {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    border-radius: 50% !important;
-    background: #e3f2fd !important;
-    /* soft blue background */
-    color: #1976d2 !important;
-    /* deep blue icon */
-    // display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
-    transition:
-        background 0.19s cubic-bezier(.4, 0, .2, 1),
-        color 0.16s cubic-bezier(.4, 0, .2, 1),
-        box-shadow 0.20s cubic-bezier(.4, 0, .2, 1),
-        transform 0.15s cubic-bezier(.4, 0, .2, 1);
-    margin: 0 2px;
-    outline: none;
-    border: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: #8cc5f1 !important;           /* soft blue */
+  color: #1976d2 !important;
+  // display: flex !important;                /* enforce flex */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
+  transition:
+    background 0.19s cubic-bezier(.4,0,.2,1),
+    color 0.16s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.20s cubic-bezier(.4,0,.2,1),
+    transform 0.15s cubic-bezier(.4,0,.2,1);
+  margin: 0 2px;
+  outline: none !important;
+  border: none !important;
 }
 
 .view-btn:hover,
 .view-btn:focus {
-    background: #1976d2 !important;
-    /* blue */
-    color: #fff !important;
-    /* white icon */
-    box-shadow: 0 8px 18px -6px #1976d2;
-    transform: scale(1.08);
+  background: #1976d2 !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px -6px #1976d2;
+  transform: scale(1.08);
 }
 
-.view-btn .mat-icon {
-    font-size: 19px !important;
-    height: 19px !important;
-    width: 19px !important;
-    line-height: 12px !important;
-    margin: -9px;
-    transition: color 0.14s;
+::ng-deep .view-btn .mat-icon {
+  font-size: 19px !important;
+  height: 19px !important;
+  width: 19px !important;
+  line-height: 19px !important;
+  margin: 0 !important;
+}
+
+
+
+/* Base hover (simple) */
+.mat-mdc-table tr.mat-mdc-row:hover {
+  background-color: rgba(153, 190, 235, 0.12); /* fallback hover fill */
+}
+
+/* Pseudo-element overlay with rounded outline */
+.mat-mdc-table tr.mat-mdc-row {
+  position: relative; /* ensure the ::after positions correctly */
+}
+.mat-mdc-table tr.mat-mdc-row:hover::after {
+  content: "";
+  position: absolute;
+  inset: 2px;                 /* avoid clipping against edges */
+  border: 1px solid #9097f9;  /* outline color */
+  border-radius: 10px;
+  // background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
+  pointer-events: none;
+  z-index: 1;                 /* above row background */
+}
+
+/* Keep cell content above overlay */
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-cell,
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-footer-cell {
+  position: relative;
+  z-index: 2;
 }

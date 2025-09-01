@@ -138,3 +138,35 @@ th.mat-mdc-header-cell {
   box-shadow: 0 6px 28px 0 rgba(60, 130, 240, 0.13) !important;
 }
 
+
+
+// table styles----------------------------------center align
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-footer-cell {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.mat-mdc-table .mat-sort-header-container {
+  justify-content: center;
+}
+
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-footer-cell {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.mat-mdc-table .mat-sort-header-content,
+.mat-mdc-table .mat-sort-header-button {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+table.mat-mdc-table {
+  width: 100%;
+}
