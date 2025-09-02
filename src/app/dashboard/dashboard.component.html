@@ -309,9 +309,8 @@
 
 
                 </div>
-                <div class="card-body p-1 d-flex justify-content-between align-items-center" *ngIf="isChartVisible">
-
-                  <div id="chart2" class="col-lg-6">
+                <div class="card-body p-1 d-flex justify-content-between align-items-center" *ngIf="isChartVisible" style="height: 175px;">
+                  <div id="chart2" class="col-lg-4 mb-3">
                     <apx-chart [series]="secondChartOptions.series" [chart]="secondChartOptions.chart"
                       [plotOptions]="secondChartOptions.plotOptions" [labels]="secondChartOptions.labels"
                       [legend]="{ show: false }" [dataLabels]="{ enabled: true }">
@@ -319,11 +318,17 @@
 
                   </div>
 
-                  <div id="chart3" class="col-lg-6 mb-3">
+                  <div id="chart3" class="col-lg-4 mb-3 ms-3">
                     <apx-chart [series]="thirdChartOptions.series" [chart]="thirdChartOptions.chart"
                       [plotOptions]="thirdChartOptions.plotOptions" [labels]="thirdChartOptions.labels"></apx-chart>
                   </div>
 
+                  <ul class="col-lg-3 mb-4 ms-5">
+                    <li style="color: #2e6c8b;">State Cash</li>
+                    <li style="color: #36b186;">State Kind</li>
+                    <li style="color: #f2a654;">Centre Cash</li>
+                    <li style="color: #d9534f;">Centre Kind</li>
+                  </ul>
                 </div>
 
 
@@ -340,6 +345,13 @@
                                         <span class="visually-hidden">Next</span>
                                     </button> -->
                 <!-- </div> -->
+                 
+                  <ul class="d-flex align-items-center mt-2 ms-5" >
+                    <li style="color: #2e6c8b;">Centre</li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- <li style="color: #f2a654;">Centre</li> -->
+                    <li style="color: #36b186;">State</li>
+                  </ul>
               </div>
             </div>
           </div>
@@ -353,6 +365,10 @@
                     <span class="mb-1 text-capitalize col-lg-6 ">
                       <p class="scheme-not-reported">Scheme Status Report</p>
                     </span>
+
+                    <div class="p-2 full-width">
+                      <button mat-raised-button color="accent" (click)="saveExcel()">Save Excel</button>
+                    </div>
 
                     <mat-form-field class="full-width slim-field mt-2 me-2" appearance="outline">
                       <mat-label>Select Type</mat-label>
@@ -390,7 +406,7 @@
                         <tr>
                           <th scope="col" style="width: 5%;">#</th>
                           <th scope="col" style="width: 60%;">Scheme Name</th>
-                          <th scope="col" style="width: 20%;">Last Reporting Month</th>
+                          <th scope="col" style="width: 20%;">Data Report to State DBT</th>
                           <th scope="col" style="width: 15%;">Push To Bharat DBT</th>
 
                         </tr>

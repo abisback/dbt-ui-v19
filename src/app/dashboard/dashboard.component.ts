@@ -22,6 +22,7 @@ import { DashboardService } from '../service/dashboard.service';
 import { MasterService } from '../service/master.service';
 import { SchemeService } from '../service/scheme.service';
 import { SharedModule } from '../shared/shared.module';
+import * as XLSX from 'xlsx';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -156,8 +157,8 @@ export class DashboardComponent {
     this.secondChartOptions = {
       series: [Number(Number(pieData[0]?.totalCentralShare).toFixed(2)), Number(Number(pieData[0]?.totalStateShare).toFixed(2))],
       chart: {
-        width: 260,
-        height: 230,
+        width: 250,
+        height: 220,
         type: "pie"
       },
       labels: ["Central Share", "State Share"],
@@ -636,5 +637,43 @@ export class DashboardComponent {
      this.GetFundTransferAndExpenditure(0);
       this.schemeListName = this.CopyschemeListName;
    }
+// saveExcel() {
+//   const transformedData = this.notReportedSchemeList.map((item: any, index: number) => ({
+//     'SI. No.': index + 1,
+//     'Scheme Name': `${item.schemeCode} ${item.schemeName}`,
+//     'Data Report to State DBT': `${item.reportingMonthName} ${item.financialYear}`,
+//     'Push To Bharat DBT': item.pushToBharatDBTMonthName || ''  // Fallback if null/undefined
+//   }));
+
+//   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(transformedData);
+//   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+//   XLSX.writeFile(wb, `filtered-department-wise-mis-report-${Date.now()}.xlsx`);
+// }
+saveExcel() {
+  const transformedData = this.notReportedSchemeList.map((item: any, index: number) => ({
+    'SI. No.': index + 1,
+    'Scheme Name': `${item.schemeCode} : ${item.schemeName}`,
+    'Data Report to State DBT': `${item.reportingMonthName} ${item.financialYear}`,
+    'Push To Bharat DBT': item.pushToBharatDBTMonthName || ''
+  }));
+
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(transformedData);
+
+  // Auto-adjust column widths
+  const columnWidths = Object.keys(transformedData[0]).map((key) => {
+    const maxLength = Math.max(
+      key.length,
+      ...transformedData.map((row) => ((row as Record<string, any>)[key] ? (row as Record<string, any>)[key].toString().length : 0))
+    );
+    return { wch: maxLength + 2 }; // +2 for padding
+  });
+  ws['!cols'] = columnWidths;
+
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  XLSX.writeFile(wb, `filtered-department-wise-mis-report-${Date.now()}.xlsx`);
+}
+
 
 }
