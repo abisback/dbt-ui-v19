@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-between mt-4 ms-3 me-3 mb-0">
+  <div class="">
+    <h2 mat-dialog-title>Extended DBT Data</h2>
+  </div>
+  <div class="">
+    <button mat-button class="close-icon" [mat-dialog-close]="true">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="mt-0 ms-5 mb-5 me-5">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="bordered-table">
+      <!-- <ng-container matColumnDef="Sno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>S. No.</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{ element.sno }}
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="departmentName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Department Name
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="beneficiaryCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Beneficiary Count
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.beneficiaryCount }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>View Data</th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <button
+            class="view-btn"
+            mat-flat-button
+            matTooltip="Click to View"
+            (click)="element.isExpanded = !element.isExpanded"
+          >
+            <mat-icon color="primary">visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail" class="mb-5">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="displayedColumns.length"
+        >
+          <div
+            class="row element-detail"
+            [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'"
+          >
+            <table class="inner-table">
+              <thead>
+                <tr>
+                  <th>Scheme Name</th>
+                  <th>Total Beneficiary</th>
+                  <th>Total Expenses</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let scheme of element.schemes">
+                  <td>{{ scheme.name }}</td>
+                  <td>{{ scheme.totalBeneficiary }}</td>
+                  <td>{{ scheme.totalExpenses | currency:'INR':'symbol':'1.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr
+        mat-row
+        [class.demo-row-is-clicked]="clickedRows.has(element)"
+        *matRowDef="let element; columns: displayedColumns"
+        [ngStyle]="getRowStyle(element)"
+        class="element-row"
+        [class.expanded-row]="element.isExpanded"
+      ></tr>
+      <!-- Extra row to show detail content column -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="detail-row"
+      ></tr>
+    </table>
+
+    <mat-paginator
+      #paginator
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+      [length]="totalSize"
+      [pageIndex]="currentPage"
+      (page)="handlePage($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

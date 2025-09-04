@@ -13,7 +13,7 @@ import {
 import { MasterCodeType } from '../../app_enum';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ import { MasterService } from '../service/master.service';
 import { SchemeService } from '../service/scheme.service';
 import { SharedModule } from '../shared/shared.module';
 import * as XLSX from 'xlsx';
+import { ExtendedDbtDataComponent } from './extended-dbt-data/extended-dbt-data.component';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -675,5 +676,23 @@ saveExcel() {
   XLSX.writeFile(wb, `filtered-department-wise-mis-report-${Date.now()}.xlsx`);
 }
 
+  openAddDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.panelClass = 'form-dialog';
+    dialogConfig.width = '60%';
+    dialogConfig.minWidth = '400px';
+    dialogConfig.height = '80%';
 
+
+    const dialogRef = this.dialog.open(ExtendedDbtDataComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(response => {
+      if (response != true) {
+        this.toastr.success(response);
+        // this.loadDataTable();
+      }
+    });
+  }
 }
