@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between ms-4 me-4 mt-2">
 
   <div class="header-row">
     <mat-icon color="primary">new_releases</mat-icon>
@@ -12,8 +12,8 @@
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography">
   <form class="example-form" [formGroup]="schemeForm" (ngSubmit)="onSubmit()">
-    <div class="d-flex gap-3 w-100 mt-3">
-      <mat-form-field class="example-full-width compact-field" appearance="outline">
+    <div class="d-flex gap-3 w-100 mt-0">
+      <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
         <mat-label>Select Department</mat-label>
         <mat-select #deptCode formControlName="deptCode" disableRipple>
           <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
@@ -23,7 +23,7 @@
         <!-- <mat-hint>Please select Department Name</mat-hint> -->
       </mat-form-field>
 
-      <mat-form-field class="example-full-width compact-field" appearance="outline">
+      <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
         <mat-label>Select Scheme type</mat-label>
         <mat-select #schemeType formControlName="schemeType" disableRipple>
           <mat-option *ngFor="let item of schemeTypeList" [value]="item.codeValueId">
@@ -36,7 +36,7 @@
     </div>
     <div class="d-flex gap-3 mt-3">
       <div class="scheme-name">
-        <mat-form-field class="example-full-width slim-field" appearance="outline">
+        <mat-form-field class="example-full-width slim-field slim-field" appearance="outline">
           <mat-label>Scheme Name</mat-label>
           <input matInput #schemeName formControlName="schemeName" placeholder="" required>
           <!-- <mat-hint>Please enter a new scheme name</mat-hint> -->
@@ -45,7 +45,7 @@
       </div>
 
       <div class="transfer-type">
-        <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
           <mat-label>Type of Transfer</mat-label>
           <mat-select #transferType formControlName="transferType" disableRipple>
             <mat-option *ngFor="let item of benefitTypeList" [value]="item.codeValueId">
@@ -94,8 +94,8 @@
     </div>
 
     <!---------------------------------------------------------------------------------->
- <div class="d-flex gap-1 mt-2">
-    <mat-form-field class="example-full-width compact-field" appearance="outline">
+ <div class="d-flex gap-1 mt-2 mb-3">
+    <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
       <mat-label>Progress of scheme specific MIS</mat-label>
       <mat-select #progress formControlName="progress" disableRipple>
         <mat-option *ngFor="let item of progressTypeList" [value]="item.codeValueId">
@@ -114,7 +114,7 @@
             </mat-select>
         </mat-form-field> -->
 
-    <mat-form-field class="example-half-width compact-field" appearance="outline">
+    <mat-form-field class="example-half-width compact-field slim-field" appearance="outline">
       <mat-label>Data Share Type</mat-label>
       <mat-select #onBoarded formControlName="dataShareType" disableRipple>
         <mat-option *ngFor="let item of dataShareType" [value]="item.codeValueId">
@@ -123,7 +123,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="example-half-width compact-field" appearance="outline">
+    <mat-form-field class="example-half-width compact-field slim-field" appearance="outline">
       <mat-label>Whether scheme API integrated with State DBT Portal</mat-label>
       <mat-select #misIntegrated formControlName="apiIntegrated" disableRipple>
         <mat-option *ngFor="let item of decisionTypeList" [value]="item.codeValueId">

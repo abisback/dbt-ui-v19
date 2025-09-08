@@ -55,7 +55,7 @@ export class UserComponent {
 
   }
   searchForm: FormGroup = new FormGroup({
-    searchString: new FormControl("", Validators.required),
+    searchString: new FormControl(""),
     roleCode: new FormControl("", Validators.required),
     deptCode: new FormControl("", Validators.required),
   });

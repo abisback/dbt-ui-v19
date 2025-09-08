@@ -1,4 +1,4 @@
-.example-container .mat-form-field + .mat-form-field {
+.example-container .mat-mdc-form-field + .mat-mdc-form-field {
     margin-left: 8px;
 }
 .example-form {
@@ -14,17 +14,17 @@
 #form-button-msg{
   color: red;
 }
-.mat-form-field {
+.mat-mdc-form-field {
   margin-bottom: 10px;
 }
-.form-dialog .mat-dialog-container {
+.form-dialog .mat-mdc-dialog-container {
   background: #eef7ff;
   border: 1px solid #438bad;
 }
-.mat-dialog-title {
+.mat-mdc-dialog-title {
   color: #2e6c8b;
 }
-.mat-dialog-content{
+.mat-mdc-dialog-content{
   height: 90%;
   max-height: max-content;
   //overflow-y: hidden;
@@ -39,7 +39,7 @@
   max-width: 100%;
   max-height: 94%;
 }
-.mat-dialog-container#mat-dialog-1 {
+.mat-mdc-dialog-container#mat-dialog-1 {
   height: 90%;
 }
 .mat-form-field-label {
@@ -80,25 +80,25 @@
 
 
 
-// ::ng-deep .mat-form-field.slim-field {
-//   font-size: 13px;
-//   height: 36px;
-//   --mat-form-field-container-height: 36px; /* Material v16+ support */
-// }
+::ng-deep .mat-mdc-form-field.slim-field {
+  font-size: 13px;
+  height: 30px;
+  --mat-mdc-form-field-container-height: 30px; /* Material v16+ support */
+}
 
-// ::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
-//   padding: 5px 0; /* minimal vertical padding */
-//   border-top: 0;
+::ng-deep .mat-mdc-form-field.slim-field .mat-mdc-form-field-infix {
+  padding: 5px 0; /* minimal vertical padding */
+  border-top: 0;
 
-// }
+}
 
-// ::ng-deep .mat-form-field.slim-field input.mat-input-element {
-//   height: 24px;
-//   line-height: 24px;
-//   padding: 0 6px;
-//   font-size: 13px;
-//   color: #000000;
-// }
+::ng-deep .mat-mdc-form-field.slim-field input.mat-mdc-input-element {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 6px;
+  font-size: 13px;
+  color: #000000;
+}
 
 // ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
 //   padding: 2px .75em 0 .75em !important;
@@ -164,20 +164,20 @@
   min-width: 220px;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   background: #fff !important;
   border-radius: 8px !important;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-outline {
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
   color: #90caf9;
 }
 
-.mat-input-element {
+.mat-mdc-input-element {
   font-size: 15px;
 }
 
-.mat-hint, .mat-error {
+.mat-mdc-hint, .mat-mdc-error {
   font-size: 12px;
 }
 
@@ -208,3 +208,13 @@ button[mat-raised-button]:hover {
 }
 
 
+mat-label,
+mat-option,
+mat-select, td {
+  font-size: 13px;
+}
+
+h2,
+mat-label {
+  color: #2e6ca9 !important;
+}

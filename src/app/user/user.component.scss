@@ -606,8 +606,14 @@ table.mat-mdc-table {
   z-index: 2;
 }
 
-
-
-
+.mat-mdc-form-field input {
+  font-size: 13px;
+}
+mat-label,
+mat-option,
+mat-select,
+td {
+  font-size: 13px;
+}
 
 

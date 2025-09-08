@@ -71,10 +71,7 @@ mat-form-field {
   color: #ffffff;
 }
 
-
-
 // //----------------------------
-
 
 /* Style the odd and even rows differently for better readability */
 // .mat-row:nth-child(even) {
@@ -85,7 +82,6 @@ mat-form-field {
 // .mat-row:nth-child(odd) {
 //   background-color: #ffffff;
 // }
-
 
 /* Style the header cells */
 // .mat-header-cell {
@@ -125,7 +121,6 @@ mat-form-field {
 //   margin-bottom: 8px;
 // }
 
-
 .custom-field {
   background-color: white;
   border-radius: 8px;
@@ -133,7 +128,6 @@ mat-form-field {
   height: 54px;
   margin-top: 8px;
 }
-
 
 // ::ng-deep .mat-form-field.slim-field {
 //   font-size: 13px;
@@ -192,11 +186,6 @@ mat-form-field {
   // margin-bottom: 10px;
 }
 
-
-
-
-
-
 // /* Center align ALL headers and cells */
 // .mat-header-cell, .mat-cell {
 //   justify-content: center !important;
@@ -245,7 +234,9 @@ mat-form-field {
 }
 
 /* Action cell and toggle group align center */
-.action-link, td > mat-button-toggle-group, td > *:not(.mat-cell):not(.mat-header-cell) {
+.action-link,
+td > mat-button-toggle-group,
+td > *:not(.mat-cell):not(.mat-header-cell) {
   // display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -280,15 +271,13 @@ mat-paginator {
   align-items: center !important;
 }
 
-
-
 /* --- Attractive, pill-style toggle group styling --- */
 .toggle-status {
   display: inline-flex !important;
   background: #e3f2fd !important;
   border-radius: 24px !important;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(30,136,229,0.04);
+  box-shadow: 0 1px 4px rgba(30, 136, 229, 0.04);
 }
 
 .toggle-btn {
@@ -312,14 +301,12 @@ mat-paginator {
   border-radius: 20px !important;
   box-shadow: none !important;
 }
-::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+::ng-deep
+  .mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content {
   line-height: 34px !important;
   font-size: 11px !important;
 }
-
-
-
-
 
 //------------------------------
 
@@ -331,8 +318,9 @@ mat-paginator {
   color: #ffffff;
 }
 
-
-.toggle-status .mat-mdc-button-toggle-checked .mdc-button__icon { display: none; }
+.toggle-status .mat-mdc-button-toggle-checked .mdc-button__icon {
+  display: none;
+}
 
 /* Base hover (simple) */
 .mat-mdc-table tr.mat-mdc-row:hover {
@@ -346,12 +334,12 @@ mat-paginator {
 .mat-mdc-table tr.mat-mdc-row:hover::after {
   content: "";
   position: absolute;
-  inset: 2px;                 /* avoid clipping against edges */
-  border: 1px solid #9097f9;  /* outline color */
+  inset: 2px; /* avoid clipping against edges */
+  border: 1px solid #9097f9; /* outline color */
   border-radius: 10px;
   // background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
   pointer-events: none;
-  z-index: 1;                 /* above row background */
+  z-index: 1; /* above row background */
 }
 
 /* Keep cell content above overlay */
@@ -360,8 +348,6 @@ mat-paginator {
   position: relative;
   z-index: 2;
 }
-
-
 
 /* Slim, rounded, modern action button */
 .edit-btn {
@@ -372,10 +358,9 @@ mat-paginator {
   border-radius: 50% !important;
   background: #7eb8e6 !important;
   box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.09);
-  transition:
-    background 0.22s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.21s cubic-bezier(.4,0,.2,1),
-    transform 0.13s cubic-bezier(.4,0,.2,1);
+  transition: background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.21s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
   color: #1976d2 !important;
   // display: flex !important;            /* enforce flex for Angular 19 */
   align-items: center;
@@ -408,17 +393,16 @@ mat-paginator {
   min-width: 32px !important;
   padding: 0 !important;
   border-radius: 50% !important;
-  background: #8cc5f1 !important;           /* soft blue */
+  background: #8cc5f1 !important; /* soft blue */
   color: #1976d2 !important;
   // display: flex !important;                /* enforce flex */
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
-  transition:
-    background 0.19s cubic-bezier(.4,0,.2,1),
-    color 0.16s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.20s cubic-bezier(.4,0,.2,1),
-    transform 0.15s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.1);
+  transition: background 0.19s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.16s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0 2px;
   outline: none !important;
   border: none !important;
@@ -440,6 +424,19 @@ mat-paginator {
   margin: 0 !important;
 }
 
-.mdc-data-table__cell, .mdc-data-table__header-cell {
-    padding: 0 12px;
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  padding: 0 12px;
+}
+mat-label {
+  color: #2e6ca9 !important;
+}
+mat-label,
+mat-option,
+mat-select,
+td {
+  font-size: 13px;
+}
+.mat-mdc-form-field input {
+  font-size: 13px;
 }

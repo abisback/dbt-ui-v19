@@ -192,7 +192,7 @@
           <mat-error *ngIf="userForm.controls['userId'].invalid">System not accepting user Id entered. Please change the user Id.</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="flex-1">
+        <mat-form-field appearance="outline" class="flex-1 slim-field mt-2">
           <mat-label>Salutation</mat-label>
           <mat-select formControlName="salutation" required>
             <mat-option *ngFor="let item of salutationList" [value]="item.codeValueId">
@@ -242,7 +242,7 @@
 
 
       <div class="form-row">
-        <mat-form-field appearance="outline" class="flex-1">
+        <mat-form-field appearance="outline" class="flex-1  slim-field">
           <mat-label>User Role</mat-label>
           <mat-select formControlName="role" required (selectionChange)="RoleChange($event)">
             <mat-option *ngFor="let item of userRoleList" [value]="item.userRole">
@@ -252,7 +252,7 @@
           <mat-hint>Choose Role</mat-hint>
         </mat-form-field>
         <ng-container *ngIf="showDepartmentList">
-          <mat-form-field appearance="outline" class="flex-1">
+          <mat-form-field appearance="outline" class="flex-1 slim-field">
             <mat-label>Department</mat-label>
             <mat-select formControlName="deptCode" required (selectionChange)="DepartmentChange($event)">
               <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
@@ -262,7 +262,7 @@
           </mat-form-field>
         </ng-container>
         <ng-container *ngIf="showSchemeList">
-          <mat-form-field appearance="outline" class="flex-1">
+          <mat-form-field appearance="outline" class="flex-1  slim-field">
             <mat-label>Scheme</mat-label>
             <mat-select formControlName="SchemeType" multiple required (selectionChange)="SchemeChange($event)">
               <mat-option *ngFor="let item of schemeList" [value]="item.id">
@@ -275,7 +275,7 @@
     </div>
 
     <mat-divider></mat-divider>
-    <div class="form-actions">
+    <div class="form-actions mb-2">
       <button mat-raised-button color="primary mb-2" type="submit" [disabled]="!userForm.valid">Register User</button>
       <span *ngIf="!userForm.valid" class="form-note">(<b>N.B.</b> Button will be enabled once validation passes)</span>
     </div>
