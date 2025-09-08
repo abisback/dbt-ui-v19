@@ -8,7 +8,7 @@
           <h2 matSubheader>Dashboard</h2>
         </a>
       </li>
-      <li *ngIf="IsStateLevel && IsStateNodal">
+      <li *ngIf="IsNotOperator">
         <a data-bs-toggle="collapse" href="#menu_list-4" role="button" aria-expanded="false"
           aria-controls="collapseExample" class="menu_list_main">
           <h2 matSubheader *ngIf="IsNotOperator">Master Data</h2> <mat-icon
