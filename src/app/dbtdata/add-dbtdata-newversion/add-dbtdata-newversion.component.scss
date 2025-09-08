@@ -1,51 +1,51 @@
-.example-container .mat-form-field+.mat-form-field {
-    margin-left: 8px;
-  }
+.example-container .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
 
-  .example-form {
-    min-width: 500px;
-    width: 100%;
-    height: fit-content;
-  }
+.example-form {
+  min-width: 500px;
+  width: 100%;
+  height: fit-content;
+}
 
-  .example-full-width {
-    width: 100%;
-  }
+.example-full-width {
+  width: 100%;
+}
 
-  .example-half-width {
-    width: 50%;
-  }
+.example-half-width {
+  width: 50%;
+}
 
-  #form-button-msg {
-    color: red;
-  }
+#form-button-msg {
+  color: red;
+}
 
-  .mat-label {
-    font-size: large;
-    font-weight: bold;
-  }
+.mat-mdc-label {
+  font-size: large;
+  font-weight: bold;
+}
 
-  .mat-dialog-content {
-    height: 95%;
-    max-height: max-content;
-    //overflow-y: hidden;
-    overflow-x: hidden;
-  }
+.mat-mdc-dialog-content {
+  height: 95%;
+  max-height: max-content;
+  //overflow-y: hidden;
+  overflow-x: hidden;
+}
 
-  .cdk-overlay-pane.my-dialog {
-    position: relative !important;
-  }
+.cdk-overlay-pane.my-dialog {
+  position: relative !important;
+}
 
-  // .close-icon.mat-button {
-  //   position: absolute;
-  //   top: 0;
-  //   right: 20%;
-  //   padding: 5px;
-  //   line-height: 14px;
-  //   min-width: auto;
-  // }
+// .close-icon.mat-button {
+//   position: absolute;
+//   top: 0;
+//   right: 20%;
+//   padding: 5px;
+//   line-height: 14px;
+//   min-width: auto;
+// }
 
-  .close-icon {
+.close-icon {
   // position: absolute;
   // top: 12px;
   right: 14px;
@@ -54,32 +54,29 @@
   border-radius: 25px;
 }
 
-  table {
-    width: 100%;
-  }
-
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-
-
-
-  /* Place in global styles.css for best effect */
-//---select field
-::ng-deep .mat-form-field.compact-field {
-  font-size: 13px;
-  height: 36px;
-  --mat-form-field-container-height: 36px; /* Material v16+ support */
+table {
+  width: 100%;
 }
 
-::ng-deep .mat-form-field.compact-field .mat-form-field-infix {
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Place in global styles.css for best effect */
+//---select field
+::ng-deep .mat-mdc-form-field.compact-field {
+  font-size: 13px;
+  height: 40px;
+  --mat-form-field-container-height: 30px; /* Material v16+ support */
+}
+
+::ng-deep .mat-mdc-form-field.compact-field .mat-mdc-form-field-infix {
   padding: 10px 0; /* minimal vertical padding */
   border-top: 0;
-
 }
 
-::ng-deep .mat-form-field.compact-field input.mat-input-element {
+::ng-deep .mat-mdc-form-field.compact-field input.mat-mdc-input-element {
   height: 30px;
   line-height: 24px;
   padding: 0 6px;
@@ -87,22 +84,20 @@
   color: #000000;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 2px .75em 0 .75em !important;
+::ng-deep .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-flex {
+  padding: 2px 0.75em 0 0.75em !important;
 }
-
 
 //--auto-complete------
-::ng-deep .mat-form-field.slim-field {
+::ng-deep .mat-mdc-form-field.slim-field {
   font-size: 13px;
-  height: 36px;
-  --mat-form-field-container-height: 36px; /* Material v16+ support */
+  height: 30px;
+  --mat-form-field-container-height: 30px; /* Material v16+ support */
 }
 
-::ng-deep .mat-form-field.slim-field .mat-form-field-infix {
+::ng-deep .mat-mdc-form-field.slim-field .mat-mdc-form-field-infix {
   padding: 5px 0; /* minimal vertical padding */
   border-top: 0;
-
 }
 
 ::ng-deep .mat-form-field.slim-field input.mat-input-element {
@@ -113,20 +108,26 @@
   color: #000000;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 2px .75em 0 .75em !important;
+::ng-deep .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-flex {
+  padding: 2px 0.75em 0 0.75em !important;
 }
-::ng-deep .mat-dialog-content{
+::ng-deep .mat-mdc-dialog-content {
   overflow: none !important;
 }
 
-
-
-
-
-
-.table-head{
+.table-head {
   background: #cfcfcf;
   color: #000000;
 }
-
+h2,
+mat-label {
+  color: #2e6ca9 !important;
+}
+mat-label,
+mat-option,
+mat-select, td {
+  font-size: 13px;
+}
+.mdc-list-item__primary-text {
+  font-size: 13px;
+}

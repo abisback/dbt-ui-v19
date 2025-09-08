@@ -1,8 +1,8 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between align-item-center pt-3 ps-2 pe-3 mb-0 pb-0">
   <div class="">
     <h2 mat-dialog-title>Upload DBT data</h2>
   </div>
-    <div class="">
+    <div class="pt-3">
     <button mat-button class="close-icon" [mat-dialog-close]="true">
       <mat-icon>close</mat-icon>
     </button>
@@ -11,9 +11,9 @@
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography">
   <form class="example-form" [formGroup]="dbtDataForm">
-    <div class="row d-flex mt-3">
+    <div class="row d-flex mt-0">
       <div class="col-md-4">
-        <mat-form-field class="example-full-width compact-field" appearance="outline" >
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline" >
           <mat-label>Select Department</mat-label>
           <mat-select #deptCode formControlName="deptCode" disableRipple (selectionChange)="onDepartmentChange($event)">
             <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
@@ -25,7 +25,7 @@
       </div>
       <!-- <div class="col-md-7"></div> -->
       <div class="col-md-4">
-        <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
           <mat-label>Level of Data Upload</mat-label>
           <mat-select #entryLevel formControlName="entryLevel" disableRipple
             (selectionChange)="onDataUploadLevelChange($event)" matTooltip="(Select District Name if entry is at District level)">
@@ -37,7 +37,7 @@
       </div>
       <!-- <div class="col-md-1"></div> -->
       <div class="col-md-4">
-        <mat-form-field class="example-full-width" appearance="outline" *ngIf="showDistrictDropDown">
+        <mat-form-field class="example-full-width slim-field" appearance="outline" *ngIf="showDistrictDropDown">
           <mat-label>Select District</mat-label>
           <mat-select #districtCode formControlName="districtCode" disableRipple>
             <mat-option *ngFor="let item of districtList" [value]="item.districtCode">
@@ -68,7 +68,7 @@
       </div>
       <!-- <div class="col-md-7"></div> -->
       <div class=" col-md-4" *ngIf="isSchemeFound">
-        <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
           <mat-label>Select Financial year</mat-label>
           <mat-select #finYrCode formControlName="finYrCode" disableRipple>
             <mat-option [value]="financialYear.codeValueId.trim()">
@@ -80,7 +80,7 @@
 
       <!-- <div class="col-md-1" *ngIf="isSchemeFound"></div> -->
       <div class=" col-md-4" *ngIf="isSchemeFound">
-        <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
           <mat-label>Reporting Month</mat-label>
           <mat-select #reportingMonth formControlName="reportingMonth" disableRipple
             (selectionChange)="onMonthChange($event)">
@@ -365,7 +365,7 @@
 
     <div class="row d-flex">
       <div class="col-md-6">
-        <mat-form-field class="example-full-width compact-field" appearance="outline">
+        <mat-form-field class="example-full-width compact-field slim-field" appearance="outline">
           <mat-label>Benefit Type</mat-label>
           <mat-select #benefitType formControlName="benefitType" required disableRipple
             (selectionChange)="onBenefitTypeChange($event)">
@@ -394,14 +394,14 @@
     </div> -->
     <!----------------------------------------------------------------------------------->
 
-    <div class="row mt-3">
+    <div class="row mt-3 mb-3">
       <div class="col-md-12"    *ngIf="showCashTypeField">
         <mat-card-subtitle><b>Funds Transferred (Cash Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
         <mat-divider></mat-divider>
       </div>
 
       <div class="col-md-5" *ngIf="showCashTypeField">
-        <mat-form-field class="example-full-width slim-field mt-3" appearance="outline">
+        <mat-form-field class="example-full-width slim-field mt-3 slim-field" appearance="outline">
           <mat-label>Total Funds Transferred</mat-label>
           <input  matInput #fundTrnsferCash formControlName="fundTrnsferCash" (keypress)="validateNumberInput($event)" placeholder="" required>
           <mat-error *ngIf="!dbtDataForm.controls['fundTrnsferCash']?.valid">Please Enter Funds
@@ -593,7 +593,7 @@
       </div>
 
 
-      <div class="col-md-12" *ngIf="isSchemeFound">
+      <div class="col-md-12 mb-2" *ngIf="isSchemeFound">
         <br />
         <mat-card-subtitle><b>Remarks</b></mat-card-subtitle>
         <mat-divider></mat-divider>
