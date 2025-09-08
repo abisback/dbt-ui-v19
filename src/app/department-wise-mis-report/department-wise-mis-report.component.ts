@@ -151,7 +151,6 @@ export class DepartmentWiseMisReportComponent {
           // this.iterator();
           this.tableflag = true;
           setTimeout(() => {
-            debugger
             if (this.paginator) {
               this.dataSource.paginator = this.paginator;
               this.paginator.firstPage();
