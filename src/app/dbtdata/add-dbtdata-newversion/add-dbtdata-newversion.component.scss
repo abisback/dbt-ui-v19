@@ -131,3 +131,7 @@ mat-select, td {
 .mdc-list-item__primary-text {
   font-size: 13px;
 }
+.mat-mdc-raised-button {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
+}
