@@ -17,21 +17,51 @@ import * as XLSX from 'xlsx';
   selector: 'app-department-wise-mis-report',
   imports: [SharedModule],
   templateUrl: './department-wise-mis-report.component.html',
-  styleUrl: './department-wise-mis-report.component.scss'
+  styleUrl: './department-wise-mis-report.component.scss',
 })
 export class DepartmentWiseMisReportComponent {
-
-
   dbtDataForm = new FormGroup({
     deptCode: new FormControl(),
     monthId: new FormControl(),
-  })
-
-
+  });
 
   loadingFlag: boolean = false;
-  displayedColumns: string[] = ['SerialNo', 'SchemeName', 'FinancialYear', 'Month', 'no_of_state_central', 'no_of_state', 'TotalBen', 'TotalBenDigitized', 'BenAadharSeeded', 'MobileCaptured', 'central_share', 'state_share', 'add_state_contribution', 'state_contribution_for_additional', 'FundTrnsferCash', 'aa', 'ab', 'ac', 'ad', 'ae', 'notrnscashelectronic', 'amnttrnscashelectronic', 'notrnscashother', 'amnttrnscashother', 'unitkind', 'qtytransferedkind', 'aadhartranskind', 'cd', 'nodeduplicated', 'noghost', 'othersavings', 'savingamnt'];
-  dataSource: MatTableDataSource<misMonthWiseReportDtls> = new MatTableDataSource<misMonthWiseReportDtls>([]);
+  displayedColumns: string[] = [
+    'SerialNo',
+    'SchemeName',
+    'FinancialYear',
+    'Month',
+    'no_of_state_central',
+    'no_of_state',
+    'TotalBen',
+    'TotalBenDigitized',
+    'BenAadharSeeded',
+    'MobileCaptured',
+    'central_share',
+    'state_share',
+    'add_state_contribution',
+    'state_contribution_for_additional',
+    'FundTrnsferCash',
+    'aa',
+    'ab',
+    'ac',
+    'ad',
+    'ae',
+    'notrnscashelectronic',
+    'amnttrnscashelectronic',
+    'notrnscashother',
+    'amnttrnscashother',
+    'unitkind',
+    'qtytransferedkind',
+    'aadhartranskind',
+    'cd',
+    'nodeduplicated',
+    'noghost',
+    'othersavings',
+    'savingamnt',
+  ];
+  dataSource: MatTableDataSource<misMonthWiseReportDtls> =
+    new MatTableDataSource<misMonthWiseReportDtls>([]);
   schemeCode: any;
   currentPage: number = 0;
   pageSize: number = 5;
@@ -60,11 +90,15 @@ export class DepartmentWiseMisReportComponent {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('TABLE') table: ElementRef | undefined;
   dialogRef: any;
-  constructor(private toastr: ToastrService, private dbtDataService: DbtdataService, private departmentService: DepartmentService, private monthService: MonthService) { }
+  constructor(
+    private toastr: ToastrService,
+    private dbtDataService: DbtdataService,
+    private departmentService: DepartmentService,
+    private monthService: MonthService
+  ) {}
 
   ngOnInit(): void {
-
-    this.departmentService.getDepartments().subscribe(x => {
+    this.departmentService.getDepartments().subscribe((x) => {
       // Create a complete Department object for 'ALL'
       const allDept: Department = {
         deptCode: 0,
@@ -78,100 +112,144 @@ export class DepartmentWiseMisReportComponent {
         isactive: true,
         createdOn: '',
         modifiedOn: '',
-        modifiedBy: ''
+        modifiedBy: '',
       };
       this.copyDepartmentList = this.departmentList = [allDept, ...x];
     });
-    this.monthService.getMonths().subscribe(x => {
-      this.monthList = [{
-        monthId: 0,
-        monthName: 'ALL',
-        monthCode: '',
-        lastDay: 0,
-        orderSeq: 0,
-        isActive: true,
-      }, ...x];
+    this.monthService.getMonths().subscribe((x) => {
+      this.monthList = [
+        {
+          monthId: 0,
+          monthName: 'ALL',
+          monthCode: '',
+          lastDay: 0,
+          orderSeq: 0,
+          isActive: true,
+        },
+        ...x,
+      ];
     });
-
   }
 
   onSubmit() {
-
-    this.deptindex = this.departmentList.findIndex(x => x.deptCode === this.dbtDataForm.value['deptCode']);
+    this.deptindex = this.departmentList.findIndex(
+      (x) => x.deptCode === this.dbtDataForm.value['deptCode']
+    );
     this.deptname = this.departmentList[this.deptindex].name;
-    this.monthindex = this.monthList.findIndex(x => x.monthId === this.dbtDataForm.value['monthId']);
+    this.monthindex = this.monthList.findIndex(
+      (x) => x.monthId === this.dbtDataForm.value['monthId']
+    );
     this.monthname = this.monthList[this.monthindex].monthName;
     // console.log(this.dbtDataForm.value['deptCode']);
     // console.log(this.dbtDataForm.value['monthId']);
-    if (this.dbtDataForm.value['deptCode'] != null && this.dbtDataForm.value['monthId'] != null) {
+    if (
+      this.dbtDataForm.value['deptCode'] != null &&
+      this.dbtDataForm.value['monthId'] != null
+    ) {
       this.loadingFlag = true;
       this.DeptCode = this.dbtDataForm.value['deptCode'];
       this.MonthId = this.dbtDataForm.value['monthId'];
-      this.dbtDataService.GetDepartmentWiseMisReport(this.dbtDataForm.value['deptCode'], this.dbtDataForm.value['monthId'], 0, 0).subscribe(x => {
+      this.dbtDataService
+        .GetDepartmentWiseMisReport(
+          this.dbtDataForm.value['deptCode'],
+          this.dbtDataForm.value['monthId'],
+          0,
+          0
+        )
+        .subscribe((x) => {
+          if (x.result.data.length > 0) {
+            this.loadingFlag = false;
+            this.dataSource = new MatTableDataSource<misMonthWiseReportDtls>(
+              x.result.data
+            );
+            this.dataSource.sortingDataAccessor = (
+              item: any,
+              property: string
+            ) => {
+              const toNumber = (val: any): number => {
+                const n = Number(val);
+                return isNaN(n) ? 0 : n;
+              };
+              const monthToIndex = (m: any): number => {
+                const s = (m ?? '').toString().trim().toLowerCase();
+                const months = [
+                  'jan',
+                  'feb',
+                  'mar',
+                  'apr',
+                  'may',
+                  'jun',
+                  'jul',
+                  'aug',
+                  'sep',
+                  'oct',
+                  'nov',
+                  'dec',
+                ];
+                const idx = months.findIndex((abbr) => s.startsWith(abbr));
+                return idx === -1 ? 13 : idx + 1; // place unknowns at bottom
+              };
 
-        if (x.result.data.length > 0) {
-          this.loadingFlag = false;
-          this.dataSource = new MatTableDataSource<misMonthWiseReportDtls>(x.result.data);
-          this.dataSource.sortingDataAccessor = (item: any, property: string) => {
-            const toNumber = (val: any): number => {
-              const n = Number(val);
-              return isNaN(n) ? 0 : n;
+              switch (property) {
+                case 'SchemeName':
+                  return (item.schemename ?? '').toString().toLowerCase();
+                case 'FinancialYear':
+                  return toNumber(item.fin_year);
+                case 'Month':
+                  return monthToIndex(
+                    item.month ?? item.monthname ?? item.reportingMonthName
+                  );
+                case 'TotalBen':
+                  return toNumber(item.totalben ?? item.TotalBen);
+                case 'TotalBenDigitized':
+                  return toNumber(
+                    item.totalbendigitized ?? item.TotalBenDigitized
+                  );
+                case 'BenAadharSeeded':
+                  return toNumber(item.benaadharseeded ?? item.BenAadharSeeded);
+                case 'MobileCaptured':
+                  return toNumber(item.mobilecaptured ?? item.MobileCaptured);
+                case 'FundTrnsferCash':
+                  return toNumber(item.fundtrnsfercash ?? item.FundTrnsferCash);
+                case 'aa':
+                  return toNumber(item.central_share);
+                case 'ab':
+                  return toNumber(item.state_share);
+                case 'ac':
+                  return toNumber(item.add_state_contribution);
+                case 'ad':
+                  return toNumber(item.state_contribution_for_additional);
+                case 'ae':
+                  return toNumber(item.fundtrnsfercash ?? item.FundTrnsferCash);
+                default:
+                  return item[property];
+              }
             };
-            const monthToIndex = (m: any): number => {
-              const s = (m ?? '').toString().trim().toLowerCase();
-              const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-              const idx = months.findIndex(abbr => s.startsWith(abbr));
-              return idx === -1 ? 13 : idx + 1; // place unknowns at bottom
-            };
+            // this.dataSource.paginator = this.paginator;
+            this.array = x.result.data;
+            this.totalSize = this.array.length;
+            this.currentPage = 0;
+            //console.log(this.dataSource.filteredData);
+            //console.log(this.departmentList)
 
-            switch (property) {
-              case 'SchemeName': return (item.schemename ?? '').toString().toLowerCase();
-              case 'FinancialYear': return toNumber(item.fin_year);
-              case 'Month': return monthToIndex(item.month ?? item.monthname ?? item.reportingMonthName);
-              case 'TotalBen': return toNumber(item.totalben ?? item.TotalBen);
-              case 'TotalBenDigitized': return toNumber(item.totalbendigitized ?? item.TotalBenDigitized);
-              case 'BenAadharSeeded': return toNumber(item.benaadharseeded ?? item.BenAadharSeeded);
-              case 'MobileCaptured': return toNumber(item.mobilecaptured ?? item.MobileCaptured);
-              case 'FundTrnsferCash': return toNumber(item.fundtrnsfercash ?? item.FundTrnsferCash);
-              case 'aa': return toNumber(item.central_share);
-              case 'ab': return toNumber(item.state_share);
-              case 'ac': return toNumber(item.add_state_contribution);
-              case 'ad': return toNumber(item.state_contribution_for_additional);
-              case 'ae': return toNumber(item.fundtrnsfercash ?? item.FundTrnsferCash);
-              default: return item[property];
-            }
-          };
-          // this.dataSource.paginator = this.paginator;
-          this.array = x.result.data;
-          this.totalSize = this.array.length;
-          this.currentPage = 0;
-          //console.log(this.dataSource.filteredData);
-          //console.log(this.departmentList)
-
-          // this.iterator();
-          this.tableflag = true;
-          setTimeout(() => {
-            if (this.paginator) {
-              this.dataSource.paginator = this.paginator;
-              this.paginator.firstPage();
-            }
-            if (this.sort) {
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
-            }
-          });
-        }
-        else {
-          this.tableflag = false;
-          this.toastr.error('Data Not Found')
-          //alert('ffffffff');
-        }
-
-      });
-
+            // this.iterator();
+            this.tableflag = true;
+            setTimeout(() => {
+              if (this.paginator) {
+                this.dataSource.paginator = this.paginator;
+                this.paginator.firstPage();
+              }
+              if (this.sort) {
+                this.dataSource.sort = this.sort;
+              }
+            });
+          } else {
+            this.tableflag = false;
+            this.toastr.error('Data Not Found');
+            //alert('ffffffff');
+          }
+        });
     }
-
-
   }
 
   public handlePage(e: any) {
@@ -187,16 +265,23 @@ export class DepartmentWiseMisReportComponent {
   }
 
   public saveToExcel() {
-
-    this.dbtDataService.GetDepartmentWiseMisReport(this.dbtDataForm.value.deptCode, this.dbtDataForm.value.monthId, this.currentPage + 1, this.pageSize /*this.DeptCode, this.MonthId*/).subscribe(x => {
-
-      let dataToExport = x.result.data;
-      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, 'all-department-wise-mis-report' + Date().valueOf() + '.xlsx');
-
-    });
+    this.dbtDataService
+      .GetDepartmentWiseMisReport(
+        this.dbtDataForm.value.deptCode,
+        this.dbtDataForm.value.monthId,
+        this.currentPage + 1,
+        this.pageSize /*this.DeptCode, this.MonthId*/
+      )
+      .subscribe((x) => {
+        let dataToExport = x.result.data;
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(
+          wb,
+          'all-department-wise-mis-report' + Date().valueOf() + '.xlsx'
+        );
+      });
 
     // const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataSource);
     // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table?.nativeElement);
@@ -204,16 +289,28 @@ export class DepartmentWiseMisReportComponent {
     // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     // XLSX.writeFile(wb, 'department-wise-mis-report' + Date().valueOf() + '.xlsx');
   }
+  saveFilterExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+      this.dataSource.filteredData
+    );
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(
+      wb,
+      'filtered-department-wise-mis-report' + Date().valueOf() + '.xlsx'
+    );
+  }
 
   public exportAllToExcel() {
-    this.dbtDataService.GetAllDepartmentWiseMisReport().subscribe(x => {
-
+    this.dbtDataService.GetAllDepartmentWiseMisReport().subscribe((x) => {
       let dataToExport = x.data;
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, 'all-department-wise-mis-report' + Date().valueOf() + '.xlsx');
-
+      XLSX.writeFile(
+        wb,
+        'all-department-wise-mis-report' + Date().valueOf() + '.xlsx'
+      );
     });
   }
 
@@ -227,8 +324,10 @@ export class DepartmentWiseMisReportComponent {
         if (term.length > 0) {
           const lowerTerm = String(term).toLowerCase();
           this.departmentList = this.copyDepartmentList?.filter((data: any) => {
-            return String(data.name).toLowerCase().indexOf(lowerTerm) >= 0 ||
-              String(data.code).toLowerCase().indexOf(lowerTerm) >= 0;
+            return (
+              String(data.name).toLowerCase().indexOf(lowerTerm) >= 0 ||
+              String(data.code).toLowerCase().indexOf(lowerTerm) >= 0
+            );
           });
         }
       } else {

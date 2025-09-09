@@ -4,7 +4,7 @@
     <p class="title">Department Wise Mis Report</p>
     <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()">
       <div class="d-flex flex-row">
-        <div class="p-2 col-md-4">
+        <div class="p-2 col-md-3">
           <mat-form-field class="example-full-width slim-field" appearance="outline">
             <mat-label>Select Department</mat-label>
             <mat-icon matSuffix>arrow_drop_down</mat-icon>
@@ -21,7 +21,7 @@
             <!-- <mat-hint>Please Select Department</mat-hint> -->
           </mat-form-field>
         </div>
-        <div class="p-2 col-md-4">
+        <div class="p-2 col-md-3">
           <mat-form-field class="example-full-width slim-field" appearance="outline">
             <mat-label>Select Month</mat-label>
             <mat-select #schemeCode formControlName="monthId" disableRipple>
@@ -39,6 +39,9 @@
           </div>
           <div class="p-2" *ngIf="tableflag">
             <button mat-raised-button color="accent" (click)="saveToExcel()">Save Excel</button>
+          </div>
+          <div class="p-2" *ngIf="tableflag">
+            <button mat-raised-button color="accent" (click)="saveFilterExcel()">Save Filter Excel</button>
           </div>
           <div class="p-2" *ngIf="tableflag">
             <button mat-raised-button color="accent" (click)="exportAllToExcel()">Download all</button>
