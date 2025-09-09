@@ -19,6 +19,7 @@ import { environment } from '../../environments/environment';
 import { ShowPasswordComponent } from '../show-password/show-password.component';
 import { MasterService } from '../service/master.service';
 import { MasterCodeType } from '../../app_enum';
+import * as CryptoJS from "crypto-js";
 
 @Component({
   selector: 'app-user',

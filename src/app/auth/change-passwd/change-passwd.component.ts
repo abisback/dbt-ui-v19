@@ -4,6 +4,7 @@ import { UserService } from '../../service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { SharedModule } from '../../shared/shared.module';
+import * as CryptoJS from "crypto-js";
 
 @Component({
   selector: 'app-change-passwd',

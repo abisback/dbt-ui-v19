@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SchemeService } from '../../../service/scheme.service';
 import { MasterCodeType, USERROLE } from '../../../../app_enum';
 import { environment } from '../../../../environments/environment';
+import * as CryptoJS from "crypto-js";
 
 @Component({
   selector: 'app-edit-user',
