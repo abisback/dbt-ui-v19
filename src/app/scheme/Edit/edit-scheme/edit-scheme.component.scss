@@ -40,7 +40,9 @@
   color: #e53935 !important;
   background: #fff;
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  top: 15px;
+  font-size: 15px !important;
 }
 // .close-icon.mat-button {
 //   position: absolute;
@@ -51,3 +53,14 @@
 //   min-width: auto;
 //   color: red;
 // }
+
+h2,
+mat-label {
+  color: #2e6ca9 !important;
+}
+mat-label {
+  font-size: 13px;
+}
+h2 {
+  margin: 0;
+}

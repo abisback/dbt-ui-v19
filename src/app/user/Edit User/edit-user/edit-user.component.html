@@ -238,7 +238,7 @@
   </button>
 
   </div>
-  <mat-divider></mat-divider>
+  <mat-divider class="mt-2"></mat-divider>
 
   <form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
@@ -250,7 +250,7 @@
         <mat-hint>Login user id (cannot change)</mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="flex-1">
+      <mat-form-field appearance="outline" class="flex-1 slim-field mt-2">
         <mat-label>Salutation</mat-label>
         <input type="text" matInput formControlName="salutation" [matAutocomplete]="autoSalutation">
         <mat-icon matSuffix>arrow_drop_down</mat-icon>
@@ -264,7 +264,7 @@
     </div>
 
     <div class="form-row" *ngIf="userdata[0]?.role !== 'DADM'">
-      <mat-form-field appearance="outline" class="flex-1">
+      <mat-form-field appearance="outline" class="flex-1 slim-field">
         <mat-label>Select Scheme</mat-label>
         <mat-select formControlName="SchemeType" multiple (selectionChange)="SchemeChange($event)" [compareWith]="compareScheme">
           <mat-option *ngFor="let item of schemeList" [value]="item.id">
@@ -311,7 +311,7 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline" class="full-width slim-field">
       <mat-label>User Role</mat-label>
       <input type="text" matInput readonly [value]="roledetails" placeholder="">
     </mat-form-field>

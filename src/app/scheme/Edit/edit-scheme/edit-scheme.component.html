@@ -1,5 +1,5 @@
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between mt-3 ms-3 me-3 mb-0">
 <h2 mat-dialog-title>Edit Scheme</h2>
 
   <button mat-button class="close-icon" [mat-dialog-close]="true">
@@ -165,8 +165,8 @@
         </mat-form-field>
 
 
-
-        <mat-form-field  class="example-half-width"  appearance="outline">
+        <div class="row">
+        <mat-form-field  class="col-md-6 example-half-width"  appearance="outline">
             <mat-label>Whether scheme has been on-boarded on State DBT Portal</mat-label>
             <!-- <mat-select #onBoarded formControlName="onBoarded" disableRipple>
                 <mat-option *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
@@ -187,7 +187,7 @@
 
 
 
-        <mat-form-field  class="example-half-width"  appearance="outline">
+        <mat-form-field  class="col-md-6 example-half-width"  appearance="outline">
             <mat-label>Whether scheme specific MIS integrated with State DBT Portal</mat-label>
             <!-- <mat-select #misIntegrated formControlName="misIntegrated" disableRipple>
                 <mat-option *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
@@ -205,6 +205,7 @@
 
             <!-- <mat-hint>( Y - Yes / N - No )</mat-hint> -->
         </mat-form-field>
+        </div>
 
         <mat-divider></mat-divider>
         <br/>

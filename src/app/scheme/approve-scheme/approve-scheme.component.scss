@@ -95,13 +95,16 @@ mat-form-field {
 //   padding: 12px;
 // }
 
-.mat-header-cell {
+.mat-mdc-header-cell {
     background-color: #bbdefb;
     /* Header background color */
-    color: #ffffff;
+
+    // color: #ffffff;
     /* Header text color */
-    // font-weight: bold;
-    padding: 12px;
+    font-weight: bold;
+    padding: 5px;
+    color: #2e6c8b;
+    font-size: 14px;
 }
 
 /* Style the filter input placeholder in the header */
