@@ -5,7 +5,7 @@
     <form class="example-form" [formGroup]="dbtDataForm" (ngSubmit)="onSubmit()">
       <div class="d-flex flex-row">
         <div class="p-2 col-md-4">
-          <mat-form-field class="example-full-width" appearance="outline">
+          <mat-form-field class="example-full-width slim-field" appearance="outline">
             <mat-label>Select Department</mat-label>
             <mat-icon matSuffix>arrow_drop_down</mat-icon>
             <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
@@ -22,7 +22,7 @@
           </mat-form-field>
         </div>
         <div class="p-2 col-md-4">
-          <mat-form-field class="example-full-width" appearance="outline">
+          <mat-form-field class="example-full-width slim-field" appearance="outline">
             <mat-label>Select Month</mat-label>
             <mat-select #schemeCode formControlName="monthId" disableRipple>
               <mat-option *ngFor="let item of monthList" [value]="item.monthId">

@@ -45,8 +45,8 @@ table {
 
 ::ng-deep .mat-form-field.slim-field {
   font-size: 13px;
-  height: 36px;
-  --mat-form-field-container-height: 36px;
+  height: 30px;
+  --mat-form-field-container-height: 30px;
   /* Material v16+ support */
 }
 
@@ -228,4 +228,9 @@ th.sticky-col2 {
 .mat-mdc-table .mat-mdc-header-cell {
   background: inherit;
   background-color: #d9edfd !important;
+}
+
+mat-label {
+  font-size: 14px;
+  color: #2e6ca9 !important;
 }
