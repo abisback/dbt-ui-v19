@@ -174,7 +174,7 @@
 
     <div class="header-row">
       <mat-icon color="primary">new_releases</mat-icon>
-      <h2>Add New Scheme</h2>
+      <h2>Add New Scheme test</h2>
     </div>
     <button mat-icon-button class="close-icon" [mat-dialog-close]="true" aria-label="Close">
       <mat-icon>close</mat-icon>
@@ -223,7 +223,7 @@
         </mat-form-field>
       </div>
       <div class="transfer-type">
-        <mat-form-field appearance="outline" class="w-100 compact-field">
+        <mat-form-field appearance="outline" class="w-100 compact-field slim-field">
           <mat-label>Type of Transfer</mat-label>
           <mat-select formControlName="transferType" required>
             <mat-option *ngFor="let item of benefitTypeList" [value]="item.codeValueId">
@@ -296,7 +296,7 @@
     </div>
 
     <div class="d-flex gap-1 mt-2">
-      <mat-form-field appearance="outline" class="compact-field">
+      <mat-form-field appearance="outline" class="compact-field slim-field">
         <mat-label>MIS Progress</mat-label>
         <mat-select formControlName="progress" required>
           <mat-option *ngFor="let item of progressTypeList" [value]="item.codeValueId">
@@ -305,7 +305,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="compact-field">
+      <mat-form-field appearance="outline" class="compact-field slim-field">
         <mat-label>Financial Year</mat-label>
         <mat-select formControlName="finYear" required>
           <mat-option *ngFor="let item of finYearList" [value]="item.codeValueId">
@@ -313,7 +313,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="compact-field">
+      <mat-form-field appearance="outline" class="compact-field slim-field">
         <mat-label>Data Share Type</mat-label>
         <mat-select formControlName="dataShareType" required>
           <mat-option *ngFor="let item of dataShareType" [value]="item.codeValueId">
@@ -321,7 +321,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="compact-field">
+      <mat-form-field appearance="outline" class="compact-field slim-field">
         <mat-label>API Integrated?</mat-label>
         <mat-select formControlName="apiIntegrated" required>
           <mat-option *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
