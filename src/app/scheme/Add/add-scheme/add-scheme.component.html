@@ -333,7 +333,7 @@
 
     <mat-divider class="divider"></mat-divider>
     <div class="form-actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!schemeForm.valid">
+      <button mat-raised-button color="primary" type="submit" id="saveSchemeBtn" [disabled]="!schemeForm.valid">
         <mat-icon>save</mat-icon> Save Scheme
       </button>
       <span *ngIf="!schemeForm.valid" class="form-note">

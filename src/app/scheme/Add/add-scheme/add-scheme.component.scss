@@ -267,3 +267,7 @@ mat-label {
 mat-label {
   font-size: 13px;
 }
+#saveSchemeBtn:not([disabled]) {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
+}

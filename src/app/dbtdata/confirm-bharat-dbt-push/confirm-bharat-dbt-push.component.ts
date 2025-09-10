@@ -72,7 +72,7 @@ export class ConfirmBharatDbtPushComponent {
                 this.toastr.error('Data Sending Fail! The reason is' + response.errorMessage);
                 //this.dialogRef.close('Data Sending Fail!');
               } else {
-                this.dialogRef.close('Data Send to Bharat DBT Succesfully');
+                this.dialogRef.close('Data Send to Bharat DBT Successfully');
               }
             });
           // this.processForm.patchValue({ dbtId: this.data.id });

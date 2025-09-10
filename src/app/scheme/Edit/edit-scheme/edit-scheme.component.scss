@@ -1,5 +1,5 @@
 .example-container .mat-form-field + .mat-form-field {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 .example-form {
   min-width: 500px;
@@ -15,10 +15,10 @@
   width: 50%;
 }
 
-#form-button-msg{
+#form-button-msg {
   color: red;
 }
-.mat-label{
+.mat-label {
   font-size: large;
   font-weight: bold;
 }
@@ -30,7 +30,7 @@
 // }
 
 .cdk-overlay-pane.my-dialog {
-  position: relative!important;
+  position: relative !important;
 }
 
 .close-icon {
@@ -63,4 +63,8 @@ mat-label {
 }
 h2 {
   margin: 0;
+}
+#updateBtn:not([disabled]) {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
 }

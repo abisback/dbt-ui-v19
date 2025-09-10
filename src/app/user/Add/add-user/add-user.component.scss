@@ -218,3 +218,7 @@ h2,
 mat-label {
   color: #2e6ca9 !important;
 }
+#registerBtn:not([disabled]) {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
+}
