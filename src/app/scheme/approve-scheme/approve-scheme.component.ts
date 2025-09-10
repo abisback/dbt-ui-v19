@@ -53,9 +53,9 @@ export class ApproveSchemeComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-    public dialog: MatDialog, 
-    private toastr: ToastrService, 
-    public helper: HelperService, 
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    public helper: HelperService,
     private departmentService: DepartmentService,
     private schemeService: SchemeService,
     private fb: FormBuilder
@@ -69,7 +69,7 @@ export class ApproveSchemeComponent {
       //this.departmentList = x;
       this.departmentList.push({deptCode: -1,
         name: 'All',
-        name_Code: '',
+        nameCode: '',
         name_Symbol: '',
         mobile: '',
         email: '',

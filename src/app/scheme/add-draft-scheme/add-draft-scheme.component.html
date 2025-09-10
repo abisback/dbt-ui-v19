@@ -17,7 +17,7 @@
         <mat-label>Select Department</mat-label>
         <mat-select #deptCode formControlName="deptCode" disableRipple>
           <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
-            {{item.name_Code+"-"+item.name}}
+            {{item.nameCode+"-"+item.name}}
           </mat-option>
         </mat-select>
         <!-- <mat-hint>Please select Department Name</mat-hint> -->
