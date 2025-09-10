@@ -194,7 +194,7 @@
         <input matInput type="text" formControlName="deptCode" [matAutocomplete]="dept" (keyup)="searchDept($event);" />
         <mat-autocomplete #dept="matAutocomplete" [displayWith]="displayFnDepartment.bind(this)">
           <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
-            {{item.name_Code}} - {{item.name}}
+            {{item.nameCode}} - {{item.name}}
           </mat-option>
         </mat-autocomplete>
         <!-- </mat-select> -->

@@ -72,7 +72,7 @@ export class UserComponent {
       this.departmentList.push({
         deptCode: -1,
         name: 'All',
-        name_Code: '',
+        nameCode: '',
         name_Symbol: '',
         mobile: '',
         email: '',

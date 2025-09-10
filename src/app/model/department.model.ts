@@ -1,7 +1,7 @@
 export interface Department {
     deptCode: number;
     name: string;
-    name_Code: string;
+    nameCode: string;
     name_Symbol: string;
     mobile: string;
     email: string;

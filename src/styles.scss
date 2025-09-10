@@ -175,3 +175,31 @@ th.mat-mdc-header-cell {
 table.mat-mdc-table {
   width: 100%;
 }
+
+
+/* Base hover (simple) */
+.mat-mdc-table tr.mat-mdc-row:hover {
+  background-color: rgba(153, 190, 235, 0.12); /* fallback hover fill */
+}
+
+/* Pseudo-element overlay with rounded outline */
+.mat-mdc-table tr.mat-mdc-row {
+  position: relative; /* ensure the ::after positions correctly */
+}
+.mat-mdc-table tr.mat-mdc-row:hover::after {
+  content: "";
+  position: absolute;
+  inset: 2px;                 /* avoid clipping against edges */
+  border: 1px solid #9097f9;  /* outline color */
+  border-radius: 10px;
+  // background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
+  pointer-events: none;
+  z-index: 1;                 /* above row background */
+}
+
+/* Keep cell content above overlay */
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-cell,
+.mat-mdc-table tr.mat-mdc-row > td.mat-mdc-footer-cell {
+  position: relative;
+  z-index: 2;
+}

@@ -103,7 +103,7 @@ export class DepartmentWiseMisReportComponent {
       const allDept: Department = {
         deptCode: 0,
         name: 'ALL',
-        name_Code: '',
+        nameCode: '',
         name_Symbol: '',
         mobile: '',
         email: '',

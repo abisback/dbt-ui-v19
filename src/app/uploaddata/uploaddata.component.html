@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Upload DBT Consolidated data</h2>
 <mat-divider></mat-divider>
 <br/>
-<mat-dialog-content class="mat-typography">    
+<mat-dialog-content class="mat-typography">
     <form class="example-form"  [formGroup]="schemeForm" >
     <!-- (ngSubmit)="onSubmit()"> -->
         <div class="row">
@@ -10,7 +10,7 @@
                     <mat-label>Level of Data Upload</mat-label>
                     <mat-select #deptCode formControlName="deptCode" disableRipple>
                         <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
-                            {{item.name_Code+"-"+item.name}}
+                            {{item.nameCode+"-"+item.name}}
                         </mat-option>
                     </mat-select>
                     <mat-hint>(Select District If Not State Level Data)</mat-hint>
@@ -22,7 +22,7 @@
                     <mat-label>Select District</mat-label>
                     <mat-select #deptCode formControlName="deptCode" disableRipple>
                         <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
-                            {{item.name_Code+"-"+item.name}}
+                            {{item.nameCode+"-"+item.name}}
                         </mat-option>
                     </mat-select>
                     <mat-hint>Please select District</mat-hint>
@@ -35,7 +35,7 @@
                     <mat-label>Select Scheme</mat-label>
                     <mat-select #deptCode formControlName="deptCode" disableRipple>
                         <mat-option *ngFor="let item of departmentList" [value]="item.deptCode">
-                            {{item.name_Code+"-"+item.name}}
+                            {{item.nameCode+"-"+item.name}}
                         </mat-option>
                     </mat-select>
                     <mat-hint>Please select Scheme to upload data</mat-hint>
@@ -67,7 +67,7 @@
                     <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-1"></div>    
+            <div class="col-md-1"></div>
             <div class="col-md-5">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Total No of Beneficiaries with Bank A/c</mat-label>
@@ -86,7 +86,7 @@
                     <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-1"></div>    
+            <div class="col-md-1"></div>
             <div class="col-md-5">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>No. of Aadhaar authenticated and seeded Beneficiaries(Out of Z)</mat-label>
@@ -105,7 +105,7 @@
                     <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-6"></div>    
+            <div class="col-md-6"></div>
         </div>
         <div class="row">
             <div class="col-md-5">
@@ -140,8 +140,8 @@
                     <mat-error *ngIf="!schemeForm.controls['schemeName']?.valid">Please Enter Scheme Name</mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-6"></div> 
-            <div class="col-md-12"><br/></div> 
+            <div class="col-md-6"></div>
+            <div class="col-md-12"><br/></div>
             <div class="col-md-12">
                 <mat-card-subtitle><b>Expenditure Incurred (In-kind Scheme) to beneficiaries (in ₹)</b></mat-card-subtitle>
                 <mat-divider></mat-divider>
@@ -155,7 +155,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-6"></div>
-            
+
             <div class="col-md-12"><br/></div>
             <div class="col-md-12">
                 <mat-card-subtitle><b>Transaction Details of Funds Transferred (Cash Scheme) in a month</b></mat-card-subtitle>
@@ -296,11 +296,11 @@
 
         <mat-divider></mat-divider>
         <br/>
-        <button mat-raised-button type="submit" color="primary" [disabled]="!schemeForm.valid">Save Scheme</button>    
+        <button mat-raised-button type="submit" color="primary" [disabled]="!schemeForm.valid">Save Scheme</button>
         &nbsp;&nbsp;&nbsp;
         <span [hidden]="schemeForm.valid" id="form-button-msg">(<b>N.B.</b> Button will be enabled once validation pass)</span>
         <br/>
         <br/>
-    </form>  
+    </form>
     <br/>
-</mat-dialog-content>    
+</mat-dialog-content>
