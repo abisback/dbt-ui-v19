@@ -90,7 +90,7 @@
                   <mat-form-field class="example-full-width" appearance="outline">
                     <input matInput placeholder="Enter Password" formControlName="password"
                       [type]="hidePassword ? 'password' : 'text'" (blur)="encryptPassword()">
-                    <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                    <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
                       <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                     </button>
                   </mat-form-field>
@@ -126,7 +126,7 @@
                   </table>
 
                   <div class="button-sec">
-                    <button mat-raised-button color="primary" (click)="ProceedLogin()">Login
+                    <button mat-raised-button color="primary" type="submit" (click)="ProceedLogin()">Login
                       <mat-icon>lock_open</mat-icon></button>
                     <button mat-raised-button color="primary">Forget Password</button>
 

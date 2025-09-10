@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
   styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent {
-
+  
   //passwordVisible = false;
   hidePassword: boolean = true;
 
@@ -84,15 +84,22 @@ export class SignInComponent {
     let b = this.loginForm.valid;
     if (this.loginForm.valid) {
       //console.log(this.loginForm);
-      this.loginForm.setValue({
+      // this.loginForm.setValue({
+      //   userId: this.loginForm.get('userId')?.value,
+      //   password: this.encryptedPassword,
+      //   captchaCode: this.loginForm.get('captchaCode')?.value,
+      //   //captchaId:this.loginForm.get('captchaId')?.value
+      //   captchaId: this.captchaId
+      // });
+      const payLoad = {
         userId: this.loginForm.get('userId')?.value,
         password: this.encryptedPassword,
         captchaCode: this.loginForm.get('captchaCode')?.value,
         //captchaId:this.loginForm.get('captchaId')?.value
         captchaId: this.captchaId
-      });
+      }
       // console.log(this.loginForm.value);
-      this.srvc.proceedLogin(this.loginForm.value).subscribe(result => {
+      this.srvc.proceedLogin(payLoad).subscribe(result => {
         if (result != null) {
           if (result.body?.errorMessage == null) {
             this.responsedata = result;
