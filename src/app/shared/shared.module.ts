@@ -22,7 +22,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MaterialModule,
     RouterModule,
     // HttpClientModule,
-    ToastrModule,
+    // ToastrModule, // This will break in standalone apps, ToastrModule removed for Angular 19 standalone
     ReactiveFormsModule,
     NgApexchartsModule,
 
