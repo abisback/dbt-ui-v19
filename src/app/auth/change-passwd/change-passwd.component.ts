@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { SharedModule } from '../../shared/shared.module';
 import * as CryptoJS from "crypto-js";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-passwd',
@@ -38,7 +39,7 @@ export class ChangePasswdComponent {
   })
 
 
-  constructor(private userService: UserService, private toastr: ToastrService) {
+  constructor(private userService: UserService, private toastr: ToastrService,  private router: Router) {
 
   }
 
@@ -73,26 +74,32 @@ export class ChangePasswdComponent {
     if (this.changePassword.valid) {
       //console.log(this.encryptedPasswordOld,this.encryptedPasswordNew, this.encryptedPasswordCon );
 
-      this.changePassword.setValue({
+      // this.changePassword.setValue({
+      //   oldpassword: this.encryptedPasswordOld,
+      //   password: this.encryptedPasswordNew,
+      //   confirmPassword: this.encryptedPasswordCon
+      // });
+      const payload = {
         oldpassword: this.encryptedPasswordOld,
         password: this.encryptedPasswordNew,
         confirmPassword: this.encryptedPasswordCon
-      });
+      }
 
       //alert("Password Submitted");
       //console.log(this.changePassword.value);
-      this.userService.ChangePassword(this.changePassword.value).subscribe(response => {
+      this.userService.ChangePassword(payload).subscribe(response => {
         if (response.errorMessage != null) {
           this.toastr.error(response.errorMessage);
         } else {
+          this.changePassword.reset();
           this.toastr.success("Password Changed Successfully");
+          this.router.navigate(['dashboard']);
         }
       });
     }
   }
 
   encryptPassword(op: any) {
-    // debugger;
 
     if (op == 1) {
       const key = CryptoJS.enc.Utf8.parse(environment.AesKey);
