@@ -566,3 +566,6 @@ ul li {
   font-size: 13px;
   font-weight: 600;
 }
+.stat-box:not(:last-child) {
+  cursor: pointer;
+}
