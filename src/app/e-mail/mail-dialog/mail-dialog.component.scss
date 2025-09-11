@@ -1,0 +1,73 @@
+.body{
+    border-radius: 10px;
+    position: relative;
+    // overflow: auto;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 24px;
+  z-index: 2;
+  color: #f44336 !important;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+.close-button {
+  float: right;
+  //   top:-24px;
+  //   right:-24px;
+}
+.compose-wrapper {
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fff;
+
+  @media (min-width: 600px) {
+    max-width: 700px;
+  }
+}
+
+.compose-form {
+  display: flex;
+  flex-direction: column;
+//   gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.attachment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.full-width {
+  width: 100%;
+}
+.example-chip-list {
+  width: 100%;
+  margin-bottom: 0px;
+}
+.slim-field {
+  --mat-form-field-container-height: 36px;
+  --mat-form-field-container-vertical-padding: 4px;
+  font-size: 13px;
+}
+.cc-bcc-buttons button{
+    font-size: 14px;
+}
