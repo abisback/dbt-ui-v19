@@ -16,9 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mail-dialog',
-  imports: [
-    SharedModule,
-  ],
+  imports: [SharedModule],
   templateUrl: './mail-dialog.component.html',
   styleUrl: './mail-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,7 +68,9 @@ Finance Department`,
       attachments: [{ value: [], disabled: true }],
     });
   }
-
+  ngOnInit(): void {
+    window.addEventListener('keydown', this.handleKeyboardEvent.bind(this));
+  }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) {
@@ -196,11 +196,11 @@ Finance Department`,
 
   onCtrlShiftC() {
     console.log('Ctrl + Shift + C pressed');
-    this.showCC = !this.showCC
+    this.showCC = !this.showCC;
   }
 
   onCtrlShiftB() {
     console.log('Ctrl + Shift + B pressed');
-    this.showBCC = !this.showBCC
+    this.showBCC = !this.showBCC;
   }
 }
