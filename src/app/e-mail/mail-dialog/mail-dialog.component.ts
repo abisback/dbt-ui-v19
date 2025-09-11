@@ -2,6 +2,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   Inject,
   inject,
   signal,
@@ -17,11 +18,6 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-mail-dialog',
   imports: [
     SharedModule,
-    // ReactiveFormsModule,
-    // MatChipsModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatIconModule
   ],
   templateUrl: './mail-dialog.component.html',
   styleUrl: './mail-dialog.component.scss',
@@ -37,6 +33,8 @@ export class MailDialogComponent {
   toEmails = signal<string[]>([]);
   ccEmails = signal<string[]>([]);
   bccEmails = signal<string[]>([]);
+
+  @HostListener('window:keydown', ['$event'])
 
   // Flags to toggle CC/BCC fields
   showCC: boolean = false;
@@ -178,5 +176,31 @@ Finance Department`,
 
   private validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.ctrlKey && event.shiftKey) {
+      switch (event.key.toLowerCase()) {
+        case 'c':
+          this.onCtrlShiftC();
+          event.preventDefault();
+          break;
+
+        case 'b':
+          this.onCtrlShiftB();
+          event.preventDefault();
+          break;
+      }
+    }
+  }
+
+  onCtrlShiftC() {
+    console.log('Ctrl + Shift + C pressed');
+    this.showCC = !this.showCC
+  }
+
+  onCtrlShiftB() {
+    console.log('Ctrl + Shift + B pressed');
+    this.showBCC = !this.showBCC
   }
 }

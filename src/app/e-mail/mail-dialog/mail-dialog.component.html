@@ -52,6 +52,7 @@
             aria-label="Add Cc"
             (click)="showCC = !showCC"
             *ngIf="!showCC"
+            matTooltip="Add Cc recipients (Ctrl-Shift-C)"
           >
             Cc
           </button>
@@ -61,6 +62,7 @@
             aria-label="Add Bcc"
             (click)="showBCC = !showBCC"
             *ngIf="!showBCC"
+            matTooltip="Add Bcc recipients (Ctrl-Shift-B)"
           >
             Bcc
           </button>
