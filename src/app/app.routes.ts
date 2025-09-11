@@ -42,6 +42,7 @@ import { AddDbtdataNewversionComponent } from './dbtdata/add-dbtdata-newversion/
 import { PushBharatDbtComponent } from './dbtdata/push-bharat-dbt/push-bharat-dbt.component';
 import { DbtdataComponent } from './dbtdata/dbtdata/dbtdata.component';
 import { USERROLE } from '../app_enum';
+import { EMailComponent } from './e-mail/e-mail.component';
 
 export const routes: Routes = [{
   path:'',
@@ -90,6 +91,7 @@ export const routes: Routes = [{
     { path: 'approve-scheme', component:ApproveSchemeComponent, data:{roles: [ USERROLE['State Level Admin']]}},
     { path: 'add-draft-scheme', component:AddDraftSchemeComponent, data:{roles: [USERROLE['Department Admin'], USERROLE['State Level Admin'], USERROLE['Department Nodal'],USERROLE['Department Operator']]}},
     { path: 'report-of-push-data', component:ReportOfPushDataComponent, data:{roles: [ USERROLE['State Level Admin']]}},
+    { path: 'e-mail', component:EMailComponent, data:{roles: [ USERROLE['State Level Admin']]}},
 
 
 

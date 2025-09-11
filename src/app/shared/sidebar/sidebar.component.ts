@@ -31,7 +31,7 @@ export class SidebarComponent {
 
   ngOnInit(): void {
     let userRole = localStorage.getItem("role");
-    //console.log(userRole);
+    // console.log(userRole);
 
     if(userRole == USERROLE['Department Operator']){
       this.IsNotOperator = false;
