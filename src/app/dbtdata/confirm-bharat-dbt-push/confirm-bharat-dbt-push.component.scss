@@ -27,12 +27,22 @@
   position: relative !important;
 }
 
-.close-icon.mat-button {
+.close-icon
+// .mat-button
+ {
   position: absolute;
   // top: 0;
-  right: 20%;
+  right: 24px;
   padding: 5px;
   padding-top: 0px;
   line-height: 14px;
   min-width: auto;
+  color: #f44336 !important;
+  background-color: rgba(255, 255, 255, 0.85);
+  float: right;
+}
+
+#approveBtn:not([disabled]) {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
 }
