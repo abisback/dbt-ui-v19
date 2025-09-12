@@ -32,8 +32,6 @@ export class MailDialogComponent {
   ccEmails = signal<string[]>([]);
   bccEmails = signal<string[]>([]);
 
-  @HostListener('window:keydown', ['$event'])
-
   // Flags to toggle CC/BCC fields
   showCC: boolean = false;
   showBCC: boolean = false;
@@ -68,9 +66,7 @@ Finance Department`,
       attachments: [{ value: [], disabled: true }],
     });
   }
-  ngOnInit(): void {
-    window.addEventListener('keydown', this.handleKeyboardEvent.bind(this));
-  }
+  ngOnInit(): void {}
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) {
@@ -178,14 +174,26 @@ Finance Department`,
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    console.log('Key pressed:', event.key); // ✅ This must appear in console
+
+    const target = event.target as HTMLElement;
+
+    if (
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.isContentEditable
+    ) {
+      return;
+    }
+
     if (event.ctrlKey && event.shiftKey) {
       switch (event.key.toLowerCase()) {
         case 'c':
           this.onCtrlShiftC();
           event.preventDefault();
           break;
-
         case 'b':
           this.onCtrlShiftB();
           event.preventDefault();
