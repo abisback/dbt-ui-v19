@@ -246,8 +246,11 @@ export class PushBharatDbtComponent {
 
     dialogRef.afterClosed().subscribe(response => {
       if (response != true) {
+        this.clickedRowsArray = [];
         this.toastr.success(response);
         this.loadDataTable();
+      } else {
+        this.clickedRowsArray = [];
       }
     });
   }

@@ -65,14 +65,16 @@ export class ConfirmBharatDbtPushComponent {
             // });
 
           })
-          console.log(this.formArray);
+          // console.log(this.formArray);
             
             this.dbtDataService.PushToBharatDbt2(this.formArray).subscribe(response => {
               if (response.errorMessage != null) {
                 this.toastr.error('Data Sending Fail! The reason is' + response.errorMessage);
+                this.formArray = []
                 //this.dialogRef.close('Data Sending Fail!');
               } else {
                 this.dialogRef.close('Data Send to Bharat DBT Successfully');
+                this.formArray = [];
               }
             });
           // this.processForm.patchValue({ dbtId: this.data.id });
