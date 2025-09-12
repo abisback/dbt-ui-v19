@@ -68,13 +68,15 @@ export class ConfirmBharatDbtPushComponent {
           // console.log(this.formArray);
             
             this.dbtDataService.PushToBharatDbt2(this.formArray).subscribe(response => {
-              if (response.errorMessage != null) {
+              if (response.apiResponseStatus == 2) {
                 this.toastr.error('Data Sending Fail! The reason is' + response.errorMessage);
                 this.formArray = []
                 //this.dialogRef.close('Data Sending Fail!');
-              } else {
+              } else if (response.apiResponseStatus == 1){
                 this.dialogRef.close('Data Send to Bharat DBT Successfully');
                 this.formArray = [];
+              } else {
+
               }
             });
           // this.processForm.patchValue({ dbtId: this.data.id });

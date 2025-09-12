@@ -75,8 +75,10 @@ Finance Department`,
     this.mailService.getMailList().subscribe(
       (data: any) => {
         if (data.apiResponseStatus === 1) {
-          this.mailList = data.result.map((x: any) => x.usersMail);
-          this.toEmails.set(this.mailList);
+          this.mailList = data.result
+            .map((x: any) => x.usersMail)
+            .filter((mail: any) => mail);
+          this.ccEmails.set(this.mailList);
           // console.log('Mail users:', this.mailList);
         } else {
           this.toaster.error(data.errorMessage);
@@ -84,7 +86,6 @@ Finance Department`,
       },
       (error) => {
         console.error('Error fetching mail users:', error);
-        debugger;
       }
     );
   }
@@ -127,7 +128,6 @@ Finance Department`,
     }
 
     console.log('Sending email...', emailData);
-    debugger;
     // Send logic
   }
 

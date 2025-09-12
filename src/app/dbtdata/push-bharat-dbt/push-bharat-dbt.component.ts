@@ -249,6 +249,7 @@ export class PushBharatDbtComponent {
         this.clickedRowsArray = [];
         this.toastr.success(response);
         this.loadDataTable();
+        this.clickedRows = new Set<any>();
       } else {
         this.clickedRowsArray = [];
       }
