@@ -62,6 +62,13 @@
 .example-chip-list {
   width: 100%;
   margin-bottom: 0px;
+  font-size: 13px;
+}
+.example-chip-list mat-chip-row,
+.example-chip-list input,
+.example-chip-list .cc-bcc-buttons button,
+.example-chip-list .mat-chip {
+  font-size: 13px;
 }
 .slim-field {
   --mat-form-field-container-height: 36px;
