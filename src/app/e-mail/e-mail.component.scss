@@ -297,3 +297,38 @@ table.mat-mdc-table {
 .mat-row {
   position: relative;
 }
+
+// responsive
+
+.table-responsive-wrapper {
+  overflow-x: auto; // Enables horizontal scrolling
+  -webkit-overflow-scrolling: touch; // Smooth scrolling for iOS
+}
+
+.table-responsive {
+  min-width: 600px; // or more depending on number of columns
+  width: 100%;
+}
+
+.mat-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+// media querry
+@media (max-width: 768px) {
+  .table-responsive-wrapper {
+    overflow-x: auto;
+  }
+
+  .table-responsive {
+    min-width: 700px; // ensures horizontal scroll
+  }
+}
+// ============
+th.mat-header-cell {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
