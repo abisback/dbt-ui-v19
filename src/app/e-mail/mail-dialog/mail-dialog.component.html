@@ -25,6 +25,7 @@
         <mat-chip-grid #toGrid aria-label="To email list">
           @for (email of toEmails(); track email) {
           <mat-chip-row
+          [disabled]="isDisabled"
             (removed)="removeEmail('to', email)"
             [editable]="true"
             (edited)="editEmail('to', email, $event)"
@@ -37,6 +38,7 @@
           </mat-chip-row>
           }
           <input
+          [disabled]="isDisabled"
             placeholder="Enter email"
             [matChipInputFor]="toGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -85,6 +87,7 @@
         <mat-chip-grid #ccGrid aria-label="Cc email list">
           @for (email of ccEmails(); track email) {
           <mat-chip-row
+          [disabled]="isDisabled"
             (removed)="removeEmail('cc', email)"
             [editable]="true"
             (edited)="editEmail('cc', email, $event)"
@@ -97,6 +100,7 @@
           </mat-chip-row>
           }
           <input
+          [disabled]="isDisabled"
             placeholder="Enter Cc"
             [matChipInputFor]="ccGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -122,6 +126,7 @@
         <mat-chip-grid #bccGrid aria-label="Bcc email list">
           @for (email of bccEmails(); track email) {
           <mat-chip-row
+          [disabled]="isDisabled"
             (removed)="removeEmail('bcc', email)"
             [editable]="true"
             (edited)="editEmail('bcc', email, $event)"
@@ -134,6 +139,7 @@
           </mat-chip-row>
           }
           <input
+          [disabled]="isDisabled"
             placeholder="Enter Bcc"
             [matChipInputFor]="bccGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -179,6 +185,7 @@
       <!-- Actions -->
       <div class="actions">
         <button
+          [disabled]="isDisabled"
           mat-flat-button
           color="primary"
           type="submit"

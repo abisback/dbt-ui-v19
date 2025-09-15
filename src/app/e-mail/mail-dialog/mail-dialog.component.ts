@@ -34,6 +34,7 @@ export class MailDialogComponent {
   bccEmails = signal<string[]>([]);
 
   mailList: any[] = [];
+  isDisabled: boolean = false;
 
   // Flags to toggle CC/BCC fields
   showCC: boolean = false;
@@ -43,15 +44,14 @@ export class MailDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toaster: ToastrService,
-    private mailService: EmailService,
-    
+    private mailService: EmailService
   ) {
     // console.log('this.data :>> ', this.data);
     this.title = this.data.title;
     this.composeForm = this.fb.group({
-      to: ['', [Validators.required, Validators.email]],
-      cc: ['', [Validators.required, Validators.email]],
-      bcc: ['', [Validators.required, Validators.email]],
+      // to: [this.toEmails(), [Validators.required, Validators.email]],
+      // cc: [this.ccEmails(), [Validators.required, Validators.email]],
+      // bcc: [this.bccEmails(), [Validators.required, Validators.email]],
       subject: [
         'Reminder for Updating DBT Schemes Information on WBDBT Portal',
         Validators.required,
@@ -72,22 +72,28 @@ Finance Department`,
     });
   }
   ngOnInit(): void {
-    this.mailService.getMailList().subscribe(
-      (data: any) => {
-        if (data.apiResponseStatus === 1) {
-          this.mailList = data.result
-            .map((x: any) => x.usersMail)
-            .filter((mail: any) => mail);
-          this.ccEmails.set(this.mailList);
-          // console.log('Mail users:', this.mailList);
-        } else {
-          this.toaster.error(data.errorMessage);
+    if (this.title === 'New Message') {
+      this.mailService.getMailList().subscribe(
+        (data: any) => {
+          if (data.apiResponseStatus === 1) {
+            this.mailList = data.result
+              .map((x: any) => x.usersMail)
+              .filter((mail: any) => mail);
+            this.toEmails.set(this.mailList);
+            // console.log('Mail users:', this.mailList);
+          } else {
+            this.toaster.error(data.errorMessage);
+          }
+        },
+        (error) => {
+          console.error('Error fetching mail users:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching mail users:', error);
-      }
-    );
+      );
+    } else {
+      this.composeForm.get('subject')?.disable();
+      this.composeForm.get('body')?.disable();
+      this.isDisabled = true;
+    }
   }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -102,17 +108,24 @@ Finance Department`,
 
   // Sending email
   sendEmail() {
+    if (this.title === 'View Message') {
+      this.toaster.error('You are in View Mode!');
+      return;
+    }
+    const toEmailsValue = this.toEmails();
+    const ccEmailsValue = this.ccEmails();
+    const bccEmailsValue = this.bccEmails();
     const subject = this.composeForm.get('subject')?.value;
     const body = this.composeForm.get('body')?.value;
     const emailData = {
-      to: this.toEmails,
-      cc: this.ccEmails,
-      bcc: this.bccEmails,
+      to: toEmailsValue,
+      cc: ccEmailsValue,
+      bcc: bccEmailsValue,
       body: body,
       subject: subject,
-      // add subject, body, etc.
     };
-    if (!this.toEmails || this.toEmails.length === 0) {
+
+    if (!toEmailsValue || toEmailsValue.length === 0) {
       this.toaster.error('To email is required');
       return; // stop further checks
     }
@@ -128,19 +141,60 @@ Finance Department`,
     }
 
     console.log('Sending email...', emailData);
+    // debugger;
     // Send logic
   }
 
   addEmail(field: 'to' | 'cc' | 'bcc', event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const input = (event.value || '').trim().toLowerCase();
 
-    // Add only if valid email
-    if (value && this.validateEmail(value)) {
-      this.getEmailSignal(field).update((emails) => [...emails, value]);
+    if (!input) {
+      event.chipInput?.clear();
+      return;
+    }
+
+    // Split input by comma or semicolon
+    const values = input
+      .split(/[,;]+/)
+      .map((email) => email.trim())
+      .filter((e) => e);
+
+    const emailSignal = this.getEmailSignal(field);
+    const existingEmails = emailSignal();
+    let newEmails = [...existingEmails];
+
+    const duplicates: string[] = [];
+    const invalids: string[] = [];
+
+    for (const email of values) {
+      if (!this.validateEmail(email)) {
+        invalids.push(email);
+      } else if (newEmails.includes(email)) {
+        duplicates.push(email);
+      } else {
+        newEmails.push(email);
+      }
+    }
+
+    // Update signal if any new emails were added
+    if (newEmails.length !== existingEmails.length) {
+      emailSignal.set(newEmails);
+    }
+
+    // Show toaster for duplicates
+    if (duplicates.length > 0) {
+      this.toaster.warning(
+        `Duplicate email(s) ignored: ${duplicates.join(', ')}`
+      );
+    }
+
+    // Show toaster for invalid emails
+    if (invalids.length > 0) {
+      this.toaster.error(`Invalid email(s): ${invalids.join(', ')}`);
     }
 
     // Clear input field
-    event.chipInput!.clear();
+    event.chipInput?.clear();
   }
 
   removeEmail(field: 'to' | 'cc' | 'bcc', email: string): void {
@@ -194,7 +248,7 @@ Finance Department`,
   private validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
-
+  @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     // console.log('Key pressed:', event.key); // ✅ This must appear in console
 
