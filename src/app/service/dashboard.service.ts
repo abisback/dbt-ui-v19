@@ -42,4 +42,8 @@ export class DashboardService {
   GetAllScheme(){
     return this.http.get(this.apiurl+'GetTotalscheme')
   }
+
+  GetSchemeListDetails(deptCode: any,financialYearId: any){
+    return this.http.get(this.apiurl+`GetSchemeListDetails/${deptCode}/${financialYearId}`)
+  }
 }

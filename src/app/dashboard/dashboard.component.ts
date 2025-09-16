@@ -683,7 +683,7 @@ saveExcel() {
     dialogConfig.panelClass = 'form-dialog';
     dialogConfig.width = '60%';
     dialogConfig.minWidth = '400px';
-    dialogConfig.height = '80%';
+    dialogConfig.height = '55%';
 
 
     const dialogRef = this.dialog.open(ExtendedDbtDataComponent, dialogConfig);

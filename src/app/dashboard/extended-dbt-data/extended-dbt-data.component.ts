@@ -9,6 +9,11 @@ import { Component, ViewChild } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { DashboardService } from '../../service/dashboard.service';
+import { ToastrService } from 'ngx-toastr';
+import { MasterService } from '../../service/master.service';
+import { MasterCodeType } from '../../../app_enum';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-extended-dbt-data',
@@ -31,8 +36,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ExtendedDbtDataComponent {
   dataSource: any;
+  finYrList: any[] = [];
+  financialYearId: string = '';
+  selectedFinYear: string = '';
   displayedColumns: string[] = [
-    // 'Sno',
+    'Sno',
     'departmentName',
     'beneficiaryCount',
     'action',
@@ -46,38 +54,16 @@ export class ExtendedDbtDataComponent {
 
   @ViewChild('paginator') paginator!: MatPaginator;
 
-  constructor() {}
+  constructor(
+    private dashboardService: DashboardService,
+    private toastr: ToastrService,
+    private masterService: MasterService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource([
-      {
-        Sno: 1,
-        departmentName: 'Department 1',
-        beneficiaryCount: 100,
-        schemes: [
-          { name: 'Scheme 1', totalBeneficiary: 50, totalExpenses: 100000 },
-          { name: 'Scheme 2', totalBeneficiary: 30, totalExpenses: 100000 },
-          { name: 'Scheme 3', totalBeneficiary: 20, totalExpenses: 100000 },
-        ],
-      },
-      {
-        Sno: 2,
-        departmentName: 'Department 2',
-        beneficiaryCount: 150,
-        schemes: [
-          { name: 'Scheme A', totalBeneficiary: 70, totalExpenses: 100000 },
-          { name: 'Scheme B', totalBeneficiary: 50, totalExpenses: 100000 },
-          { name: 'Scheme C', totalBeneficiary: 30, totalExpenses: 100000 },
-        ],
-      },
-    ]);
-    // this.dataSource = new MatTableDataSource(
-    //   rawData.map((item: any, idx: any) => ({
-    //     ...item,
-    //     sno: this.currentPage * this.pageSize + idx + 1,
-    //   }))
-    // );
-    this.dataSource.paginator = this.paginator;
+    this.loadDepartmentList();
+    this.loadFinancialYearList();
   }
 
   viewDetails(row: any) {
@@ -94,8 +80,55 @@ export class ExtendedDbtDataComponent {
     }
   }
   handlePage(e: any) {
-    // console.log('Page event:', e);
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
+  }
+  loadDepartmentList(): void {
+    this.dashboardService.GetAllDepartmentCount().subscribe((res: any) => {
+      if (res.apiResponseStatus == 1) {
+        this.dataSource = new MatTableDataSource(res.result);
+        this.dataSource.paginator = this.paginator;
+      } else {
+        this.toastr.error(res.errorMessage);
+      }
+    });
+  }
+  getExpandedDetails(deptCode: any, element: any) {
+    element.isExpanded = !element.isExpanded;
+    if (element.isExpanded === true) {
+      console.log('deptCode :>> ', element.isExpanded);
+      this.dashboardService
+        .GetSchemeListDetails(deptCode, this.financialYearId)
+        .subscribe((res: any) => {
+          if (res.apiResponseStatus == 1) {
+            console.log('res.result :>> ', res.result);
+            element.schemes = res.result;
+          } else {
+            this.toastr.error(res.errorMessage);
+          }
+        });
+    }
+  }
+  displayFinancialYearFn(finYearId: number): string {
+    // Find the financial year by ID
+    const finYear = this.finYrList.find(
+      (f: any) => f.codeValueId === finYearId
+    );
+    return finYear ? finYear.codeValueDesc : '';
+  }
+  onFinancialYearSelect(event: any, finYearId: any): void {
+    if (event.isUserInput) {
+      this.financialYearId = finYearId;
+    }
+  }
+  loadFinancialYearList(): void {
+    this.masterService
+      .getCodeValues(MasterCodeType.Financial_Year)
+      .subscribe((x: any) => {
+        this.finYrList = x.sort(
+          (a: { codeValueDesc: string }, b: { codeValueDesc: string }) =>
+            b.codeValueDesc.localeCompare(a.codeValueDesc)
+        );
+      });
   }
 }
