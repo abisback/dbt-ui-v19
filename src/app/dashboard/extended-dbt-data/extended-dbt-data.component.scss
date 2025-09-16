@@ -66,7 +66,6 @@ tr {
   font-weight: bold;
 }
 
-
 //------------------------
 
 /* Add some styles to the table */
@@ -129,10 +128,7 @@ mat-form-field {
   color: #ffffff;
 }
 
-
-
 //----------------------------
-
 
 /* Style the odd and even rows differently for better readability */
 .mat-row:nth-child(even) {
@@ -143,7 +139,6 @@ mat-form-field {
 .mat-row:nth-child(odd) {
   background-color: #ffffff;
 }
-
 
 /* Style the header cells */
 // .mat-header-cell {
@@ -188,21 +183,22 @@ mat-form-field {
 
 /*new*/
 
-
 /* Center align ALL headers and cells */
-.mat-header-cell, .mat-cell {
+.mat-header-cell,
+.mat-cell {
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
   vertical-align: middle !important;
   padding: 0px 6px !important;
   font-size: 11px;
-  font-family: 'Inter', 'Roboto', sans-serif;
+  font-family: "Inter", "Roboto", sans-serif;
 }
 
 /* Prevent excessive row spacing except on hover */
 .mat-row {
-  transition: box-shadow 0.22s, background 0.18s, border-spacing 0.2s, margin 0.20s;
+  transition: box-shadow 0.22s, background 0.18s, border-spacing 0.2s,
+    margin 0.2s;
   border-radius: 6px;
   box-shadow: none;
   margin-bottom: 0px;
@@ -211,7 +207,7 @@ mat-form-field {
 /* Visual gap and border effect on hover */
 .mat-row:hover {
   background: #e6f0fc !important; /* Light blue hover */
-  box-shadow: 0 4px 16px rgba(60,64,67,0.09);
+  box-shadow: 0 4px 16px rgba(60, 64, 67, 0.09);
   margin-bottom: 8px;
   outline: 1px solid #9097f9;
 }
@@ -236,7 +232,6 @@ mat-form-field {
   line-height: 16px !important;
 }
 
-
 /* For tight table header row and background */
 .mat-header-row {
   height: 36px !important;
@@ -255,7 +250,6 @@ mat-paginator {
   align-items: center !important;
 }
 
-
 /* Slim, rounded, modern icon button for 'view' */
 .view-btn {
   width: 32px !important;
@@ -263,17 +257,16 @@ mat-paginator {
   min-width: 32px !important;
   padding: 0 !important;
   border-radius: 50% !important;
-  background: #e3f2fd !important;           /* soft blue background */
-  color: #1976d2 !important;                /* deep blue icon */
+  background: #e3f2fd !important; /* soft blue background */
+  color: #1976d2 !important; /* deep blue icon */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.10);
-  transition:
-    background 0.19s cubic-bezier(.4,0,.2,1),
-    color 0.16s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.20s cubic-bezier(.4,0,.2,1),
-    transform 0.15s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 1px 7px 0 rgba(25, 118, 210, 0.1);
+  transition: background 0.19s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.16s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0 2px;
   outline: none;
   border: none !important;
@@ -289,9 +282,10 @@ mat-paginator {
   height: 100%;
 }
 
-.view-btn:hover, .view-btn:focus {
-  background: #1976d2 !important;           /* blue */
-  color: #fff !important;                   /* white icon */
+.view-btn:hover,
+.view-btn:focus {
+  background: #1976d2 !important; /* blue */
+  color: #fff !important; /* white icon */
   box-shadow: 0 8px 18px -6px #1976d2;
   transform: scale(1.08);
 }
@@ -315,27 +309,27 @@ mat-paginator {
 
 .viewComments {
   font-size: 12px !important;
-  border-radius: 16px !important;               /* slightly less for small button */
-  background-color: #e3f2fd !important;         /* soft blue */
-  color: #1976d2 !important;                    /* deep blue text */
-  padding: 2px 12px !important;                 /* small and horizontal padding */
-  height: 24px !important;                      /* makes button short */
-  min-width: unset !important;                  /* remove material min-width */
-  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.10); /* soft shadow */
-  transition:
-    background-color 0.22s cubic-bezier(.4,0,.2,1),
-    color 0.18s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.22s cubic-bezier(.4,0,.2,1),
-    transform 0.13s cubic-bezier(.4,0,.2,1);
-  text-transform: none !important;              /* removes uppercase */
+  border-radius: 16px !important; /* slightly less for small button */
+  background-color: #e3f2fd !important; /* soft blue */
+  color: #1976d2 !important; /* deep blue text */
+  padding: 2px 12px !important; /* small and horizontal padding */
+  height: 24px !important; /* makes button short */
+  min-width: unset !important; /* remove material min-width */
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.1); /* soft shadow */
+  transition: background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: none !important; /* removes uppercase */
   font-weight: 500;
   margin: 0 2px;
   line-height: 16px !important;
   vertical-align: middle;
 }
 
-.viewComments:hover, .viewComments:focus {
-  background-color: #1976d2 !important;         /* dark blue on hover */
+.viewComments:hover,
+.viewComments:focus {
+  background-color: #1976d2 !important; /* dark blue on hover */
   color: #fff !important;
   box-shadow: 0 7px 20px -5px #1976d2;
   transform: scale(1.05);
@@ -351,17 +345,17 @@ mat-paginator {
   font-size: 14px !important;
   // font-weight: bold;
   box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15);
-  transition:
-    background-color 0.22s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.21s cubic-bezier(.4,0,.2,1),
-    transform 0.13s cubic-bezier(.4,0,.2,1);
+  transition: background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.21s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.13s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none !important;
   border: none !important;
 }
 
 /* Modern hover effect */
-.process-btn:hover, .process-btn:focus {
-  background-color: #1254a4 !important;   /* darker blue */
+.process-btn:hover,
+.process-btn:focus {
+  background-color: #1254a4 !important; /* darker blue */
   color: #fff !important;
   box-shadow: 0 8px 20px rgba(25, 118, 210, 0.28);
   transform: translateY(-2px) scale(1.03);
@@ -369,7 +363,7 @@ mat-paginator {
 
 /* MDC table header (Angular Material v15+) */
 .mat-mdc-table .mat-mdc-header-cell {
-  background-color: #BBDEFB !important;
+  background-color: #bbdefb !important;
   color: #2e6c8b;
   font-size: 14px !important;
   height: 20px !important;
@@ -380,7 +374,7 @@ mat-paginator {
   text-overflow: ellipsis;
 }
 tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
-    height: 0 !important;
+  height: 0 !important;
 }
 /* Add bottom spacing for each row */
 // .element-row {
@@ -390,4 +384,13 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
 // /* Optional: spacing for expanded row too */
 .detail-row {
   border-bottom: 10px solid transparent;
+}
+::ng-deep.mat-mdc-table tr.mat-mdc-row:hover::after {
+  content: "";
+  position: absolute;
+  inset: 2px; /* avoid clipping against edges */
+  border: none; /* outline color */
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1; /* above row background */
 }

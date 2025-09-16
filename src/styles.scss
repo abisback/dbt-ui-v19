@@ -190,7 +190,8 @@ table.mat-mdc-table {
   content: "";
   position: absolute;
   inset: 2px;                 /* avoid clipping against edges */
-  border: 1px solid #9097f9;  /* outline color */
+  // border: 1px solid #9097f9;  /* outline color */
+  border: 1px solid #2e6c8b;  /* outline color */
   border-radius: 10px;
   // background: rgba(58, 140, 240, 0.12); /* tone down fill for readability */
   pointer-events: none;
