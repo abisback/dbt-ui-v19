@@ -40,7 +40,7 @@ export class ExtendedDbtDataComponent {
   financialYearId: string = '';
   selectedFinYear: string = '';
   displayedColumns: string[] = [
-    'Sno',
+    // 'Sno',
     'departmentName',
     'beneficiaryCount',
     'action',
