@@ -318,12 +318,12 @@
 
                   </div>
 
-                  <div id="chart3" class="col-lg-4 mb-3 ms-3">
+                  <div id="chart3" class="col-lg-4 mb-3">
                     <apx-chart [series]="thirdChartOptions.series" [chart]="thirdChartOptions.chart"
                       [plotOptions]="thirdChartOptions.plotOptions" [labels]="thirdChartOptions.labels"></apx-chart>
                   </div>
 
-                  <ul class="col-lg-3 mb-4 ms-5">
+                  <ul class="col-lg-3 mb-4 me-5">
                     <li style="color: #2e6c8b;">State Cash</li>
                     <li style="color: #36b186;">State Kind</li>
                     <li style="color: #f2a654;">Centre Cash</li>
@@ -487,7 +487,11 @@
                                 <!-- <small>42542</small> -->
                               </h3>
 
-                              <span class="me-2 pill-total-amount amount">
+                              <!-- <span class="me-2 pill-total-amount amount">
+                                ₹ {{ (items.maximumExpenditureAmount / 10000000).toFixed(2) }} Cr
+                              </span> -->
+                              <span #pillRef class="me-2 pill-total-amount amount"
+                              matTooltip="₹ {{ (items.maximumExpenditureAmount / 10000000).toFixed(2) }} Cr">
                                 ₹ {{ (items.maximumExpenditureAmount / 10000000).toFixed(2) }} Cr
                               </span>
 

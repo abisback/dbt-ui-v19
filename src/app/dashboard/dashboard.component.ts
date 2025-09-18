@@ -153,34 +153,69 @@ export class DashboardComponent {
       }
     });
   }
-
-  pieChart(pieData: any) {
-    this.secondChartOptions = {
-      series: [Number(Number(pieData[0]?.totalCentralShare).toFixed(2)), Number(Number(pieData[0]?.totalStateShare).toFixed(2))],
-      chart: {
-        width: 250,
-        height: 220,
-        type: "pie"
-      },
-      labels: ["Central Share", "State Share"],
-      legend: {
-        show: false    // <-- Top-level, not inside 'chart'
-      },
-      dataLabels: {
-        enabled: true  // or false if you also want to hide slice values
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: { width: 260 },
-            legend: { show: false }, // keep for safety at small widths
-            dataLabels: { enabled: false }
+pieChart(pieData: any) {
+  this.secondChartOptions = {
+    series: [
+      Number(Number(pieData[0]?.totalCentralShare).toFixed(2)),
+      Number(Number(pieData[0]?.totalStateShare).toFixed(2))
+    ],
+    chart: {
+      type: "pie",
+      width: "100%", // ✅ Responsive width
+      height: this.getPieHeight(), // ✅ Dynamically calculated height
+    },
+    labels: ["Central Share", "State Share"],
+    legend: {
+      show: false
+    },
+    dataLabels: {
+      enabled: true
+    },
+    responsive: [
+      {
+        breakpoint: 1024, // Tablets
+        options: {
+          chart: {
+            height: 200
+          },
+          dataLabels: {
+            enabled: true
           }
         }
-      ]
-    };
-  }
+      },
+      {
+        breakpoint: 768, // Mobile
+        options: {
+          chart: {
+            height: 180
+          },
+          dataLabels: {
+            enabled: false
+          }
+        }
+      },
+      {
+        breakpoint: 480, // Very small phones
+        options: {
+          chart: {
+            height: 160
+          },
+          dataLabels: {
+            enabled: false
+          }
+        }
+      }
+    ]
+  };
+}
+getPieHeight(): number {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 480) return 180;
+  if (screenWidth <= 768) return 250;
+  if (screenWidth <= 1024) return 210;
+  return 220; // default for desktop
+}
 
   radialChart(radialData: any) {
     this.thirdChartOptions = {
@@ -191,8 +226,8 @@ export class DashboardComponent {
         Number((Number(radialData[0]?.totalExpenditureKindCentral) / 10000000).toFixed(2))
       ],
       chart: {
-        height: 240,
-        width: 260,
+        height: this.getPieHeight(),
+        width: "100%",
         type: "radialBar"
       },
       plotOptions: {
@@ -202,7 +237,7 @@ export class DashboardComponent {
               fontSize: "22px"
             },
             value: {
-              fontSize: "14px",
+              fontSize: "13px",
               formatter: function (val: number) {
                 return val + " Cr";
               }
