@@ -11,6 +11,7 @@
         [(ngModel)]="selectedFinYear"
         [matAutocomplete]="finYrAuto"
         name="finYrCode"
+        required="selectedFinYear"
       />
       <mat-icon matSuffix>arrow_drop_down</mat-icon>
       <mat-autocomplete
@@ -62,11 +63,13 @@
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>View Data</th>
-        <td mat-cell *matCellDef="let element" class="action-link">
+        <td mat-cell *matCellDef="let element"
+        class="action-link"
+        [matTooltip]="selectedFinYear === '' ? 'Please Select Financial Year First' : 'Click to View'">
           <button
+          [disabled]="selectedFinYear == ''"
             class="view-btn"
             mat-flat-button
-            matTooltip="Click to View"
             (click)="
               
               getExpandedDetails(element.deptCode, element)

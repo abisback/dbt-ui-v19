@@ -78,8 +78,9 @@ Finance Department`,
           if (data.apiResponseStatus === 1) {
             this.mailList = data.result
               .map((x: any) => x.usersMail)
-              .filter((mail: any) => mail);
-            this.toEmails.set(this.mailList);
+              .filter((mail: any) => mail); // remove falsy values
+            const uniqueEmails = [...new Set(this.mailList)];
+            this.toEmails.set(uniqueEmails);
             // console.log('Mail users:', this.mailList);
           } else {
             this.toaster.error(data.errorMessage);
@@ -141,7 +142,7 @@ Finance Department`,
     }
 
     console.log('Sending email...', emailData);
-    // debugger;
+    debugger;
     // Send logic
   }
 
