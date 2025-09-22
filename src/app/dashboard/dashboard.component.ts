@@ -161,7 +161,7 @@ pieChart(pieData: any) {
     ],
     chart: {
       type: "pie",
-      width: "100%", // ✅ Responsive width
+      width: this.getPieWidth(), // ✅ Responsive width
       height: this.getPieHeight(), // ✅ Dynamically calculated height
     },
     labels: ["Central Share", "State Share"],
@@ -216,6 +216,16 @@ getPieHeight(): number {
   if (screenWidth <= 1024) return 210;
   return 220; // default for desktop
 }
+getPieWidth(): number {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 480) return 110;   // mobile
+  if (screenWidth <= 768) return 130;   // tablet
+  if (screenWidth <= 1024) return 150;  // small desktop
+  return 171;                            // default desktop
+}
+
+
 
   radialChart(radialData: any) {
     this.thirdChartOptions = {
@@ -227,7 +237,7 @@ getPieHeight(): number {
       ],
       chart: {
         height: this.getPieHeight(),
-        width: "100%",
+        width: this.getPieWidth(),
         type: "radialBar"
       },
       plotOptions: {
@@ -725,7 +735,7 @@ saveExcel() {
 
     dialogRef.afterClosed().subscribe(response => {
       if (response != true) {
-        this.toastr.success(response);
+        // this.toastr.success(response);
         // this.loadDataTable();
       }
     });

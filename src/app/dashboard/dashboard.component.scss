@@ -574,6 +574,11 @@ mat-label {
 }
 .pill-total-amount {
   font-size: 12px; // default for large screens
+  background: linear-gradient(
+    90deg,
+    #e0f7fa 0%,
+    #b2ebf2 100%
+  );
 
   @media (max-width: 1024px) {
     font-size: 10px;
