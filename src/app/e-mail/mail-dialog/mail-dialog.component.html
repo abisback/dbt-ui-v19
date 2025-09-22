@@ -1,31 +1,31 @@
 <div class="body m-3" >
   <!-- <div class="row"> -->
-    <h2>{{ title }}</h2>
-    <button
-      mat-icon-button
-      class="close-button"
-      [mat-dialog-close]="true"
-      aria-label="Close"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
+  <h2>{{ title }}</h2>
+  <button
+    mat-icon-button
+    class="close-button"
+    [mat-dialog-close]="true"
+    aria-label="Close"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
   <!-- </div> -->
-
   <mat-divider></mat-divider>
 
-  <div class="compose-wrapper mat-elevation-z4">
+  <div class="compose-wrapper mat-elevation-z4" *ngIf="title === 'New Message'">
     <form
       [formGroup]="composeForm"
       (ngSubmit)="sendEmail()"
       class="compose-form"
     >
       <!-- TO FIELD -->
-      <mat-form-field class="example-chip-list" [class.disabled]="title === 'View Message'">
+      <!-- [class.disabled]="title === 'View Message'" -->
+      <mat-form-field class="example-chip-list">
         <mat-label>To</mat-label>
         <mat-chip-grid #toGrid aria-label="To email list">
           @for (email of toEmails(); track email) {
           <mat-chip-row
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             (removed)="removeEmail('to', email)"
             [editable]="true"
             (edited)="editEmail('to', email, $event)"
@@ -38,7 +38,7 @@
           </mat-chip-row>
           }
           <input
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             placeholder="Enter email"
             [matChipInputFor]="toGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -87,7 +87,7 @@
         <mat-chip-grid #ccGrid aria-label="Cc email list">
           @for (email of ccEmails(); track email) {
           <mat-chip-row
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             (removed)="removeEmail('cc', email)"
             [editable]="true"
             (edited)="editEmail('cc', email, $event)"
@@ -100,7 +100,7 @@
           </mat-chip-row>
           }
           <input
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             placeholder="Enter Cc"
             [matChipInputFor]="ccGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -126,7 +126,7 @@
         <mat-chip-grid #bccGrid aria-label="Bcc email list">
           @for (email of bccEmails(); track email) {
           <mat-chip-row
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             (removed)="removeEmail('bcc', email)"
             [editable]="true"
             (edited)="editEmail('bcc', email, $event)"
@@ -139,7 +139,7 @@
           </mat-chip-row>
           }
           <input
-          [disabled]="isDisabled"
+            [disabled]="isDisabled"
             placeholder="Enter Bcc"
             [matChipInputFor]="bccGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -185,11 +185,12 @@
       <!-- Actions -->
       <div class="actions">
         <button
+          id="send"
           [disabled]="isDisabled"
-          mat-flat-button
+          mat-raised-button
           color="primary"
           type="submit"
-          >
+        >
           <!-- [disabled]="composeForm.invalid" -->
           Send
         </button>
@@ -198,5 +199,34 @@
         </button> -->
       </div>
     </form>
+  </div>
+  <div
+    class="compose-wrapper mat-elevation-z4"
+    *ngIf="title === 'View Message'"
+  >
+    <div class="email-header">
+      <p><strong>To:</strong> {{ mailData.to }}</p>
+      <p><strong>Subject:</strong> {{ mailData.subject }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span
+          [ngClass]="{
+            'status-success': mailData.status === 'Sent',
+            'status-failed': mailData.status === 'Failed'
+          }"
+        >
+          {{ mailData.status }}
+        </span>
+      </p>
+      <p>
+        <strong>Date Sent:</strong> {{ mailData.dateSent | date : "medium" }}
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="email-body">
+      <pre>{{ mailData.body }}</pre>
+    </div>
   </div>
 </div>

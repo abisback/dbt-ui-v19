@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MailDialogComponent } from './mail-dialog/mail-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 interface SentMail {
   to: string;
   subject: string;
@@ -33,6 +34,7 @@ export class EMailComponent {
   totalSize: number = 0;
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private dialog: MatDialog) {}
 
@@ -54,7 +56,8 @@ export class EMailComponent {
     ];
 
     // Assign data to dataSource
-    this.dataSource.data = users;
+    this.dataSource = new MatTableDataSource(users);
+    this.dataSource.paginator = this.paginator;
 
     // Attach sort
     this.dataSource.sort = this.sort;
@@ -71,7 +74,7 @@ export class EMailComponent {
 
     // Add your data here
     dialogConfig.data = {
-      title : 'New Message'
+      title: 'New Message',
       // to: 'example@example.com',
       // cc: ['cc1@example.com', 'cc2@example.com'],
       // subject: 'Hello',
@@ -90,12 +93,6 @@ export class EMailComponent {
 
   // View mail
   viewMail(mail: SentMail): void {
-    // console.log('Viewing mail:', mail);
-    // // Open a dialog or route to a detail page
-    // this.dialog.open(MailDialogComponent, {
-    //   width: '600px',
-    //   data: mail
-    // });
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -104,10 +101,27 @@ export class EMailComponent {
     dialogConfig.minWidth = '410px';
     dialogConfig.height = '80%';
     dialogConfig.minHeight = '80%';
+    const sentEmailData = {
+      to: 'john@example.com',
+      subject: 'Meeting Notes',
+      body: `Madam/Sir,
+
+This is a gentle reminder that the requisite information relating to the DBT Schemes being implemented by your esteemed Department has not yet been updated on the WBDBT Portal for the month of ______, ______.
+
+You are kindly requested to update the same at the earliest to ensure timely compliance to Bharat DBT Portal.
+
+With regards,
+WBDBT Team
+
+Finance Department`,
+      status: 'Sent',
+      dateSent: new Date(),
+    };
 
     // Add your data here
     dialogConfig.data = {
-      title : `View Message`
+      title: `View Message`,
+      mailData: sentEmailData,
       // to: 'example@example.com',
       // cc: ['cc1@example.com', 'cc2@example.com'],
       // subject: 'Hello',

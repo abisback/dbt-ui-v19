@@ -6,11 +6,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class EmailService {
+  baseUrl = environment.api_url + 'MailUser/' + environment.version + '/';
 
-  apiurl = environment.api_url + 'MailUser/' + environment.version + '/';
-  
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
+
   getMailList() {
-    return this.http.get(`${this.apiurl}MailUsersList`);
+    return this.http.get(`${this.baseUrl}MailUsersList`);
+  }
+
+  sendMail(payLoad: any) {
+    return this.http.post(`${this.baseUrl}SendMail`, payLoad);
   }
 }

@@ -11,7 +11,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { EmailService } from '../../service/email.service';
 
@@ -34,6 +34,7 @@ export class MailDialogComponent {
   bccEmails = signal<string[]>([]);
 
   mailList: any[] = [];
+  mailData: any ={};
   isDisabled: boolean = false;
 
   // Flags to toggle CC/BCC fields
@@ -44,14 +45,13 @@ export class MailDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toaster: ToastrService,
-    private mailService: EmailService
+    private mailService: EmailService,
+    public dialogRef: MatDialogRef<MailDialogComponent>
   ) {
     // console.log('this.data :>> ', this.data);
     this.title = this.data.title;
+    this.mailData = this.data.mailData
     this.composeForm = this.fb.group({
-      // to: [this.toEmails(), [Validators.required, Validators.email]],
-      // cc: [this.ccEmails(), [Validators.required, Validators.email]],
-      // bcc: [this.bccEmails(), [Validators.required, Validators.email]],
       subject: [
         'Reminder for Updating DBT Schemes Information on WBDBT Portal',
         Validators.required,
@@ -141,9 +141,23 @@ Finance Department`,
       return;
     }
 
-    console.log('Sending email...', emailData);
-    debugger;
-    // Send logic
+    // console.log('Sending email...', emailData);
+    // debugger;
+    this.mailService.sendMail(emailData).subscribe(
+      (data: any) => {
+        if (data.success === true) {
+          this.toaster.success(data.message);
+        } else {
+          this.toaster.error(data.message);
+        }
+        this.dialogRef.close(); // ✅ Close after response
+      },
+      (error) => {
+        console.error('Error fetching mail users:', error);
+        this.toaster.error('An error occurred while sending the mail.');
+        this.dialogRef.close(); // ✅ Close even on error
+      }
+    );
   }
 
   addEmail(field: 'to' | 'cc' | 'bcc', event: MatChipInputEvent): void {

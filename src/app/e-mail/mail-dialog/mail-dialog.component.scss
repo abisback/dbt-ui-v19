@@ -78,3 +78,11 @@
 .cc-bcc-buttons button{
     font-size: 14px;
 }
+#send:not([disabled]) {
+  background-color: #2e6c8b !important;
+  color: white; /* Optional: ensure text is visible */
+}
+.email-body pre {
+  font-family: inherit;
+  white-space: pre-wrap; /* wrap long lines */
+}
