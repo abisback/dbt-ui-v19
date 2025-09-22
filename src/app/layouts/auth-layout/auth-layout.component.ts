@@ -8,15 +8,13 @@ import { SharedModule } from '../../shared/shared.module';
   selector: 'app-auth-layout',
   imports: [SharedModule, SidebarComponent, FooterComponent, HeaderComponent],
   templateUrl: './auth-layout.component.html',
-  styleUrl: './auth-layout.component.scss'
+  styleUrl: './auth-layout.component.scss',
 })
 export class AuthLayoutComponent {
-    sideBarOpen = true;
+  sideBarOpen = false;
 
   constructor() {}
-
-      sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
-
 }
