@@ -13,7 +13,8 @@ import { DashboardService } from '../../service/dashboard.service';
 import { ToastrService } from 'ngx-toastr';
 import { MasterService } from '../../service/master.service';
 import { MasterCodeType } from '../../../app_enum';
-import { FormBuilder, FormGroup } from '@angular/forms';
+// import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-extended-dbt-data',
@@ -58,7 +59,8 @@ export class ExtendedDbtDataComponent {
     private dashboardService: DashboardService,
     private toastr: ToastrService,
     private masterService: MasterService,
-    private fb: FormBuilder
+    // private fb: FormBuilder,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -131,4 +133,11 @@ export class ExtendedDbtDataComponent {
         );
       });
   }
+  ngOnDestroy(): void {
+    window.removeEventListener('beforeunload', this.beforeUnloadHandler);
+    this.dialog.closeAll(); // Also closes on route change or destroy
+  }
+  beforeUnloadHandler = () => { 
+    this.dialog.closeAll();
+  };
 }

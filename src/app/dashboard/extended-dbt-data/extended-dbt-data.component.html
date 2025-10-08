@@ -99,6 +99,7 @@
                 </tr>
               </thead>
               <tbody>
+                <ng-container *ngIf="element.schemes?.length > 0; else noData">
                 <tr *ngFor="let scheme of element.schemes">
                   <td  style="width: 40%; word-wrap: break-word; white-space: normal;">{{ scheme.schemeName || "" }}</td>
                   <td>{{ scheme.totalBen || "" }}</td>
@@ -109,6 +110,16 @@
                     }}
                   </td>
                 </tr>
+                </ng-container>
+
+                <!-- Template to show if no data -->
+                <ng-template #noData>
+                  <tr>
+                    <td colspan="3" style="text-align: center; padding: 10px; color: red;">
+                      <strong>No data found.</strong>
+                    </td>
+                  </tr>
+                </ng-template>
               </tbody>
             </table>
           </div>
