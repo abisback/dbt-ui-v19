@@ -111,8 +111,8 @@
           </mat-menu>
         </li> -->
 
-        <li class="user-profile">
-          <button mat-button [matMenuTriggerFor]="menu" class="user-btn">
+        <li class="user-profile" [matMenuTriggerFor]="menu">
+          <button mat-button class="user-btn">
             <mat-icon>account_circle</mat-icon>
             {{username}}
           </button> <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
