@@ -65,7 +65,8 @@ export class SchemeWiseMonthlyStatusComponent {
     if (e.isUserInput) {
 
 
-
+      
+    this.schemeControl.reset();
 
 
       // if (role == 'DNOD' || role == 'DOPT') {
