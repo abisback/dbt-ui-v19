@@ -57,10 +57,10 @@ export class ExtendedDbtDataComponent {
 
   constructor(
     private dashboardService: DashboardService,
-    private toastr: ToastrService,
+    private toaster: ToastrService,
     private masterService: MasterService,
     // private fb: FormBuilder,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -68,9 +68,6 @@ export class ExtendedDbtDataComponent {
     this.loadFinancialYearList();
   }
 
-  viewDetails(row: any) {
-    console.log(row);
-  }
   getRowStyle(row: any) {
     if (row.submition_flag == 0) {
       return { backgroundColor: '' }; // Apply yellow background for condition 'value1'
@@ -91,22 +88,22 @@ export class ExtendedDbtDataComponent {
         this.dataSource = new MatTableDataSource(res.result);
         this.dataSource.paginator = this.paginator;
       } else {
-        this.toastr.error(res.errorMessage);
+        this.toaster.error(res.errorMessage);
       }
     });
   }
   getExpandedDetails(deptCode: any, element: any) {
     element.isExpanded = !element.isExpanded;
     if (element.isExpanded === true) {
-      console.log('deptCode :>> ', element.isExpanded);
+      // console.log('deptCode :>> ', element.isExpanded);
       this.dashboardService
         .GetSchemeListDetails(deptCode, this.financialYearId)
         .subscribe((res: any) => {
           if (res.apiResponseStatus == 1) {
-            console.log('res.result :>> ', res.result);
+            // console.log('res.result :>> ', res.result);
             element.schemes = res.result;
           } else {
-            this.toastr.error(res.errorMessage);
+            this.toaster.error(res.errorMessage);
           }
         });
     }
@@ -137,7 +134,7 @@ export class ExtendedDbtDataComponent {
     window.removeEventListener('beforeunload', this.beforeUnloadHandler);
     this.dialog.closeAll(); // Also closes on route change or destroy
   }
-  beforeUnloadHandler = () => { 
+  beforeUnloadHandler = () => {
     this.dialog.closeAll();
   };
 }
