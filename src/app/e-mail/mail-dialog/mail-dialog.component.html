@@ -206,6 +206,8 @@
   >
     <div class="email-header">
       <p><strong>To:</strong> {{ mailData.to }}</p>
+      <p *ngIf="mailData.cc != ''"><strong>CC:</strong> {{ mailData.cc }}</p>
+      <p  *ngIf="mailData.bcc != ''"><strong>BCC:</strong> {{ mailData.bcc }}</p>
       <p><strong>Subject:</strong> {{ mailData.subject }}</p>
       <p>
         <strong>Status:</strong>
