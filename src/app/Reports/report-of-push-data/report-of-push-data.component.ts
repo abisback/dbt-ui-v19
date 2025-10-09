@@ -577,6 +577,7 @@ export class ReportOfPushDataComponent {
   }
   displayFnDepartment(deptCode: Department): string {
     const dept = this.departmentList?.find((s: any) => s.deptCode === deptCode);
+    this.deptname = dept ? dept.name : 'ALL Department';
     return dept ? dept.name : '';
   }
 
@@ -589,6 +590,7 @@ export class ReportOfPushDataComponent {
   }
   displayMonthFn(monthId: number) {
     const month = this.monthList.find((m: any) => m.monthId == monthId);
+    this.monthname = month ? month.monthName : 'ALL';
     return month ? month.monthName : '';
   }
 }
