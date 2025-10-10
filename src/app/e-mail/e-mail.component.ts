@@ -116,7 +116,7 @@ With regards,
 WBDBT Team
 
 Finance Department`,
-      status: 'Sent',
+      status: mail.status,
       dateSent: new Date(),
     };
 

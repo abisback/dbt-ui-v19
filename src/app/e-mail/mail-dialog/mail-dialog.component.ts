@@ -96,16 +96,20 @@ Finance Department`,
       this.isDisabled = true;
     }
   }
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.composeForm.patchValue({ attachments: Array.from(input.files) });
-    }
-  }
+  // onFileSelected(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files?.length) {
+  //     this.composeForm.patchValue({ attachments: Array.from(input.files) });
+  //   }
+  // }
 
-  discardEmail() {
-    this.composeForm.reset();
-  }
+  // discardEmail() {
+  //   this.composeForm.reset();
+  //   this.ccEmails.set([]);
+  //   this.bccEmails.set([]);
+  //   this.toEmails.set([]);
+  //   // this.dialogRef.close(); // Close without response
+  // }
 
   // Sending email
   sendEmail() {

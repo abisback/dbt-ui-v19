@@ -213,8 +213,8 @@
         <strong>Status:</strong>
         <span
           [ngClass]="{
-            'status-success': mailData.status === 'Sent',
-            'status-failed': mailData.status === 'Failed'
+            'text-success': mailData.status === 'Sent',
+            'text-danger': mailData.status === 'Failed'
           }"
         >
           {{ mailData.status }}
