@@ -87,7 +87,7 @@ export class UserComponent {
         this.departmentList.push(elm);
       });
       // If you want to COPY this list elsewhere
-      this.departmentList = [...this.departmentList];
+      this.copyDepartmentList = [...this.departmentList];
     });
 
     this.masterService.getCodeValues(MasterCodeType.Roles).subscribe(x => {
@@ -183,6 +183,7 @@ export class UserComponent {
         this.totalSize = this.array.length;
         // this.iterator();
       });
+
     }
     // this.userService.GetUserProfileByDeptRole(deptcode, this.searchForm.value.roleCode ? this.searchForm.value.roleCode : -1).subscribe(x => {
     //   this.filterData = x;
@@ -214,7 +215,7 @@ export class UserComponent {
         this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
         this.array = x;
-        this.totalSize = this.array.length;
+        this.totalSize = this.array?.length;
 
       });
     }

@@ -102,9 +102,9 @@ export class EMailComponent {
     dialogConfig.height = '80%';
     dialogConfig.minHeight = '80%';
     const sentEmailData = {
-      to: 'ujjwalkant.nic@gmail.com',
-      cc: 'ujjwalkant.nic@gmail.com',
-      bcc:'ujjwalkant.nic@gmail.com',
+      to: 'xyz.nic@gmail.com',
+      cc: 'abc.nic@gmail.com',
+      bcc:'zzz.nic@gmail.com',
       subject: 'Meeting Notes',
       body: `Madam/Sir,
 

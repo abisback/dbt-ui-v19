@@ -197,7 +197,7 @@ export class ProcessDbtComponent {
     if (deptId === null || deptId === undefined || deptId <= 0) {
       deptId = -1;
       //this.departmentCode = -1;
-      // this.admin = true;
+      this.admin = true;
     }
     if (schemeCode == null || schemeCode == "") {
       schemeCode = "unset";

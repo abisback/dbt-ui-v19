@@ -50,6 +50,7 @@ export class ExtendedDbtDataComponent {
   currentPage: number = 0;
   pageSize: number = 5;
   totalSize: number = 0;
+  expandedElement: any | null;
 
   clickedRows = new Set<any>();
 
@@ -92,22 +93,52 @@ export class ExtendedDbtDataComponent {
       }
     });
   }
-  getExpandedDetails(deptCode: any, element: any) {
-    element.isExpanded = !element.isExpanded;
-    if (element.isExpanded === true) {
-      // console.log('deptCode :>> ', element.isExpanded);
-      this.dashboardService
-        .GetSchemeListDetails(deptCode, this.financialYearId)
-        .subscribe((res: any) => {
-          if (res.apiResponseStatus == 1) {
-            // console.log('res.result :>> ', res.result);
-            element.schemes = res.result;
-          } else {
-            this.toaster.error(res.errorMessage);
-          }
-        });
-    }
+  // getExpandedDetails(deptCode: any, element: any) {
+  //   element.isExpanded = !element.isExpanded;
+  //   if (element.isExpanded === true) {
+  //     // console.log('deptCode :>> ', element.isExpanded);
+  //     this.dashboardService
+  //       .GetSchemeListDetails(deptCode, this.financialYearId)
+  //       .subscribe((res: any) => {
+  //         if (res.apiResponseStatus == 1) {
+  //           // console.log('res.result :>> ', res.result);
+  //           element.schemes = res.result;
+  //         } else {
+  //           this.toaster.error(res.errorMessage);
+  //         }
+  //       });
+  //   }
+  // }
+
+
+getExpandedDetails(deptCode: any, element: any) {
+  // If some other row is already expanded, close it
+  if (this.expandedElement && this.expandedElement !== element) {
+    this.expandedElement.isExpanded = false;
   }
+
+  // Toggle current row
+  element.isExpanded = !element.isExpanded;
+
+  // Update tracker
+  this.expandedElement = element.isExpanded ? element : null;
+
+  if (element.isExpanded === true) {
+    this.dashboardService
+      .GetSchemeListDetails(deptCode, this.financialYearId)
+      .subscribe((res: any) => {
+        if (res.apiResponseStatus == 1) {
+          element.schemes = res.result;
+        } else {
+          this.toaster.error(res.errorMessage);
+        }
+      });
+  }
+}
+
+
+
+
   displayFinancialYearFn(finYearId: number): string {
     // Find the financial year by ID
     const finYear = this.finYrList.find(
@@ -115,11 +146,27 @@ export class ExtendedDbtDataComponent {
     );
     return finYear ? finYear.codeValueDesc : '';
   }
+  // onFinancialYearSelect(event: any, finYearId: any): void {
+  //   if (event.isUserInput) {
+  //     this.financialYearId = finYearId;
+  //     if (this.expandedElement?.isExpanded === true) {
+  //       this.expandedElement.isExpanded = false;
+  //     }
+
+  //   }
+  // }
+
+
+
   onFinancialYearSelect(event: any, finYearId: any): void {
-    if (event.isUserInput) {
-      this.financialYearId = finYearId;
+  if (event.isUserInput) {
+    this.financialYearId = finYearId;
+    if (this.expandedElement?.isExpanded === true) {
+      this.expandedElement.isExpanded = false;
     }
   }
+}
+
   loadFinancialYearList(): void {
     this.masterService
       .getCodeValues(MasterCodeType.Financial_Year)

@@ -15,6 +15,6 @@ export class EmailService {
   }
 
   sendMail(payLoad: any) {
-    return this.http.post(`${this.baseUrl}SendMail`, payLoad);
+    return this.http.post(`${this.baseUrl}SendPendingMails`, payLoad);
   }
 }
