@@ -45,6 +45,7 @@ tr {
   // font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
+  margin-left: 13px;
   color: #21245c;
 }
 .margin-header {
@@ -56,4 +57,12 @@ mat-label {
 .mat-typography {
   font: 400 14px / 20px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
+}
+
+.custom-dialog-header {
+background-color: #f4fff2;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 54px;
+  margin-bottom: 8px;
 }

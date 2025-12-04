@@ -15,7 +15,7 @@ export interface User {
     phoneNo: string;
     schemeType:number;
     schemeCode:string;
-    profilePhotoUrl: string;  
+    profilePhotoUrl: string;
     codeTypeId:number;
     schemeCodeList: string[];
 }

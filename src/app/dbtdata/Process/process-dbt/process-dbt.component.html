@@ -1,41 +1,79 @@
 <div class="body">
-<!-- <mat-form-field appearance="standard">
+  <!-- <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter" #input>
 </mat-form-field> -->
-<!-- <mat-dialog-content class="mat-typography"> -->
+  <!-- <mat-dialog-content class="mat-typography"> -->
 
-  <form [formGroup]="dbtDataForm" >
-    <div class="row" *ngIf="admin">
+  <form [formGroup]="dbtDataForm">
+    <div class="row" class="row custom-field mt-2" >
       <div class="col-xl-2 col-lg-2 col-md-2">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Select Department</mat-label>
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline" *ngIf="admin">
+          <!-- <mat-label>Select Department</mat-label>
           <mat-select #deptName formControlName="deptCode" disableRipple>
             <mat-option *ngFor="let item of departmentList"
               (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
               {{item.name}}
             </mat-option>
           </mat-select>
-          <mat-hint>Please Select Department</mat-hint>
+          <mat-hint>Please Select Department</mat-hint> -->
+
+          <mat-label>Select Department</mat-label>
+          <input matInput type="text" [matAutocomplete]="dept" formControlName="deptCode"
+            (keyup)="searchdept($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
+          <mat-autocomplete #dept="matAutocomplete" [panelWidth]="'auto'"
+            [displayWith]="displayFnDepartment.bind(this)">
+            <mat-option *ngFor="let item of departmentList"
+              (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
+              {{item.name}}
+            </mat-option>
+          </mat-autocomplete>
+
+
+
+
+
+
         </mat-form-field>
       </div>
 
       <div class="col-xl-2 col-lg-2 col-md-2">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Select Scheme</mat-label>
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline" *ngIf="admin">
+          <!-- <mat-label>Select Scheme</mat-label>
           <mat-select #schemeCode formControlName="schemeCode" disableRipple>
             <mat-option *ngFor="let item of schemeList" (onSelectionChange)="onSchemeSelect($event,item.id)"
               [value]="item.id">
               {{item.schemeName}}
             </mat-option>
           </mat-select>
-          <mat-hint>Please Select Scheme</mat-hint>
+          <mat-hint>Please Select Scheme</mat-hint> -->
+
+
+
+          <mat-label>Select Scheme</mat-label>
+          <input matInput type="text" [matAutocomplete]="scheme" formControlName="schemeCode"
+            (keyup)="searchScheme($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple> -->
+          <mat-autocomplete #scheme="matAutocomplete" [panelWidth]="'auto'" [displayWith]="displayFnScheme.bind(this)">
+            <mat-option *ngFor="let item of schemeList" (onSelectionChange)="onSchemeSelect($event,item.id)"
+              [value]="item.id">
+              {{item.schemeName}}
+            </mat-option>
+          </mat-autocomplete>
+
+
+
+
+
         </mat-form-field>
       </div>
 
       <div class="col-xl-2 col-lg-2 col-md-2">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Select Financial year</mat-label>
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline" *ngIf="admin">
+          <!-- <mat-label>Select Financial year</mat-label>
           <mat-select #finYrCode formControlName="finYrCode" disableRipple>
             <mat-option *ngFor="let item of finYrList"
               (onSelectionChange)="onFinancialYearSelect($event,item.codeValueId)" [value]="item.codeValueId.trim()">
@@ -43,13 +81,33 @@
             </mat-option>
           </mat-select>
 
-          <mat-hint>Please select financial year</mat-hint>
+          <mat-hint>Please select financial year</mat-hint> -->
+
+
+
+          <mat-label>Select Financial year</mat-label>
+          <input matInput type="text" [matAutocomplete]="finYr" formControlName="finYrCode"
+            (keyup)="searchFinYr($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #finYrCode formControlName="finYrCode" disableRipple> -->
+          <mat-autocomplete #finYr="matAutocomplete" [displayWith]="displayFnFinancialYear.bind(this)">
+            <mat-option *ngFor="let item of finYrList"
+              (onSelectionChange)="onFinancialYearSelect($event,item.codeValueId)" [value]="item.codeValueId">
+              {{item.codeValueDesc.trim()}}
+            </mat-option>
+          </mat-autocomplete>
+
+
+
+
+
+
         </mat-form-field>
       </div>
 
       <div class="col-xl-2 col-lg-2 col-md-1">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Select Month</mat-label>
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline" *ngIf="admin">
+          <!-- <mat-label>Select Month</mat-label>
           <mat-select #monthCode formControlName="monthCode" disableRipple>
             <mat-option *ngFor="let item of reportingMonthList" (onSelectionChange)="onMonthSelect($event,item.monthId)"
               [value]="item.monthId">
@@ -57,31 +115,53 @@
             </mat-option>
           </mat-select>
 
-          <mat-hint>Please select Month</mat-hint>
+          <mat-hint>Please select Month</mat-hint> -->
+
+
+          <mat-label>Select Month</mat-label>
+          <input matInput type="text" [matAutocomplete]="month" formControlName="monthCode"
+            (keyup)="searchMonth($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #monthCode formControlName="monthCode" disableRipple> -->
+          <mat-autocomplete #month="matAutocomplete" [displayWith]="displayFnMonth.bind(this)">
+            <mat-option *ngFor="let item of reportingMonthList" (onSelectionChange)="onMonthSelect($event,item.monthId)"
+              [value]="item.monthId">
+              {{item.monthName.trim()}}
+            </mat-option>
+          </mat-autocomplete>
+
+
+
+
+
         </mat-form-field>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex ">
         <!-- <form action="" [formGroup]="searchForm"> -->
-          <mat-form-field appearance="outline">
-            <mat-label>Search Here</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Enter text to filter"
-              style="color: black; ">
-              <mat-hint>Please Enter the keyword you want to serach</mat-hint>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 slim-field mt-2">
+          <mat-label>Search Here</mat-label>
+          <input matInput (keyup)="applyFilter($event)" [formControl]="searchControl" placeholder="Enter text to filter"
+            style="color: black; ">
+          <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
+        </mat-form-field>
+
+        <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()" matTooltip="Reset" *ngIf="admin">
+          <mat-icon>refresh</mat-icon>
+        </button>
         <!-- </form> -->
       </div>
       <!-- <div class="col-3">
                 <button mat-raised-button type="submit" color="primary" >Search</button>
             </div> -->
 
-      <div class="col-md-2" style="float: none; margin-bottom:0px;">
+     <div class="col-md-2" style="float: none; margin-bottom:0px;" *ngIf="admin">
         <ul>
           <li><span class="Api_Uploaded"><b>
-                <h3>API base data entry</h3>
+                <p class="title">API base data entry</p>
               </b></span></li>
           <li><span class="From_Uploaded"><b>
-                <h3>Form base data entry</h3>
+                <p class="title">Form base data entry</p>
               </b></span> </li>
         </ul>
       </div>
@@ -127,7 +207,8 @@
       <ng-container matColumnDef="schemeType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Type </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.benefitType === 1 ? 'Cash' : (element.benefitType === 2 ? 'Kind' : (element.benefitType === 3 ? 'Cash and Kind' : '')) }}
+          {{ element.benefitType === 1 ? 'Cash' : (element.benefitType === 2 ? 'Kind' : (element.benefitType === 3 ?
+          'Cash and Kind' : '')) }}
         </td>
       </ng-container>
       <!-- name Column -->
@@ -155,7 +236,7 @@
       <ng-container matColumnDef="comment">
         <th mat-header-cell *matHeaderCellDef style="align-content: center;"> View Comments </th>
         <td mat-cell *matCellDef="let element">
-          <button class="viewComments"  mat-raised-button type="submit" id="approveBtn" color="primary"
+          <button class="viewComments" mat-raised-button type="submit" id="approveBtn" color="primary"
             (click)="openCommentsDialog(element.id)">View</button>
         </td>
       </ng-container>
@@ -186,7 +267,8 @@
           <!-- <button *ngIf="element.status==100 || element.status==202 || element.status==203 || element.status==101 || (roleid=='DNOD' && element.status==0) || roleid=='DADM'" (click)="onEditClickDraft(element.id,element.reportingMonth)" mat-flat-button matTooltip="Click to Edit">
             <mat-icon color="accent">edit</mat-icon>
           </button>   -->
-          <button class="view-btn" mat-flat-button matTooltip="Click to View" (click)="element.isExpanded = !element.isExpanded">
+          <button class="view-btn" mat-flat-button matTooltip="Click to View"
+            (click)="element.isExpanded = !element.isExpanded">
             <mat-icon color="primary">visibility</mat-icon>
           </button>
         </td>
@@ -407,8 +489,8 @@
       <button class="process-btn" mat-raised-button color="primary" (click)="goForApprove()">Process Data</button>
     </mat-action-row> -->
     <mat-action-row class="d-flex justify-content-center mt-2">
-  <button class="process-btn" mat-raised-button color="primary" (click)="goForApprove()">Process Data</button>
-</mat-action-row>
+      <button class="process-btn" mat-raised-button color="primary" (click)="goForApprove()">Process Data</button>
+    </mat-action-row>
 
 
 
@@ -418,5 +500,5 @@
     </mat-paginator>
 
   </div>
-<!-- </mat-dialog-content> -->
+  <!-- </mat-dialog-content> -->
 </div>

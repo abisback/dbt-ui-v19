@@ -116,6 +116,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Code </th>
           <td mat-cell *matCellDef="let element"> {{element.deptCode}} </td>
         </ng-container>
+         <ng-container matColumnDef="schemeName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.schemeNames}} </td>
+        </ng-container>
         <!-- role Column -->
         <ng-container matColumnDef="role">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>

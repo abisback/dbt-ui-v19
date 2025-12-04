@@ -57,160 +57,160 @@
   </div>
 </mat-dialog-content> -->
   <!-- <div class="container-fluid justify-content-end d-flex">
-   
+
   </div> -->
 
   <!-- <mat-dialog-content class="mat-typography"> -->
 
-    <form [formGroup]="dbtDataForm">
-      <div class="row custom-field mt-2" *ngIf="admin">
-        <div class="col-xl-2 col-lg-2 col-md-2">
-          <mat-form-field class="full-width slim-field mt-2" appearance="outline">
-            <mat-label>Select Department</mat-label>
-            <input matInput type="text" [matAutocomplete]="dept" formControlName="deptCode"
-              (keyup)="searchdept($event);" />
-            <mat-icon matSuffix>arrow_drop_down</mat-icon>
-            <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
-            <mat-autocomplete #dept="matAutocomplete" [panelWidth]="'auto'"
-              [displayWith]="displayFnDepartment.bind(this)">
-              <mat-option *ngFor="let item of departmentList"
-                (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
-                {{item.name}}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- </mat-select> -->
-            <!-- <mat-hint>Please Select Department</mat-hint> -->
-          </mat-form-field>
-        </div>
+  <form [formGroup]="dbtDataForm">
+    <div class="row custom-field mt-2" *ngIf="admin">
+      <div class="col-xl-2 col-lg-2 col-md-2">
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+          <mat-label>Select Department</mat-label>
+          <input matInput type="text" [matAutocomplete]="dept" formControlName="deptCode"
+            (keyup)="searchdept($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #deptName formControlName="deptCode" disableRipple> -->
+          <mat-autocomplete #dept="matAutocomplete" [panelWidth]="'auto'"
+            [displayWith]="displayFnDepartment.bind(this)">
+            <mat-option *ngFor="let item of departmentList"
+              (onSelectionChange)="onDepartmentSelect($event,item.deptCode)" [value]="item.deptCode">
+              {{item.name}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
+          <!-- <mat-hint>Please Select Department</mat-hint> -->
+        </mat-form-field>
+      </div>
 
-        <div class="col-xl-2 col-lg-2 col-md-2">
-          <mat-form-field class="full-width slim-field mt-2" appearance="outline">
-            <mat-label>Select Scheme</mat-label>
-            <input matInput type="text" [matAutocomplete]="scheme" formControlName="schemeCode"
-              (keyup)="searchScheme($event);" />
-            <mat-icon matSuffix>arrow_drop_down</mat-icon>
-            <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple> -->
-            <mat-autocomplete #scheme="matAutocomplete" [panelWidth]="'auto'"
-              [displayWith]="displayFnScheme.bind(this)">
-              <mat-option *ngFor="let item of schemeList" (onSelectionChange)="onSchemeSelect($event,item.id)"
-                [value]="item.id">
-                {{item.schemeName}}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- </mat-select> -->
-            <!-- <mat-hint>Please Select Scheme</mat-hint> -->
-          </mat-form-field>
-        </div>
+      <div class="col-xl-2 col-lg-2 col-md-2">
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+          <mat-label>Select Scheme</mat-label>
+          <input matInput type="text" [matAutocomplete]="scheme" formControlName="schemeCode"
+            (keyup)="searchScheme($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #schemeCode formControlName="schemeCode" disableRipple> -->
+          <mat-autocomplete #scheme="matAutocomplete" [panelWidth]="'auto'" [displayWith]="displayFnScheme.bind(this)">
+            <mat-option *ngFor="let item of schemeList" (onSelectionChange)="onSchemeSelect($event,item.id)"
+              [value]="item.id">
+              {{item.schemeName}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
+          <!-- <mat-hint>Please Select Scheme</mat-hint> -->
+        </mat-form-field>
+      </div>
 
-        <div class="col-xl-2 col-lg-2 col-md-2">
-          <mat-form-field class="full-width slim-field mt-2" appearance="outline">
-            <mat-label>Select Financial year</mat-label>
-            <input matInput type="text" [matAutocomplete]="finYr" formControlName="finYrCode"
-              (keyup)="searchFinYr($event);" />
-            <mat-icon matSuffix>arrow_drop_down</mat-icon>
-            <!-- <mat-select #finYrCode formControlName="finYrCode" disableRipple> -->
-            <mat-autocomplete #finYr="matAutocomplete"
-              [displayWith]="displayFnFinancialYear.bind(this)">
-              <mat-option *ngFor="let item of finYrList"
-                (onSelectionChange)="onFinancialYearSelect($event,item.codeValueId)" [value]="item.codeValueId">
-                {{item.codeValueDesc.trim()}}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- </mat-select> -->
+      <div class="col-xl-2 col-lg-2 col-md-2">
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+          <mat-label>Select Financial year</mat-label>
+          <input matInput type="text" [matAutocomplete]="finYr" formControlName="finYrCode"
+            (keyup)="searchFinYr($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #finYrCode formControlName="finYrCode" disableRipple> -->
+          <mat-autocomplete #finYr="matAutocomplete" [displayWith]="displayFnFinancialYear.bind(this)">
+            <mat-option *ngFor="let item of finYrList"
+              (onSelectionChange)="onFinancialYearSelect($event,item.codeValueId)" [value]="item.codeValueId">
+              {{item.codeValueDesc.trim()}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
 
-            <!-- <mat-hint>Please select financial year</mat-hint> -->
-          </mat-form-field>
-        </div>
+          <!-- <mat-hint>Please select financial year</mat-hint> -->
+        </mat-form-field>
+      </div>
 
-        <div class="col-xl-2 col-lg-2 col-md-1">
-          <mat-form-field class="full-width slim-field mt-2" appearance="outline">
-            <mat-label>Select Month</mat-label>
-            <input matInput type="text" [matAutocomplete]="month" formControlName="monthCode"
-              (keyup)="searchMonth($event);" />
-            <mat-icon matSuffix>arrow_drop_down</mat-icon>
-            <!-- <mat-select #monthCode formControlName="monthCode" disableRipple> -->
-            <mat-autocomplete #month="matAutocomplete" [displayWith]="displayFnMonth.bind(this)">
-              <mat-option *ngFor="let item of reportingMonthList"
-                (onSelectionChange)="onMonthSelect($event,item.monthId)" [value]="item.monthId">
-                {{item.monthName.trim()}}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- </mat-select> -->
+      <div class="col-xl-2 col-lg-2 col-md-1">
+        <mat-form-field class="full-width slim-field mt-2" appearance="outline">
+          <mat-label>Select Month</mat-label>
+          <input matInput type="text" [matAutocomplete]="month" formControlName="monthCode"
+            (keyup)="searchMonth($event);" />
+          <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          <!-- <mat-select #monthCode formControlName="monthCode" disableRipple> -->
+          <mat-autocomplete #month="matAutocomplete" [displayWith]="displayFnMonth.bind(this)">
+            <mat-option *ngFor="let item of reportingMonthList" (onSelectionChange)="onMonthSelect($event,item.monthId)"
+              [value]="item.monthId">
+              {{item.monthName.trim()}}
+            </mat-option>
+          </mat-autocomplete>
+          <!-- </mat-select> -->
 
-            <!-- <mat-hint>Please select Month</mat-hint> -->
-          </mat-form-field>
-        </div>
+          <!-- <mat-hint>Please select Month</mat-hint> -->
+        </mat-form-field>
+      </div>
 
-        <div class="col-md-2 d-flex ">
-          <!-- <form action="" [formGroup]="searchForm"> -->
-          <mat-form-field appearance="outline" class="w-100 slim-field mt-2">
-            <mat-label>Search Here</mat-label>
-            <input matInput (keyup)="applyFilter($event)" [formControl]="searchControl"  placeholder="Enter text to filter" style="color: black; ">
-            <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
-          </mat-form-field>
+      <div class="col-md-2 d-flex ">
+        <!-- <form action="" [formGroup]="searchForm"> -->
+        <mat-form-field appearance="outline" class="w-100 slim-field mt-2">
+          <mat-label>Search Here</mat-label>
+          <input matInput (keyup)="applyFilter($event)" [formControl]="searchControl" placeholder="Enter text to filter"
+            style="color: black; ">
+          <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
+        </mat-form-field>
 
-          <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()" matTooltip="Reset">
-            <mat-icon>refresh</mat-icon>
-          </button>
-          <!-- </form> -->
-        </div>
-        <!-- <div class="col-3">
+        <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()" matTooltip="Reset">
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <!-- </form> -->
+      </div>
+      <!-- <div class="col-3">
                 <button mat-raised-button type="submit" color="primary" >Search</button>
             </div> -->
 
-        <div class="col-md-2" style="float: none; margin-bottom:0px;">
-          <ul>
-            <li><span class="Api_Uploaded"><b>
-                  <p class="title">API base data entry</p>
-                </b></span></li>
-            <li><span class="From_Uploaded"><b>
-                  <p class="title">Form base data entry</p>
-                </b></span> </li>
-          </ul>
-        </div>
+      <div class="col-md-2" style="float: none; margin-bottom:0px;">
+        <ul>
+          <li><span class="Api_Uploaded"><b>
+                <p class="title">API base data entry</p>
+              </b></span></li>
+          <li><span class="From_Uploaded"><b>
+                <p class="title">Form base data entry</p>
+              </b></span> </li>
+        </ul>
+      </div>
 
+    </div>
+
+
+
+    <div class="d-flex custom-field" *ngIf="showAddButton">
+      <div class="col-md-2 d-flex search-field">
+        <!-- <form action="" [formGroup]="searchForm"> -->
+        <mat-form-field appearance="outline" class="w-100 slim-field mt-2">
+          <mat-label>Search Here</mat-label>
+          <input matInput (keyup)="applyFilter($event)" [formControl]="searchControl" placeholder="Enter text to filter"
+            style="color: black; ">
+          <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
+        </mat-form-field>
+
+        <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()" matTooltip="Reset">
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <!-- </form> -->
+      </div>
+      <!-- <div class="col-3">
+                <button mat-raised-button type="submit" color="primary" >Search</button>
+            </div> -->
+
+      <div class="col-md-2" style="float: none; margin-bottom:0px;">
+        <ul>
+          <li><span class="Api_Uploaded"><b>
+                <p class="title">API base data entry</p>
+              </b></span></li>
+          <li><span class="From_Uploaded"><b>
+                <p class="title">Form base data entry</p>
+              </b></span> </li>
+        </ul>
+      </div>
+
+      <div class="mt-2 p-1" style="margin-left: auto; margin-right: 0;">
+        <button mat-raised-button class="add-button" color="primary" mat-button (click)="openAddDialog()">
+          <!-- <mat-icon>note-add-outline</mat-icon> -->
+          Add DBT Data
+        </button>
       </div>
 
 
-
-<div class="d-flex custom-field" *ngIf="showAddButton">
- <div class="col-md-2 d-flex search-field">
-          <!-- <form action="" [formGroup]="searchForm"> -->
-          <mat-form-field appearance="outline" class="w-100 slim-field mt-2">
-            <mat-label>Search Here</mat-label>
-            <input matInput (keyup)="applyFilter($event)" [formControl]="searchControl" placeholder="Enter text to filter" style="color: black; ">
-            <!-- <mat-hint>Please Enter the keyword you want to serach</mat-hint> -->
-          </mat-form-field>
-
-          <button mat-icon-button color="warn" class="small-icon-btn" (click)="resetForm()" matTooltip="Reset">
-            <mat-icon>refresh</mat-icon>
-          </button>
-          <!-- </form> -->
-        </div>
-        <!-- <div class="col-3">
-                <button mat-raised-button type="submit" color="primary" >Search</button>
-            </div> -->
-
-        <div class="col-md-2" style="float: none; margin-bottom:0px;">
-          <ul>
-            <li><span class="Api_Uploaded"><b>
-                  <p class="title">API base data entry</p>
-                </b></span></li>
-            <li><span class="From_Uploaded"><b>
-                  <p class="title">Form base data entry</p>
-                </b></span> </li>
-          </ul>
-        </div>
-
-    <div class="mt-2 p-1" style="margin-left: auto; margin-right: 0;">
-       <button mat-raised-button class="add-button" color="primary" mat-button (click)="openAddDialog()">
-      <!-- <mat-icon>note-add-outline</mat-icon> -->
-      Add DBT Data
-    </button>
-  </div> 
-    
-
-</div>
+    </div>
 
 
 
@@ -218,113 +218,113 @@
 
 
 
-    </form>
+  </form>
 
 
-    <div class="mat-elevation-z8">
-      <!-- <button mat-flat-button color="primary" (click)="exportToExcel()">Export to Excel</button> -->
-      <!-- <button mat-flat-button color="primary" (click)="exportToPdf()">Export to PDF</button> -->
-      <table mat-table id="my-table" #table [dataSource]="dataSource" matSort >
-        <!--- Note that these columns can be defined in any order.
+  <div class="mat-elevation-z8">
+    <!-- <button mat-flat-button color="primary" (click)="exportToExcel()">Export to Excel</button> -->
+    <!-- <button mat-flat-button color="primary" (click)="exportToPdf()">Export to PDF</button> -->
+    <table mat-table id="my-table" #table [dataSource]="dataSource" matSort>
+      <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
 
-        <ng-container matColumnDef="serialNo">
-          <th mat-header-cell *matHeaderCellDef> Serial No. </th>
-          <td mat-cell *matCellDef="let row; let rowIndex = index"> {{ (paginator.pageIndex * paginator.pageSize) +
-            (rowIndex + 1) }} </td>
-        </ng-container>
+      <ng-container matColumnDef="serialNo">
+        <th mat-header-cell *matHeaderCellDef> Serial No. </th>
+        <td mat-cell *matCellDef="let row; let rowIndex = index"> {{ (paginator.pageIndex * paginator.pageSize) +
+          (rowIndex + 1) }} </td>
+      </ng-container>
 
-        <ng-container matColumnDef="deptName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.deptName}} </td>
-          <!-- <td mat-footer-cell *matFooterCellDef>
+      <ng-container matColumnDef="deptName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.deptName}} </td>
+        <!-- <td mat-footer-cell *matFooterCellDef>
           <input matInput (keyup)="applyFilter($event)" placeholder="Search Serial No.">
         </td> -->
-        </ng-container>
+      </ng-container>
 
 
-        <ng-container matColumnDef="schemeName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.schemeName}} </td>
-          <!-- <td mat-footer-cell *matFooterCellDef>
+      <ng-container matColumnDef="schemeName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.schemeName}} </td>
+        <!-- <td mat-footer-cell *matFooterCellDef>
           <input matInput (keyup)="applyFilter($event)" placeholder="Search Serial No.">
         </td> -->
-        </ng-container>
-        <!-- name Column -->
-        <ng-container matColumnDef="financialYear">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Financial Year </th>
-          <td mat-cell *matCellDef="let element"> {{element.financialYear}} </td>
-        </ng-container>
+      </ng-container>
+      <!-- name Column -->
+      <ng-container matColumnDef="financialYear">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Financial Year </th>
+        <td mat-cell *matCellDef="let element"> {{element.financialYear}} </td>
+      </ng-container>
 
-        <!-- email Column -->
-        <ng-container matColumnDef="reportingMonthName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporting Month </th>
-          <td mat-cell *matCellDef="let element"><span class="pill-reporting-month">{{ element.reportingMonthName
-              }}</span> </td>
-        </ng-container>
-        <!-- mobile Column -->
-        <ng-container matColumnDef="totalBen">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Beneficiary </th>
-          <!-- <td mat-cell *matCellDef="let element"> {{element.totalBen}}</td> -->
-          <td mat-cell *matCellDef="let element">
-            <span class="pill-total-ben">{{ element.totalBen }}</span>
-          </td>
+      <!-- email Column -->
+      <ng-container matColumnDef="reportingMonthName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporting Month </th>
+        <td mat-cell *matCellDef="let element"><span class="pill-reporting-month">{{ element.reportingMonthName
+            }}</span> </td>
+      </ng-container>
+      <!-- mobile Column -->
+      <ng-container matColumnDef="totalBen">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Beneficiary </th>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.totalBen}}</td> -->
+        <td mat-cell *matCellDef="let element">
+          <span class="pill-total-ben">{{ element.totalBen }}</span>
+        </td>
 
-        </ng-container>
-        <ng-container matColumnDef="fundTrnsferCash">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fund Transfer(Cash) </th>
-          <td mat-cell *matCellDef="let element">
-            <span class="pill-value">{{ element.fundTrnsferCash }}</span>
-          </td>
+      </ng-container>
+      <ng-container matColumnDef="fundTrnsferCash">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fund Transfer(Cash) </th>
+        <td mat-cell *matCellDef="let element">
+          <span class="pill-value">{{ element.fundTrnsferCash }}</span>
+        </td>
 
-        </ng-container>
+      </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="element.dbtstatus === 'Push To Bharat DBT'"
-              style="background-color: #d4edda; color: #155724; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
-            <span *ngIf="element.dbtstatus == 'State Approved'"
-              style="background-color: #fff9db; color: #7c6400; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
-            <span *ngIf="element.dbtstatus == 'Fresh Entry'"
-              style="background-color: #ede7f6; color: #4a148c; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
-              <span *ngIf="element.dbtstatus == 'Department Nodal Approve'"
-              style="background-color: #e7f6f6; color: #09a8bd; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
-              <span *ngIf="element.dbtstatus == 'State Rejected'"
-              style="background-color: #f6e7e7; color: #bd0909; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
-            <span
-              *ngIf="element.dbtstatus != 'Push To Bharat DBT' && element.dbtstatus != 'State Approved' && element.dbtstatus != 'Fresh Entry' && element.dbtstatus != 'Department Nodal Approve' && element.dbtstatus != 'State Rejected'"
-              style="background-color: #e3f2fd; color: #0d47a1; border-radius: 16px; padding: 2px 12px; display: inline-block;">
-              {{element.dbtstatus}}
-            </span>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.dbtstatus === 'Push To Bharat DBT'"
+            style="background-color: #d4edda; color: #155724; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
+          <span *ngIf="element.dbtstatus == 'State Approved'"
+            style="background-color: #fff9db; color: #7c6400; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
+          <span *ngIf="element.dbtstatus == 'Fresh Entry'"
+            style="background-color: #ede7f6; color: #4a148c; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
+          <span *ngIf="element.dbtstatus == 'Department Nodal Approve'"
+            style="background-color: #e7f6f6; color: #09a8bd; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
+          <span *ngIf="element.dbtstatus == 'State Rejected'"
+            style="background-color: #f6e7e7; color: #bd0909; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
+          <span
+            *ngIf="element.dbtstatus != 'Push To Bharat DBT' && element.dbtstatus != 'State Approved' && element.dbtstatus != 'Fresh Entry' && element.dbtstatus != 'Department Nodal Approve' && element.dbtstatus != 'State Rejected'"
+            style="background-color: #e3f2fd; color: #0d47a1; border-radius: 16px; padding: 2px 12px; display: inline-block;">
+            {{element.dbtstatus}}
+          </span>
 
-           
-            
-            <!-- <button mat-button color="primary" *ngIf="element.status==202 || element.status==203 || element.status==101" (click)="onEditClick(element.id,element.reportingMonth)" title="Edit"><mat-icon>mode_edit</mat-icon></button> -->
-          </td>
-        </ng-container>
 
-        <!-- isactive Column -->
-        <ng-container matColumnDef="isActive">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Status </th>
-          <td mat-cell *matCellDef="let element">
-            <!-- {{element.isActive}}  -->
-            <!-- <mat-button-toggle-group class="toggle-status" *ngIf="show" [value]="element.isActive?'true':'false'"
+
+          <!-- <button mat-button color="primary" *ngIf="element.status==202 || element.status==203 || element.status==101" (click)="onEditClick(element.id,element.reportingMonth)" title="Edit"><mat-icon>mode_edit</mat-icon></button> -->
+        </td>
+      </ng-container>
+
+      <!-- isactive Column -->
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Status </th>
+        <td mat-cell *matCellDef="let element">
+          <!-- {{element.isActive}}  -->
+          <!-- <mat-button-toggle-group class="toggle-status" *ngIf="show" [value]="element.isActive?'true':'false'"
               (change)="toggleActive(element.id)">
               <mat-button-toggle class="toggle-btn" *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
                 {{item.codeValueDesc}}
@@ -332,55 +332,54 @@
             </mat-button-toggle-group> -->
 
 
-            <mat-button-toggle-group *ngIf="show" class="toggle-status" [value]="element.isActive ? 'true' : 'false'"
-              (change)="onToggleChange($event, element)">
-              <mat-button-toggle class="toggle-btn" *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
-                {{ item.codeValueDesc }}
-              </mat-button-toggle>
-            </mat-button-toggle-group>
+          <mat-button-toggle-group *ngIf="show" class="toggle-status" [value]="element.isActive ? 'true' : 'false'"
+            (change)="onToggleChange($event, element)">
+            <mat-button-toggle class="toggle-btn" *ngFor="let item of decisionTypeList" [value]="item.codeValueId">
+              {{ item.codeValueDesc }}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
 
 
 
 
 
 
-            <button mat-button color="primary" *ngIf="!show && element.status==0">Forward</button>
-            <!-- <button mat-button color="primary"  *ngIf="!show && element.status==202" (click)="onEditClick(element.id)">Edit</button> -->
-          </td>
-          <td>
-          </td>
-        </ng-container>
+          <button mat-button color="primary" *ngIf="!show && element.status==0">Forward</button>
+          <!-- <button mat-button color="primary"  *ngIf="!show && element.status==202" (click)="onEditClick(element.id)">Edit</button> -->
+        </td>
+        <td>
+        </td>
+      </ng-container>
 
-        <!-- Action Column -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef style="align-content: center;"> View Data </th>
-          <!-- <td mat-cell *matCellDef="let element"> {{element.dbtstatus}}
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef style="align-content: center;"> View Data </th>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.dbtstatus}}
           <button mat-button color="primary" *ngIf="element.status==202 || element.status==203 || element.status==101 || element.status==0" (click)="onEditClick(element.id,element.reportingMonth)" title="Edit"><mat-icon>mode_edit</mat-icon></button>
         </td> -->
-          <td mat-cell *matCellDef="let element" class="action-link">
-            <div class="d-flex">
-              <button class="edit-btn"
-                *ngIf="(roleid=='DOPT' && element.status == 202)|| ((element.status==0||element.status == 203) && ((roleid=='DNOD' || roleid=='DADM')))"
-                (click)="onEditClickDraft(element.id,element.reportingMonth)" mat-flat-button
-                matTooltip="Click to Edit">
-                <mat-icon color="accent">edit</mat-icon>
-              </button>
-              <button class="view-btn" mat-flat-button matTooltip="Click to View" (click)="viewDBTData(element)">
-                <mat-icon color="primary">visibility</mat-icon>
-              </button>
-            </div>
-          </td>
-        </ng-container>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <div class="d-flex">
+            <button class="edit-btn"
+              *ngIf="(roleid=='DOPT' && element.status == 202)|| ((element.status==0||element.status == 203) && ((roleid=='DNOD' || roleid=='DADM')))"
+              (click)="onEditClickDraft(element.id,element.reportingMonth)" mat-flat-button matTooltip="Click to Edit">
+              <mat-icon color="accent">edit</mat-icon>
+            </button>
+            <button class="view-btn" mat-flat-button matTooltip="Click to View" (click)="viewDBTData(element)">
+              <mat-icon color="primary">visibility</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="getRowStyle(row)"
-          [attr.title]="getRowTooltip(row)"></tr>
-      </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="getRowStyle(row)"
+        [attr.title]="getRowTooltip(row)"></tr>
+    </table>
 
-      <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
-        [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
-      </mat-paginator>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+    </mat-paginator>
 
-    </div>
+  </div>
   <!-- </mat-dialog-content> -->
 </div>

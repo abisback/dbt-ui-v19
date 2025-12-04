@@ -20,6 +20,7 @@ import { ShowPasswordComponent } from '../show-password/show-password.component'
 import { MasterService } from '../service/master.service';
 import { MasterCodeType } from '../../app_enum';
 import * as CryptoJS from "crypto-js";
+import { SchemeService } from '../service/scheme.service';
 
 @Component({
   selector: 'app-user',
@@ -30,7 +31,7 @@ import * as CryptoJS from "crypto-js";
 export class UserComponent {
   departmentCode: any;
   admin: boolean = false;
-  displayedColumns: string[] = ['serialNo', 'userId', 'deptCode', 'role', 'firstName', 'middleName', 'lastName', 'email', 'phoneNo', 'isActive', 'action', 'newpass'];
+  displayedColumns: string[] = ['serialNo', 'userId', 'deptCode', 'schemeName', 'role', 'firstName', 'middleName', 'lastName', 'email', 'phoneNo', 'isActive', 'action', 'newpass'];
   dataSource: any;
   currentPage: number = 0;
   pageSize: number = 10;
@@ -39,6 +40,7 @@ export class UserComponent {
   @ViewChild(MatSort) sort!: MatSort;
   array!: User[];
   departmentList: Department[] = [];
+  schemeList: any[] = [];
   selectDept: number = -1;
   decisionTypeList: CodeValues[] = [];
   roles: CodeValues[] = [];
@@ -52,6 +54,7 @@ export class UserComponent {
     private departmentService: DepartmentService,
     private notify: NotificationService,
     private masterService: MasterService,
+    private _schemeService: SchemeService
   ) {
 
   }
@@ -94,7 +97,18 @@ export class UserComponent {
       this.roles = x.filter(a => a.codeValueId == 'DADM' || a.codeValueId == 'DNOD' || a.codeValueId == 'DOPT');
       //console.log(this.decisionTypeList);
     });
-    this.loadDataTable();
+
+
+
+this._schemeService.GetAllSchemes().subscribe(schemes => {
+      this.schemeList = schemes;
+       this.loadDataTable();
+    } );
+
+
+
+
+
   }
 
   openAddDialog() {
@@ -123,15 +137,63 @@ export class UserComponent {
       this.departmentCode = -1;
       this.admin = true;
     }
-    this.userService.findUsers(deptCode, '', 'asc', 1, 20).subscribe(x => {
-      //  console.log(x);
-      this.dataSource = new MatTableDataSource(x);
+
+
+    this.userService.findUsers(deptCode, '', 'asc', 1, 20).subscribe(users => {
+
+      // Add scheme names to every user row
+      const transformedUsers = users.map((u: any) => {
+
+        // 1. Convert schemecode to array (if not null)
+        const schemeCodes = u.schemecode
+          ? u.schemecode.split(',').map((c: any) => c.trim())
+          : [];
+
+        // 2. Choose correct code array
+        const effectiveCodes =
+          u.schemeCodeList && u.schemeCodeList.length > 0
+            ? u.schemeCodeList
+            : schemeCodes;
+
+        // 3. Convert scheme codes → scheme names
+        const schemeNames = effectiveCodes
+          .map((code: any) => {
+            const match = this.schemeList.find((s: any) => s.schemeCode === code);
+            return match ? match.schemeName : null;
+          })
+          .filter((name: any) => name !== null);
+
+        // 4. Attach scheme names to user object
+        return {
+          ...u,
+          schemeNames: schemeNames.join(', ')   // e.g., "Scholarship X, Yojana A"
+        };
+      });
+
+      // Load table
+      this.dataSource = new MatTableDataSource(transformedUsers);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.array = x;
-      this.totalSize = this.array.length;
-      // this.iterator();
+
+      this.array = transformedUsers;
+      this.totalSize = this.array?.length;
     });
+
+
+
+
+
+
+
+    // this.userService.findUsers(deptCode, '', 'asc', 1, 20).subscribe(x => {
+    //   //  console.log(x);
+    //   this.dataSource = new MatTableDataSource(x);
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
+    //   this.array = x;
+    //   this.totalSize = this.array.length;
+    //   // this.iterator();
+    // });
 
     // this.userService.GetUserProfileByDeptRole(this.selectDept ? this.selectDept : deptCode, this.searchForm.value.roleCode ? this.searchForm.value.roleCode : -1).subscribe(x => {
     //   this.filterData = x;
@@ -174,15 +236,66 @@ export class UserComponent {
     if (e.isUserInput) {
       this.selectDept = deptcode;
       //this.loaddata(deptcode);
-      this.userService.findUsers(deptcode, '', 'asc', 1, 20).subscribe(x => {
-        //  console.log(x);
-        this.dataSource = new MatTableDataSource(x);
-        this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
-        this.array = x;
-        this.totalSize = this.array.length;
-        // this.iterator();
+
+      // COMMENTED FOR FILTERING LOGIC
+      // this.userService.findUsers(deptcode, '', 'asc', 1, 20).subscribe(x => {
+      //   //  console.log(x);
+      //   this.dataSource = new MatTableDataSource(x);
+      //   this.dataSource.paginator = this.paginator;
+      //   // this.dataSource.sort = this.sort;
+      //   this.array = x;
+      //   this.totalSize = this.array.length;
+      //   // this.iterator();
+      // });
+
+
+
+       this.userService.findUsers(deptcode, '', 'asc', 1, 20).subscribe(users => {
+
+      // Add scheme names to every user row
+      const transformedUsers = users.map((u: any) => {
+
+        // 1. Convert schemecode to array (if not null)
+        const schemeCodes = u.schemecode
+          ? u.schemecode.split(',').map((c: any) => c.trim())
+          : [];
+
+        // 2. Choose correct code array
+        const effectiveCodes =
+          u.schemeCodeList && u.schemeCodeList.length > 0
+            ? u.schemeCodeList
+            : schemeCodes;
+
+        // 3. Convert scheme codes → scheme names
+        const schemeNames = effectiveCodes
+          .map((code: any) => {
+            const match = this.schemeList.find((s: any) => s.schemeCode === code);
+            return match ? match.schemeName : null;
+          })
+          .filter((name: any) => name !== null);
+
+        // 4. Attach scheme names to user object
+        return {
+          ...u,
+          schemeNames: schemeNames.join(', ')   // e.g., "Scholarship X, Yojana A"
+        };
       });
+
+      // Load table
+      this.dataSource = new MatTableDataSource(transformedUsers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+      this.array = transformedUsers;
+      this.totalSize = this.array?.length;
+    });
+
+
+
+
+
+
+
 
     }
     // this.userService.GetUserProfileByDeptRole(deptcode, this.searchForm.value.roleCode ? this.searchForm.value.roleCode : -1).subscribe(x => {
@@ -208,16 +321,67 @@ export class UserComponent {
   onRoleSelect(e: any, roleId: any) {
     //console.log(roleId);
     if (e.isUserInput) {
-      this.userService.GetUserProfileByDeptRole(this.selectDept, roleId).subscribe(x => {
-        this.filterData = x;
-        //console.log(this.selectDept);
-        this.dataSource = new MatTableDataSource(x);
-        this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
-        this.array = x;
-        this.totalSize = this.array?.length;
 
+// COMMENTED FOR FILTERING LOGIC
+
+      // this.userService.GetUserProfileByDeptRole(this.selectDept, roleId).subscribe(x => {
+      //   this.filterData = x;
+      //   //console.log(this.selectDept);
+      //   this.dataSource = new MatTableDataSource(x);
+      //   this.dataSource.paginator = this.paginator;
+      //   // this.dataSource.sort = this.sort;
+      //   this.array = x;
+      //   this.totalSize = this.array?.length;
+
+      // });
+
+
+
+ this.userService.GetUserProfileByDeptRole(this.selectDept, roleId).subscribe(users => {
+
+      // Add scheme names to every user row
+      const transformedUsers = users.map((u: any) => {
+
+        // 1. Convert schemecode to array (if not null)
+        const schemeCodes = u.schemecode
+          ? u.schemecode.split(',').map((c: any) => c.trim())
+          : [];
+
+        // 2. Choose correct code array
+        const effectiveCodes =
+          u.schemeCodeList && u.schemeCodeList.length > 0
+            ? u.schemeCodeList
+            : schemeCodes;
+
+        // 3. Convert scheme codes → scheme names
+        const schemeNames = effectiveCodes
+          .map((code: any) => {
+            const match = this.schemeList.find((s: any) => s.schemeCode === code);
+            return match ? match.schemeName : null;
+          })
+          .filter((name: any) => name !== null);
+
+        // 4. Attach scheme names to user object
+        return {
+          ...u,
+          schemeNames: schemeNames.join(', ')   // e.g., "Scholarship X, Yojana A"
+        };
       });
+
+      // Load table
+      this.dataSource = new MatTableDataSource(transformedUsers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+      this.array = transformedUsers;
+      this.totalSize = this.array?.length;
+    });
+
+
+
+
+
+
     }
 
   }

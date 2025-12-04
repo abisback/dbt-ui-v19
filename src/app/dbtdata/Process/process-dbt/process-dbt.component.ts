@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CodeValues } from '../../../model/code-values.model';
 import { Scheme } from '../../../model/scheme.model';
 import { DBTData } from '../../../model/dbtdata.model';
@@ -22,6 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmProcessDbtComponent } from '../Confirm/confirm-process-dbt/confirm-process-dbt.component';
 import { ViewCommentsComponent } from '../../../view-comments/view-comments.component';
 import { EditDbtComponent } from '../../../edit-dbt/edit-dbt.component';
+import { Department } from '../../../model/department.model';
 
 @Component({
   selector: 'app-process-dbt',
@@ -39,13 +40,14 @@ import { EditDbtComponent } from '../../../edit-dbt/edit-dbt.component';
 export class ProcessDbtComponent {
 
   dbtDataForm!: FormGroup;
+   searchControl = new FormControl('');
   public array: any;
   displayedColumns: string[] = ['serialNo', 'deptName', 'schemeName', 'schemeType', 'financialYear', 'reportingMonthName', 'totalBen', 'fundTrnsferCash', 'comment', 'action', 'bulkApprove'];
   //action
   dataSource: any;
 
   currentPage: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 10;
   totalSize: number = 0;
   decisionTypeList: CodeValues[] = [];
   isTableExpanded = false;
@@ -55,7 +57,9 @@ export class ProcessDbtComponent {
   clickedRowsArray: any[] = [];
   // departmentList: Department[] = [];
   departmentList: any[] = [];
+  copyDepartmentList: any[] = [];
   schemeList: Scheme[] = [];
+  copySchemeList: Scheme[] = [];
   selectDept: number = 0;
   admin: any;
   searchForm !: FormGroup;
@@ -88,11 +92,22 @@ export class ProcessDbtComponent {
     this.masterService.getCodeValues(MasterCodeType.DecisionType).subscribe(x => {
       this.decisionTypeList = x;
     });
+    // this.departmentService.getDepartments().subscribe(x => {
+    //   this.departmentList.push({ name: 'All', deptCode: '' });
+    //   x.forEach(elm => {
+    //     this.departmentList.push(elm);
+    //   });
+    // });
+
     this.departmentService.getDepartments().subscribe(x => {
-      this.departmentList.push({ name: 'All', deptCode: '' });
+      //this.departmentList = x;
+      this.departmentList.push({ name: 'All', deptCode: 0 });
       x.forEach(elm => {
         this.departmentList.push(elm);
       });
+      // If you want to COPY this list elsewhere
+      this.copyDepartmentList = [...this.departmentList];
+      // console.log(x);
     });
 
 
@@ -369,7 +384,8 @@ export class ProcessDbtComponent {
     if (e.isUserInput) {
       this.schemeService.findSchemes(deptcode).subscribe(x => {
         //console.log(x);
-        this.schemeList = x;
+        // this.schemeList = x; chage below
+         this.schemeList = this.copySchemeList = x;
         //this.iterator();
       });
       this.selectDept = deptcode;
@@ -391,7 +407,7 @@ export class ProcessDbtComponent {
             //console.log(x.result);
 
             this.configureDataSource(x.result);
-            this.array = x;
+            this.array = x.result;
             this.totalSize = this.array.length;
           });
     }
@@ -418,7 +434,7 @@ export class ProcessDbtComponent {
           //console.log(x.result);
 
           this.configureDataSource(x.result);
-          this.array = x;
+          this.array = x.result;
           this.totalSize = this.array.length;
         });
     }
@@ -448,7 +464,7 @@ export class ProcessDbtComponent {
             //console.log(x.result);
 
             this.configureDataSource(x.result);
-            this.array = x;
+            this.array = x.result;
             this.totalSize = this.array.length;
           });
     }
@@ -466,7 +482,7 @@ export class ProcessDbtComponent {
             //console.log(x.result);
 
             this.configureDataSource(x.result);
-            this.array = x;
+            this.array = x.result;
             this.totalSize = this.array.length;
           });
     }
@@ -495,4 +511,91 @@ export class ProcessDbtComponent {
       }
     });
   }
+
+
+
+
+
+
+    searchdept(e: any) {
+    if (e !== undefined) {
+      let term = '';
+      if (e.target.value.length > 0) {
+        term = e.target.value;
+      }
+      if (term !== undefined && term !== '' && term != null) {
+        if (term.length > 0) {
+          const lowerTerm = String(term).toLowerCase();
+          this.departmentList = this.copyDepartmentList?.filter((data: any) => {
+            return String(data.name).toLowerCase().indexOf(lowerTerm) >= 0 ||
+              String(data.code).toLowerCase().indexOf(lowerTerm) >= 0;
+          });
+        }
+      } else {
+        this.departmentList = this.copyDepartmentList;
+      }
+    }
+  }
+
+    displayFnDepartment(deptCode: Department): string {
+      const dept = this.departmentList?.find((s: any) => s.deptCode === deptCode);
+      return dept ? dept.name : '';
+    }
+
+  searchScheme(e: any) {
+    if (e !== undefined) {
+      let term = '';
+      if (e.target.value.length > 0) {
+        term = e.target.value;
+      }
+      if (term !== undefined && term !== '' && term != null) {
+        if (term.length > 0) {
+          const lowerTerm = String(term).toLowerCase();
+          this.schemeList = this.copySchemeList?.filter((data: any) => {
+            return String(data.schemeName).toLowerCase().indexOf(lowerTerm) >= 0 ||
+              String(data.id).toLowerCase().indexOf(lowerTerm) >= 0;
+          });
+        }
+      } else {
+        this.schemeList = this.copySchemeList;
+      }
+    }
+  }
+
+
+  displayFnScheme(schemeCode: Scheme): string {
+    const scheme = this.schemeList?.find((s: any) => s.id === schemeCode);
+    return scheme ? scheme.schemeName : '';
+  }
+
+searchFinYr(event: any) { }
+
+  displayFnFinancialYear(financialYear: CodeValues): string {
+    const finYr = this.finYrList?.find((s: any) => s.codeValueId === financialYear);
+    return finYr ? finYr.codeValueDesc : '';
+  }
+
+ searchMonth(event: any) { }
+
+   displayFnMonth(month: Month): string {
+    const mth = this.reportingMonthList?.find((s: any) => s.monthId === month);
+    return mth ? mth.monthName : '';
+  }
+
+    resetForm() {
+    this.dbtDataForm.reset();
+    this.selectDept = 0;
+    this.schemeList = [];
+    this.departmentList = this.copyDepartmentList;
+    // this.clearSelection();
+    this.loadDataTable();
+    console.log(this.schemeList);
+    this.searchControl.setValue('');
+
+  }
+
 }
+
+
+
+

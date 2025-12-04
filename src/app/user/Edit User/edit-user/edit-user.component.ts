@@ -51,7 +51,8 @@ export class EditUserComponent {
   DataUploadLevelList: CodeValues[] = [];
 
   decisionTypeList: CodeValues[] = [];
-  userdata: User[] = [];
+  // userdata: User[] = [];
+   userdata: any = [];
   changepassword: boolean = false;
   defaultSalutationValue: any;
   roledetails: any;
@@ -201,31 +202,11 @@ export class EditUserComponent {
       // console.log(this.userdata[0])
       this.SchemeService.findActiveSchemes(Number(this.userdata[0].deptCode)!).subscribe(x => {
         this.schemeList = x;
+        this.editDataPatchValue();
         // console.log(this.schemeList);
       });
 
-      this.userForm.patchValue({
-        id: this.userdata[0].id,
-        userId: this.userdata[0].userId,
-        //salutation:this.userdata[0].salutation,
-        firstName: this.userdata[0].firstName,
-        middleName: this.userdata[0].middleName,
-        lastName: this.userdata[0].lastName,
-        email: this.userdata[0].email,
-        phoneno: this.userdata[0].phoneNo,
-        SchemeCode: this.userdata[0].schemeCode,
-        // schemetype: this.userdata[0].schemeCodeList,
-        salutation: ((this.userdata[0].salutation == '12') ? 'Mr' : this.userdata[0].salutation == '13' ? 'Mrs' : 'Ms'),
-      })
 
-      const selectedIds = this.userdata[0].schemeCodeList
-        .map(code => {
-          const match = this.schemeList.find(s => s.schemeCode === code);
-          return match ? match.id : null;
-        })
-        .filter(id => id !== null);
-      this.userForm.patchValue({ SchemeType: selectedIds });
-      console.log(this.userForm.value);
 
 
 
@@ -250,6 +231,52 @@ export class EditUserComponent {
       // console.log(res);
     });
   }
+
+editDataPatchValue() {
+   this.userForm.patchValue({
+        id: this.userdata[0].id,
+        userId: this.userdata[0].userId,
+        //salutation:this.userdata[0].salutation,
+        firstName: this.userdata[0].firstName,
+        middleName: this.userdata[0].middleName,
+        lastName: this.userdata[0].lastName,
+        email: this.userdata[0].email,
+        phoneno: this.userdata[0].phoneNo,
+        SchemeCode: this.userdata[0].schemeCode,
+        // schemetype: this.userdata[0].schemeCodeList,
+        salutation: ((this.userdata[0].salutation == '12') ? 'Mr' : this.userdata[0].salutation == '13' ? 'Mrs' : 'Ms'),
+      })
+
+
+
+ // Convert schemecode (comma-separated string) into array
+const schemeCodes = this.userdata[0].schemecode
+  ? this.userdata[0].schemecode.split(',').map((c: any) => c.trim())
+  : [];
+
+// Decide which code list to use
+const effectiveCodes =
+  this.userdata[0].schemeCodeList.length === 0
+    ? schemeCodes
+    : this.userdata[0].schemeCodeList;
+
+// Convert codes → IDs from schemeList
+const selectedIds = effectiveCodes
+  .map((code: any) => {
+    const match = this.schemeList.find(s => s.schemeCode === code);
+    return match ? match.id : null;
+  })
+  .filter((id: any) => id !== null);
+
+this.userForm.patchValue({ SchemeType: selectedIds });
+console.log(this.userForm.value);
+
+
+}
+
+
+
+
   compareScheme(s1: any, s2: any): boolean {
     return s1 && s2 ? s1 === s2 : s1 === s2;
   }

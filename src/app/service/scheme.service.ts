@@ -88,4 +88,9 @@ export class SchemeService {
     .pipe(map(response => response.result as Scheme[]));    ;
   }
 
+  GetAllSchemes(): Observable<Scheme[]> {
+    return this.http.get<ServiceResponse<Scheme[]>>(this.apiurl+"GetAllSchemeList")
+        .pipe(map(response => response.result as Scheme[]));
+  }
+
 }

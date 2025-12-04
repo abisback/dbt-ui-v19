@@ -367,7 +367,7 @@ mat-paginator {
   color: #2e6c8b;
   font-size: 14px !important;
   height: 20px !important;
-  line-height: 15px !important;
+  line-height: 34px !important;
   padding: 0 16 !important;
   white-space: nowrap !important;
   overflow: hidden;
@@ -393,4 +393,21 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
   border-radius: 10px;
   pointer-events: none;
   z-index: 1; /* above row background */
+}
+
+.custom-dialog-header {
+background-color: #f4fff2;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 54px;
+  margin-bottom: 8px;
+}
+.mt-4 {
+    margin-top: 0.5rem !important;
+}
+.header-row h2 {
+  // font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #21245c;
 }

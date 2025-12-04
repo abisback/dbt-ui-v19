@@ -43,7 +43,7 @@ export class ExtendedDbtDataComponent {
   displayedColumns: string[] = [
     // 'Sno',
     'departmentName',
-    'beneficiaryCount',
+    // 'beneficiaryCount',
     'action',
   ];
 
