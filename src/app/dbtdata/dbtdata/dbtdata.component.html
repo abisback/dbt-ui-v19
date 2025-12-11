@@ -222,6 +222,7 @@
 
 
   <div class="mat-elevation-z8">
+    <div class="mat-table-wrapper">
     <!-- <button mat-flat-button color="primary" (click)="exportToExcel()">Export to Excel</button> -->
     <!-- <button mat-flat-button color="primary" (click)="exportToPdf()">Export to PDF</button> -->
     <table mat-table id="my-table" #table [dataSource]="dataSource" matSort>
@@ -375,6 +376,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="getRowStyle(row)"
         [attr.title]="getRowTooltip(row)"></tr>
     </table>
+    </div>
 
     <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
       [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">

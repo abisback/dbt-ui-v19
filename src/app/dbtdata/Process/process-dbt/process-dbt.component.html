@@ -170,6 +170,7 @@
   </form>
 
   <div class="mat-elevation-z8">
+    <div class="mat-table-wrapper">
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
       <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -485,6 +486,7 @@
       <!-- Extra row to show detail content column -->
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
     </table>
+    </div>
     <!-- <mat-action-row class="justify-content-center">
       <button class="process-btn" mat-raised-button color="primary" (click)="goForApprove()">Process Data</button>
     </mat-action-row> -->
