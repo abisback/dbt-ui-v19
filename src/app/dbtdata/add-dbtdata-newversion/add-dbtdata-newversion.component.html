@@ -227,9 +227,9 @@
             </td>
             <td>+</td>
             <td>
-              <mat-form-field appearance="outline" class="full-width slim-field">
-                <input matInput formControlName="totalBen" autocomplete="off" (keyup)="onKeyUpdefault($event, i)" />
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width slim-field">
+                <input matInput formControlName="totalBen" autocomplete="off" (keyup)="onKeyUpdefault($event, i)" (keypress)="validateNumberInput($event)" />
+                </mat-form-field>
             </td>
             <td style="max-width: 80px;">
               <span style="font-weight: 600; color: #388e3c;">{{ this.incrementaldata[i] }}</span>
