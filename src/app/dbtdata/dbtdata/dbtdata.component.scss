@@ -153,13 +153,13 @@ mat-form-field {
 
 /*new*/
 
-.custom-field {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 54px;
-  margin-bottom: 8px;
-}
+// .custom-field {
+//   background-color: white;
+//   border-radius: 8px;
+//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+//   height: 54px;
+//   margin-bottom: 8px;
+// }
 
 .nav-tabs p {
   // color: #ffffff;
@@ -523,4 +523,123 @@ mat-label {
 .mat-table-wrapper::-webkit-scrollbar-track {
   background-color: #eceff1; /* Scrollbar track color */
   border-radius: 4px;        /* Rounded corners */
+}
+
+
+/* Base style (you already have some) */
+.custom-field {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 8px 12px;          /* changed from fixed height for flexibility */
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Make internal columns behave as flexible boxes so mat-form-field can shrink/grow */
+.custom-field > .col-xl-2,
+.custom-field > .col-lg-2,
+.custom-field > .col-md-2,
+.custom-field > .col-md-1,
+.custom-field > .col-md-2.d-flex {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+/* Make form-fields fill their column container */
+.custom-field mat-form-field.full-width {
+  width: 100%;
+  margin: 0;
+}
+
+/* Slim look for mat-form-field */
+.slim-field .mat-form-field-wrapper {
+  padding: 0.2rem 0.35rem;  /* smaller vertical padding */
+}
+.slim-field .mat-form-field-flex {
+  min-height: 36px;         /* compact height */
+}
+.small-icon-btn {
+  margin-left: 6px;
+}
+
+/* Status labels on the right: keep them vertically centered */
+.custom-field .col-md-2[style] ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.custom-field .Api_Uploaded, .custom-field .From_Uploaded {
+  display: inline-block;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* ---------- Breakpoints ---------- */
+
+/* Small laptop / wide tablet (~1200px and below) */
+@media (max-width: 1200px) {
+  .custom-field {
+    gap: 6px;
+    padding: 6px 10px;
+  }
+  .slim-field .mat-form-field-flex {
+    min-height: 34px;
+  }
+  .custom-field mat-form-field.full-width { font-size: 14px; }
+}
+
+/* Tablet: stack into two rows (two columns per row) */
+@media (max-width: 992px) {
+  .custom-field > .col-xl-2,
+  .custom-field > .col-lg-2,
+  .custom-field > .col-md-2,
+  .custom-field > .col-md-1 {
+    flex: 0 0 50%;       /* two columns per row */
+    max-width: 50%;
+  }
+  /* make Search + buttons also half width but align items */
+  .custom-field .col-md-2.d-flex {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  .custom-field .col-md-2[style] ul { order: 3; width: 100%; justify-content: flex-start; }
+}
+
+/* Mobile: single column stack */
+@media (max-width: 600px) {
+  .custom-field {
+    padding: 8px;
+  }
+  .custom-field > .col-xl-2,
+  .custom-field > .col-lg-2,
+  .custom-field > .col-md-2,
+  .custom-field > .col-md-1,
+  .custom-field .col-md-2.d-flex,
+  .custom-field .col-md-2[style] {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+  .custom-field mat-form-field.full-width { width: 100%; }
+  .small-icon-btn { margin-left: 0; margin-top: 6px; }
+  /* reduce label size and icon size for small screens */
+  .custom-field mat-label { font-size: 13px; }
+  .mat-icon { font-size: 20px; }
+  /* Ensure autocomplete panel fits the viewport */
+  .mat-autocomplete-panel { max-width: calc(100vw - 32px) !important; }
+}
+
+/* Optional: if you want the <mat-icon matSuffix> smaller on small screens */
+@media (max-width: 400px) {
+  .mat-icon.mat-suffix { font-size: 18px; }
 }

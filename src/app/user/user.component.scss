@@ -617,3 +617,74 @@ td {
 }
 
 
+
+.mat-table-wrapper {
+  width: 100%;
+  overflow-x: auto;             /* allows horizontal scrolling on small screens */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optional: make table take full width available */
+.mat-table-wrapper table {
+  width: 100%;
+  min-width: 720px; /* choose a sensible min-width depending on columns */
+}
+/* Slim scrollbar styling */
+.mat-table-wrapper::-webkit-scrollbar {
+  height: 6px; /* Horizontal scrollbar height */
+  width: 6px;  /* Vertical scrollbar width */
+}
+
+.mat-table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #b0bec5; /* Scrollbar thumb color */
+  border-radius: 4px;        /* Rounded corners */
+}
+
+.mat-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #90a4ae; /* Darker thumb color on hover */
+}
+
+.mat-table-wrapper::-webkit-scrollbar-track {
+  background-color: #eceff1; /* Scrollbar track color */
+  border-radius: 4px;        /* Rounded corners */
+}
+
+
+
+/* MOBILE (below 600px) */
+@media (max-width: 600px) {
+  th.mat-column-schemeName,
+  td.mat-column-schemeName {
+    width: 20px !important;
+    max-width: 20px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* TABLETS (600px to 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  th.mat-column-schemeName,
+  td.mat-column-schemeName {
+    width: 150px !important;
+    max-width: 150px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* SMALL LAPTOPS (1024px to 1366px) */
+@media (min-width: 1025px) and (max-width: 1466px) {
+  th.mat-column-schemeName,
+  td.mat-column-schemeName {
+    width: 190px !important;
+    max-width: 190px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
